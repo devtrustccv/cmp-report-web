@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/certidao', function () {
+     return view('certidao_matricial');
+});
+
+Route::get('/iupremforo', function () {
+     return view('iupremforo');
 });
