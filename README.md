@@ -6,7 +6,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 # instalar laravael 
 composer global require laravel/installer
 
-# generate key (na pasta raiz do)
+# generate key (na pasta raiz do projeto)
 php artisan key:generate
 
 
