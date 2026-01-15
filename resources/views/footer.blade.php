@@ -22,7 +22,7 @@
         </td>
         <td align="center" style="border:1px solid #000; padding:6px 8px;">
             <div><strong>Contra Prova/Validation Code:</strong></div>
-            <div><strong>@003010100000531826096@</strong></div>
+            <div><strong>{{$dados->contraProva}}</strong></div>
         </td>
     </tr>
 </table>

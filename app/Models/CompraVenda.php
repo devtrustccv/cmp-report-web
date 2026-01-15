@@ -31,6 +31,7 @@ class CompraVenda extends Model
     public $cobrado_por;
     public $status;
     public $titulo;
+    public $contraProva;
 
 
     // Construtor para popular o model direto com array (ex: resposta da API)

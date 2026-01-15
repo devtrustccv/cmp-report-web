@@ -43,7 +43,7 @@
  </td>
     </tr>
 </table>
-<h4>Descrição</h4>
+<h4>Descrição:</h4>
 <p style="
     border:1px solid #000;   /* borda do retângulo */
     min-height:60px;         /* altura mínima */
