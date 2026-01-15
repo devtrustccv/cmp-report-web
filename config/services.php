@@ -14,6 +14,10 @@ return [
     |
     */
 
+    'compra_venda' => [
+        'base_url' => env('API_COMPRA_VENDA'),
+    ],
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
