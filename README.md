@@ -6,12 +6,12 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 # instalar laravael 
 composer global require laravel/installer
 
-# generate key
+# generate key (na pasta raiz do)
 php artisan key:generate
 
 
 # rodar app
 php artisan serve
 
-# install dom pdf 
+# install dom pdf (biblioteca para conversão de html em pdf)
 composer require barryvdh/laravel-dompdf
