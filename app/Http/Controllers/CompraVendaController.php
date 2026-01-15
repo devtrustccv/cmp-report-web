@@ -4,6 +4,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Http;
 use App\Models\CompraVenda;
 use App\Http\Utils;
+use SimpleSoftwareIO\QrCode\Facades\QrCode; 
 
 
 class CompraVendaController extends Controller
@@ -21,6 +22,8 @@ class CompraVendaController extends Controller
         
 
         $dadosApi = $response->json();
+
+       // QrCode::backend('gd')->format('png')->size(150)->generate(url("/compra-venda/{$id}"));
 
         
         $dados = new CompraVenda($dadosApi);

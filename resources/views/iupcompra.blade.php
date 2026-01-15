@@ -1,6 +1,9 @@
 @extends('layout')
 
 @section('content')
+
+ @include('components.watermark', ['status' => $dados->status ?? "REQ_PAG"])
+
 <table width="100%" cellspacing="0" cellpadding="0"
        style="margin-top:30px; border:1px solid #000;">
     <tr>

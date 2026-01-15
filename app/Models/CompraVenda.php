@@ -29,11 +29,9 @@ class CompraVenda extends Model
     public $data_pagamento;
     public $emitido_por;
     public $cobrado_por;
+    public $status;
+    public $titulo;
 
-
-     // Aqui você adiciona
-    public $comprador_simplificado;
-    public $vendedor_simplificado;
 
     // Construtor para popular o model direto com array (ex: resposta da API)
     public function __construct(array $attributes = [])

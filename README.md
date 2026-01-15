@@ -15,3 +15,7 @@ php artisan serve
 
 # install dom pdf (biblioteca para conversão de html em pdf)
 composer require barryvdh/laravel-dompdf
+
+# biblioteca para gerar QRCode
+composer require simplesoftwareio/simple-qrcode
+
