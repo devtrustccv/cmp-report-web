@@ -11,9 +11,8 @@ class CompraVenda extends Model
     protected $table = null;
 
     // Atributos que o Model pode ter
-    public $iup;
     public $multa;
-    public $juros;
+    public $juro;
     public $total_pago;
     public $valor_avalidado;
     public $valor_declarado;
@@ -29,9 +28,11 @@ class CompraVenda extends Model
     public $data_pagamento;
     public $emitido_por;
     public $cobrado_por;
-    public $status;
+    public $estado;
     public $titulo;
     public $contraProva;
+    public $extenso;
+    public $codigoBarra;
 
 
     // Construtor para popular o model direto com array (ex: resposta da API)

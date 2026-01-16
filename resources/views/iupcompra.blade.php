@@ -2,7 +2,7 @@
 
 @section('content')
 
- @include('components.watermark', ['status' => $dados->status ?? "REQ_PAG"])
+ @include('components.watermark', ['estado' => $dados->estado ?? "REQ_PAG"])
 
 <table width="100%" cellspacing="0" cellpadding="0"
        style="margin-top:30px; border:1px solid #000;">
@@ -10,9 +10,9 @@
         <td style="padding:6px;">
  <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:10px;">
     <tr>
-        <td style="width:25%; padding:6px 8px;"><strong>IUP :</strong> <span style="text-decoration: underline;">{{$dados->iup ?? ''}} </span> </td>
-        <td style="width:25%; padding:6px 8px;"><strong>Multa :</strong> <span style="text-decoration: underline;">{{$dados->multa ?? ''}}</span> </td>
-        <td style="width:25%; padding:6px 8px;"><strong>Juros :</strong> <span style="text-decoration: underline;">{{$dados->juros ?? ''}}</span>  </td>
+        <td style="width:25%; padding:6px 8px;"><strong>IUP :</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }} </span> </td>
+        <td style="width:25%; padding:6px 8px;"><strong>Multa :</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->multa ?? 0)}}</span> </td>
+        <td style="width:25%; padding:6px 8px;"><strong>Juros :</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->juro ?? 0)}}</span>  </td>
     </tr>
 </table>
 
@@ -20,14 +20,19 @@
 
 <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:10px;">
     <tr>
-        <td style="width:100%; padding:6px 8px;"> <strong>Total Pago :</strong> <span style="text-decoration: underline;">{{$dados->total_pago ?? ''}} </span> </td>
+        <td style="width:100%; padding:6px 8px;"> <strong>Total Pago :</strong> <span style="text-decoration: underline;">
+            {{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }}
+              </span> <span>({{$dados->extenso}})</span> </td>
     </tr>
 </table>
 
 <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:10px;">
     <tr>
-        <td style="width:25%; padding:6px 8px;"><strong>Valor Avaliado :</strong> <span style="text-decoration: underline;">{{$dados->valor_declarado ?? ''}}</span> </td>
-        <td style="width:25%; padding:6px 8px;"><strong>Valor Declarado :</strong><span style="text-decoration: underline;">{{$dados->valor_declarado ?? ''}}</span>   </td>
+        <td style="width:25%; padding:6px 8px;"><strong>Valor Avaliado :</strong> <span style="text-decoration: underline;">
+            {{\App\Http\Utils::formatarComSeparador($dados->valor_avalidado  ?? 0) }} 
+           </span> </td>
+        <td style="width:25%; padding:6px 8px;"><strong>Valor Declarado :</strong><span style="text-decoration: underline;">
+            {{\App\Http\Utils::formatarComSeparador($dados->valor_declarado ?? 0) }}</span>   </td>
         <td style="width:25%; padding:6px 8px;"><strong>Área :</strong> <span style="text-decoration: underline;">{{$dados->area ?? ''}}</span>  </td>
     </tr>
 </table>

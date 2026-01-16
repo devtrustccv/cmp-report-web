@@ -1,12 +1,9 @@
-# Dockerfile.dev para Laravel
-
-# Use a imagem oficial do PHP 8.3 FPM
+# Use the official PHP 8.2 FPM image as the base image
 FROM php:8.3-fpm
-
-# Diretório de trabalho dentro do container
+# Set the working directory inside the container
 WORKDIR /var/www/html
 
-# Instala dependências do sistema
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -14,33 +11,27 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    unzip
 
-# Instala extensões PHP necessárias
+# Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Instala Composer
+# Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Copia apenas os arquivos de composer primeiro para cache de build
-COPY composer.json composer.lock /var/www/html/
+# Copy the application code to the container
+COPY . /var/www/html
+# Copiar o .env.example para .env
+RUN cp .env.example .env
 
-# Instala dependências via Composer
+# Install dependencies using Composer
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
-# Copia o restante da aplicação
-COPY . /var/www/html
+# Generate the application key
+RUN php artisan key:generate
 
-# Certifica-se que o .env existe
-# Se você montar o volume do host com o .env, isso não sobrescreve
-RUN if [ ! -f ".env" ]; then cp .env.example .env; fi
-
-# Gera a APP_KEY caso ainda não exista
-RUN php artisan key:generate || true
-
-# Exponha a porta que o Laravel serve
+# Expose the port that your Laravel application listens on
 EXPOSE 8000
 
-# Comando padrão para rodar Laravel em dev
+# Set the command to run your Laravel application
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]

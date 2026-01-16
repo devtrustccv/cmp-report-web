@@ -21,4 +21,9 @@ class Utils
         return mb_substr($text, 0, $maxLength) . '...';
     }
 
+
+    public static function formatarComSeparador(float $valor, string $moeda = '$'): string {
+        return number_format($valor) . $moeda.'00';
+    }
+
 }

@@ -1,4 +1,4 @@
-@if(!empty($status) && $status !== 'FIM')
+@if(!empty($estado) && $estado !== 'FIM')
     <div style="
         position: fixed;
         top: 40%;
