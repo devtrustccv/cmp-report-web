@@ -31,12 +31,16 @@ class CompraVendaController extends Controller
         }
        // QrCode::backend('gd')->format('png')->size(150)->generate(url("/compra-venda/{$id}"));
 
-        
+       
         $dados = new CompraVenda($dadosApi['data']);
         
+        $titulo = 'IMPOSTO SOBRE A TRANSMISSÃO DE IMÓVEIS (ITI)';
+        if($dados->anoEscritura < 2026)
+             $titulo = 'IMPOSTO SOBRE O PATRIMONIO';
 
         return Pdf::loadView('iupcompra', [
-                'dados' => $dados
+                'dados' => $dados,
+                'titulo' => $titulo
             ])
             ->setPaper('A4')
             ->stream('iupcompra.pdf');

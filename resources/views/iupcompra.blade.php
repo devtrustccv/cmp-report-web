@@ -33,7 +33,7 @@
            </span> </td>
         <td style="width:25%; padding:6px 8px;"><strong>Valor Declarado :</strong><span style="text-decoration: underline;">
             {{\App\Http\Utils::formatarComSeparador($dados->valor_declarado ?? 0) }}</span>   </td>
-        <td style="width:25%; padding:6px 8px;"><strong>Área :</strong> <span style="text-decoration: underline;">{{$dados->area ?? ''}}</span>  </td>
+        <td style="width:25%; padding:6px 8px;"><strong>Área :</strong> <span style="text-decoration: underline;">{{$dados->area ?? ''}} </span> m²</td>
     </tr>
 </table>
 
@@ -50,10 +50,11 @@
 </table>
 <h4>Descrição:</h4>
 <p style="
-    border:1px solid #000;   /* borda do retângulo */
-    min-height:60px;         /* altura mínima */
-    padding:8px;             /* espaço interno */
-    margin-top:12px;         /* distância do conteúdo acima */
+    border:1px solid #000;   
+    min-height:60px;        
+    padding:8px;             
+    margin-top:12px;        
+    text-align: justify;
 ">
     <!-- espaço para assinatura ou texto -->
     {{$dados -> descricao }}

@@ -10,7 +10,7 @@ style="margin-top:50px;">
                  style="width:30px; height:30px; display:block; margin:0 auto 5px auto;">
             <div>República de Cabo Verde</div>
             <div style="font-size: 14px;"><strong>DOCUMENTO SO PARA USO INTERNO DO MUNICIPIO</strong></div>
-            <div>{{$dados->titulo ?? 'IMPOSTO SOBRE A TRANSMISSÃO DE IMÓVEIS (ITI)'}}</div>
+            <div>{{$titulo ?? 'IMPOSTO SOBRE A TRANSMISSÃO DE IMÓVEIS (ITI)'}}</div>
             <div style="font-size: 10px;  text-decoration: underline;">Referente a Compra - Proc. Nº {{$dados->numero_processo ?? ''}}</div>
         </td>
 
