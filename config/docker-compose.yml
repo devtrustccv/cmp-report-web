@@ -1,0 +1,13 @@
+version: '3'
+services:
+  cmp-report-web:
+    container_name: cmp-report-web
+    image: devtrustccv/cmp-report-web:0.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/var/www/html
+      - ./properties/.env:/var/www/html/.env 
