@@ -17,7 +17,7 @@ class CompraVendaController extends Controller
         $response = Http::withoutVerifying()->withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept'        => 'application/json',
-            ])->get("{$baseUrl}/{$id}");
+            ])->get("{$baseUrl}/compra-venda/{$id}");
 
         if ($response->failed()) {
             abort(404, "Documento não encontrado na API");
