@@ -12,7 +12,7 @@ class QrCodeService
     public function gerarBase64(string $link): string
     {
         // gera PNG binário
-        $png = QrCode::format('png')->size(80)->generate($link);
+        $png = QrCode::format('png')->size(50)->generate($link);
         // converte para base64 e retorna
         return base64_encode($png);
     }
@@ -22,7 +22,7 @@ class QrCodeService
      */
     public function gerarSvg(string $link): string
     {
-        return QrCode::format('svg')->size(200)->generate($link);
+        return QrCode::format('svg')->size(50)->generate($link);
     }
 
 }

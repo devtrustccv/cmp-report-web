@@ -34,7 +34,7 @@
                   
             </div>
         </td>
-        <td>
+        <td style="text-align: right;">
             <img src="data:image/png;base64, {{ $qrcode_base64 }}" alt="QR Code">
         </td>
 
