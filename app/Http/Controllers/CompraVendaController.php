@@ -28,6 +28,8 @@ class CompraVendaController extends Controller
         $link = $urlWeb.'/'.$id;
         $qrcode = $this->qrService->gerarBase64($link);
 
+        $qrcode_base64 = base64_encode($qrcode);
+
 
         $response = Http::withoutVerifying()->withHeaders([
                 'Authorization' => 'Bearer ' . $token,
@@ -55,7 +57,7 @@ class CompraVendaController extends Controller
         return Pdf::loadView('iupcompra', [
                 'dados' => $dados,
                 'titulo' => $titulo,
-                'qrcode' => $qrcode
+                'qrcode_base64' => $qrcode_base64
             ])
             ->setPaper('A4')
             ->stream('iupcompra.pdf');

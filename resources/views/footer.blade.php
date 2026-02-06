@@ -26,10 +26,17 @@
             </div>
         </td>
         <td align="center" style="border:1px solid #000; padding:3px 6px;">
-            <div><strong>Contra Prova/Validation Code:</strong></div>
-            <div><strong>{{$dados->codigoBarra ?? ''}}</strong></div>
-            <div><img src="data:image/png;base64, {!! base64_encode($qrcode) !!}" alt="QR Code"></div>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <div>
+                    <div><strong>Contra Prova/Validation Code:</strong></div>
+                    <div><strong>{{ $dados->codigoBarra ?? '' }}</strong></div>
+                </div>
+                <div>
+                    <img src="data:image/png;base64, {{ $qrcode_base64 }}" alt="QR Code" style="width:80px; height:80px;">
+                </div>
+            </div>
         </td>
+
     </tr>
 </table>
 <div style="font-size:7px;">www.lojacmp.com/autentica-recibo <strong>Contact Center:</strong> 8005002</div>
