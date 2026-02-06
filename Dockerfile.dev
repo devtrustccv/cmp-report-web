@@ -1,9 +1,10 @@
-# Use the official PHP 8.2 FPM image as the base image
+# Use PHP 8.3 FPM oficial
 FROM php:8.3-fpm
-# Set the working directory inside the container
+
+# Diretório de trabalho dentro do container
 WORKDIR /var/www/html
 
-# Install system dependencies
+# Instala dependências do sistema
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -11,27 +12,33 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    libmagickwand-dev --no-install-recommends \
+    imagemagick
 
-# Install PHP extensions
+# Instala extensões PHP necessárias
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Install Composer
+# Instala extensão Imagick
+RUN pecl install imagick && docker-php-ext-enable imagick
+
+# Instala o Composer globalmente
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Copy the application code to the container
+# Copia a aplicação para o container
 COPY . /var/www/html
-# Copiar o .env.example para .env
+
+# Copia .env example
 RUN cp .env.example .env
 
-# Install dependencies using Composer
+# Instala dependências do Laravel
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
-# Generate the application key
+# Gera a key da aplicação
 RUN php artisan key:generate
 
-# Expose the port that your Laravel application listens on
+# Exponha a porta
 EXPOSE 8000
 
-# Set the command to run your Laravel application
+# Comando para rodar o Laravel
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]

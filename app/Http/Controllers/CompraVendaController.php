@@ -4,15 +4,30 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Http;
 use App\Models\CompraVenda;
 use App\Http\Utils;
-use SimpleSoftwareIO\QrCode\Facades\QrCode; 
+use App\Http\QrCodeService;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 
 class CompraVendaController extends Controller
 {
+    private QrCodeService $qrService;
+
+    public function __construct(QrCodeService $qrService)
+    {
+        $this->qrService = $qrService;
+    }
+
+
     public function gerarPdf($id)
     {
         $baseUrl = config('services.compra_venda.base_url');
         $token   = config('services.compra_venda.token');
+        $urlWeb = config('services.global.url_web');
+
+        $link = $urlWeb.'/'.$id;
+        $qrcode = $this->qrService->gerarBase64($link);
+
 
         $response = Http::withoutVerifying()->withHeaders([
                 'Authorization' => 'Bearer ' . $token,
@@ -29,7 +44,6 @@ class CompraVendaController extends Controller
         if (!isset($dadosApi['data'])) {
             abort(500, 'Resposta inválida da API');
         }
-       // QrCode::backend('gd')->format('png')->size(150)->generate(url("/compra-venda/{$id}"));
 
        
         $dados = new CompraVenda($dadosApi['data']);
@@ -40,7 +54,8 @@ class CompraVendaController extends Controller
 
         return Pdf::loadView('iupcompra', [
                 'dados' => $dados,
-                'titulo' => $titulo
+                'titulo' => $titulo,
+                'qrcode' => $qrcode
             ])
             ->setPaper('A4')
             ->stream('iupcompra.pdf');

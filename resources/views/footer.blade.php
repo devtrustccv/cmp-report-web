@@ -27,7 +27,8 @@
         </td>
         <td align="center" style="border:1px solid #000; padding:3px 6px;">
             <div><strong>Contra Prova/Validation Code:</strong></div>
-            <div><strong>{{$dados->codigoBarra}}</strong></div>
+            <div><strong>{{$dados->codigoBarra ?? ''}}</strong></div>
+            <div><img src="data:image/png;base64, {!! base64_encode($qrcode) !!}" alt="QR Code"></div>
         </td>
     </tr>
 </table>

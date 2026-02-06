@@ -22,7 +22,7 @@
     <tr>
         <td style="width:100%; padding:6px 8px;"> <strong>Total Pago :</strong> <span style="text-decoration: underline;">
             {{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }}
-              </span> <span>({{$dados->extenso}})</span> </td>
+              </span> <span>({{$dados->extenso ?? ''}})</span> </td>
     </tr>
 </table>
 
@@ -57,7 +57,7 @@
     text-align: justify;
 ">
     <!-- espaço para assinatura ou texto -->
-    {{$dados -> descricao }}
+    {{$dados -> descricao ?? '' }}
 </p>
 
 
