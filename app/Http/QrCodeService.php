@@ -11,8 +11,10 @@ class QrCodeService
      */
     public function gerarBase64(string $link): string
     {
-        $png = QrCode::format('png')->size(200)->generate($link);
-        return 'data:image/png;base64,' . base64_encode($png);
+        // gera PNG binário
+        $png = QrCode::format('png')->size(150)->generate($link);
+        // converte para base64 e retorna
+        return base64_encode($png);
     }
 
     /**
