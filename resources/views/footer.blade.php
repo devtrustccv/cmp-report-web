@@ -31,10 +31,11 @@
                     <div><strong>Contra Prova/Validation Code:</strong></div>
                     <div><strong>{{ $dados->codigoBarra ?? '' }}</strong></div>
                 </div>
-                <div>
-                    <img src="data:image/png;base64, {{ $qrcode_base64 }}" alt="QR Code" style="width:80px; height:80px;">
-                </div>
+                  
             </div>
+        </td>
+        <td>
+            <img src="data:image/png;base64, {{ $qrcode_base64 }}" alt="QR Code">
         </td>
 
     </tr>
