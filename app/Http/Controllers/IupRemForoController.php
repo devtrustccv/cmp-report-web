@@ -30,7 +30,7 @@ class IupRemForoController extends Controller
          return Pdf::loadView('iupremforo', [
                 'dados' => $dados,
                 'titulo' => $titulo,
-                'qrcode_base64' => null, // $qrcode_base64,
+                'qrcode_base64' =>  $qrcode_base64,
                 'tipo' =>  'IUPREMFORO'
             ])
             ->setPaper('A4')
