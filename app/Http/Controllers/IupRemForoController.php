@@ -23,7 +23,7 @@ class IupRemForoController extends Controller
         $urlWeb = config('services.global.url_web');
 
         $link = $urlWeb.'/'.$id;
-     //   $qrcode_base64 = $this->qrService->gerarBase64($link);
+        $qrcode_base64 = $this->qrService->gerarBase64($link);
         $titulo= 'IMPOSTO ÚNICO SOBRE O PATRIMONIO';
         
         $dados=null;
