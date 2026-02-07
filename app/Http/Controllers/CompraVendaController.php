@@ -54,7 +54,8 @@ class CompraVendaController extends Controller
         return Pdf::loadView('iupcompra', [
                 'dados' => $dados,
                 'titulo' => $titulo,
-                'qrcode_base64' => $qrcode_base64
+                'qrcode_base64' => $qrcode_base64,
+                'tipo' => 'IUPCOMPRA'
             ])
             ->setPaper('A4')
             ->stream('iupcompra.pdf');
