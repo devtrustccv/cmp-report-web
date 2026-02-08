@@ -20,7 +20,7 @@ class IupRemForoController extends Controller
     public function gerarPdf($id)
     {
 
-        $urlWeb = config('services.global.url_web');
+        $urlWeb = config('services.global.url_web').'/iupremforo';
 
         $link = $urlWeb.'/'.$id;
         $qrcode_base64 = $this->qrService->gerarBase64($link);

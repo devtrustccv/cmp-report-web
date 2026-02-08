@@ -23,7 +23,7 @@ class CompraVendaController extends Controller
     {
         $baseUrl = config('services.compra_venda.base_url');
         $token   = config('services.compra_venda.token');
-        $urlWeb = config('services.global.url_web');
+        $urlWeb = config('services.global.url_web') . '/compra-venda';
 
         $link = $urlWeb.'/'.$id;
         $qrcode_base64 = $this->qrService->gerarBase64($link);
