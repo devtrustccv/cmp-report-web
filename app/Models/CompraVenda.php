@@ -33,6 +33,7 @@ class CompraVenda extends Model
     public $extenso;
     public $codigoBarra;
     public $meioPagamento;
+    public $tipoDuc;
 
 
     // Construtor para popular o model direto com array (ex: resposta da API)
