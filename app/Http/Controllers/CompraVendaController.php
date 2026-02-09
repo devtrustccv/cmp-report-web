@@ -53,7 +53,7 @@ class CompraVendaController extends Controller
 
         return Pdf::loadView('iupcompra', [
                 'dados' => $dados,
-                'titulo' => $titulo,
+                'titulo' => 'IMPOSTO SOBRE A TRANSMISSÃO DE IMÓVEIS (ITI)',
                 'qrcode_base64' => $qrcode_base64,
                 'tipo' => 'IUPCOMPRA'
             ])
