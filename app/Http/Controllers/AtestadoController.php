@@ -41,22 +41,27 @@ class AtestadoController extends Controller
        
         $dadosAssinatura = new AssinaturaDto($dadosApi['data']);
 
-        switch ($dadosAssinatura->tipoPedido) {
-            case 'ATESTADO DE AGREGADO FAMILIAR':
-                return Pdf::loadView('atestado.agregado_familiar', [
-                    'assinatura' => $dadosAssinatura
-                ])->setPaper('A4')->stream('agregado_familiar.pdf');
+        $tipo = trim(strtoupper($dadosAssinatura->tipoPedido));
+        
+        if ($tipo === 'ATESTADO DE AGREGADO FAMILIAR') {
+            return Pdf::loadView('atestado.agregado_familiar', [
+                'assinatura' => $dadosAssinatura
+            ])->setPaper('A4')->stream('agregado_familiar.pdf');
 
-            case 'ATESTADO DE RESIDÊNCIA':
-                return Pdf::loadView('atestado.residencia', [
-                    'assinatura' => $dadosAssinatura
-                ])->setPaper('A4')->stream('residencia.pdf');
+        } elseif ($tipo === 'ATESTADO RESIDÊNCIA') {
+            return Pdf::loadView('atestado.residencia', [
+                'assinatura' => $dadosAssinatura
+            ])->setPaper('A4')->stream('residencia.pdf');
 
-            case 'ATESTADO DE PROBREZA':
-                return Pdf::loadView('atestado.pobreza', [
-                    'assinatura' => $dadosAssinatura
-                ])->setPaper('A4')->stream('pobreza.pdf');
+        } elseif ($tipo === 'ATESTADO DE POBREZA') {
+            return Pdf::loadView('atestado.pobreza', [
+                'assinatura' => $dadosAssinatura
+            ])->setPaper('A4')->stream('pobreza.pdf');
+
+        } else {
+            abort(404, 'Tipo de atestado não reconhecido: ' . $dadosAssinatura->tipoPedido);
         }
+
                 
     }
 }

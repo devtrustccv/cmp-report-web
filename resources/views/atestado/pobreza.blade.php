@@ -4,9 +4,9 @@
 
 @section('content')
     <p> Ao abrigo do Despacho nº 68/09 de 13 de Agosto, atesto a pedido do(a) interessado(a),
-         registado no Sistema de Informação Municipal que, <strong>{{$assinatura->nome_completo ?? ''}}</strong>, 
+         registado no Sistema de Informação Municipal que, <strong>{{$assinatura->nome ?? ''}}</strong>, 
          {{ $assinatura->estadoCivil ?? '' }}, {{ $assinatura->filiacao ?? '' }}, 
-          natural de {{$assinatura->naturalidade ?? ''}}, portador(a) do {{$assinatura->tipoDocumento ?? ''}}  nº {{$assinatura->numero_documento ?? ''}}, 
+          natural de {{$assinatura->naturalidade ?? ''}}, portador(a) do {{$assinatura->tipoDocumento ?? ''}}  nº {{$assinatura->numeroDocumento ?? ''}}, 
           reside em {{$assinatura->residencia ?? ''}}, possui dificuldades financeiras.
     </p>
     <p>O presente atestado serve para efeito de <strong>{{$assinatura->efeito ?? ''}}</strong>.</p>
