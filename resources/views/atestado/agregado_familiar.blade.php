@@ -18,7 +18,10 @@
          
         portador(a) do {{$assinatura->tipoDocumento ?? ''}} 
         nº  {{$assinatura->numeroDocumento ?? ''}}, reside em {{$assinatura->residencia ?? ''}}
-        {{$assinatura->agregado ?? ''}}.</p> 
+        @if($assinatura->agregado != null)
+          tem o seu agregado familiar composto {{$assinatura->agregado ?? ''}}
+        @endif
+        .</p> 
 
     <p> O presente atestado serve para efeito de <strong>{{$assinatura->efeito ?? ''}}</strong>.</p> 
 
