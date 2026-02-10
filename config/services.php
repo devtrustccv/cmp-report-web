@@ -16,6 +16,7 @@ return [
 
     'global' => [
         'url_web' => env('URL_WEB'),
+        'url_api' => env('URL_API'),
     ],
     
     'compra_venda' => [
