@@ -29,6 +29,7 @@ class AssinaturaDto
     public ?string $residencia = null;
     public ?string $efeito = null;
     public ?string $texto = null;
+    public ?string $agregado = null;
 
 // ===== Delegação =====
 public ?string $delegacaoDirecao = null;
@@ -59,6 +60,7 @@ public ?string $delegacaoDirecao = null;
         $this->residencia = $data['residencia'] ?? null;
         $this->efeito = $data['efeito'] ?? null;
         $this->texto = $data['texto'] ?? null;
+        $this->agregado = $data['agregado'] ?? null;
 
         // Delegação
         $this->delegacaoDirecao = $data['delegacaoDirecao'] ?? null;
