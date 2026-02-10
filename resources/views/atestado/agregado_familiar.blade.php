@@ -8,8 +8,8 @@
         registado no Sistema de Informação Municipal que, <strong>{{$assinatura->nome ?? ''}}</strong>, 
         {{$assinatura->estadoCivil ?? ''}}, 
         {{$assinatura->filiacao ?? ''}}, natural de {{$assinatura->naturalidade ?? ''}}, 
-        portador(a) do {{$assinatura->tipo_documento ?? ''}} 
-        nº  {{$assinatura->numero_documento ?? ''}}, reside em {{$assinatura->residencia ?? ''}}
+        portador(a) do {{$assinatura->tipoDocumento ?? ''}} 
+        nº  {{$assinatura->numeroDocumento ?? ''}}, reside em {{$assinatura->residencia ?? ''}}
         {{$assinatura->agregado_familiar ?? ''}}.</p> 
 
     <p> O presente atestado serve para efeito de <strong>{{$assinatura->efeito ?? ''}}</strong>.</p> 
