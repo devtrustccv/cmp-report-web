@@ -29,7 +29,7 @@
         vai por mim assinado e devidamente autenticado com o código de barra em uso
          nesta Instituição.</p>
 
-    <p>Cidade da Praia, {{ \Carbon\Carbon::now()->translatedFormat('d \d\e F \d\e Y') }}.</p>
+    <p>Cidade da Praia, {{ \Carbon\Carbon::$assinatura->dataRegisto->translatedFormat('d \d\e F \d\e Y') }}.</p>
 
     </p>
 @endsection
