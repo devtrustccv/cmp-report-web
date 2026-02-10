@@ -13,7 +13,6 @@ class AtestadoController extends Controller
     public function gerarPdf(Request $request)
     {
         
-        $tipo       = request('tipo', 'DEFAULT');
         $idProcesso = request('idProcesso', 0);
         $userName   = request('userName', 'guest');
         $email      = request('email', '');
