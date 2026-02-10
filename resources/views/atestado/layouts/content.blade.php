@@ -96,19 +96,19 @@
     @yield('content')
 </main>
 
-<div style="text-align:center; margin-top:40px; position: relative; width: 100%;">
+<div style="text-align:center; margin-top:10px; position: relative; width: 100%;">
     <!-- Linha de assinatura -->
-    <div style="margin-bottom: 10px; font-size: 13px;">/{{ $assinatura->quem_assinatura ?? 'Delegado (a)' }}/</div>
-    <div style="padding-top: 80px; position: relative;">
+    <div style="margin-bottom: 10px; font-size: 13px;">
+        /{{ $assinatura->quem_assinatura ?? 'Delegado (a)' }}/
+    </div>
+    <div style="padding-top: 40px; position: relative;">
         @if (!empty($assinatura->assinatura))
             {!! $assinatura->assinaturaHtml(200) !!}
         @endif
     </div>
 
-
-
     <!-- Nome abaixo da linha -->
-    <div style="margin-top: 10px; font-weight: bold;">
+    <div style="margin-top: 5px; font-weight: bold;">
         {{ $assinatura->nomeAssina ?? '' }}
     </div>
 </div>
