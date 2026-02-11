@@ -48,7 +48,7 @@ class AtestadoController extends Controller
                 'assinatura' => $dadosAssinatura
             ])->setPaper('A4')->stream('agregado_familiar.pdf');
 
-        } elseif ($tipo === 'ATESTADO RESIDÊNCIA') {
+        } elseif ($tipo === 'ATESTADO DE RESIDÊNCIA') {
             return Pdf::loadView('atestado.residencia', [
                 'assinatura' => $dadosAssinatura
             ])->setPaper('A4')->stream('residencia.pdf');

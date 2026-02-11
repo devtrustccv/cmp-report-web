@@ -102,7 +102,7 @@
     <div style="margin-bottom: -2px; font-size: 13px;">
         /{{ $assinatura->quem_assinatura ?? 'Delegado (a)' }}/
     </div>
-    <div style="padding-top: 10px; position: relative;">
+    <div style="padding-top: -2px; position: relative;">
         @if (!empty($assinatura->assinatura))
             {!! $assinatura->assinaturaHtml(200) !!}
         @endif
