@@ -26,7 +26,7 @@ class CompraVendaController extends Controller
         $urlWeb = config('services.global.url_web') . '/compra-venda';
 
         $link = $urlWeb.'/'.$id;
-        $qrcode_base64 = $this->qrService->gerarBase64($link);
+        $qrcode_base64 = null; //$this->qrService->gerarBase64($link);
 
         $response = Http::withoutVerifying()->withHeaders([
                 'Authorization' => 'Bearer ' . $token,
@@ -57,7 +57,7 @@ class CompraVendaController extends Controller
                 'qrcode_base64' => $qrcode_base64,
                 'tipo' => 'IUPCOMPRA'
             ])
-            ->setPaper('A4', 'landscape')
+            ->setPaper([0, 0, 600, 400], 'landscape')
             ->stream('iupcompra.pdf');
     }
 
