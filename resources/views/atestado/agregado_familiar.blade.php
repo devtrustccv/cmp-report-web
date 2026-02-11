@@ -19,7 +19,7 @@
         portador(a) do {{$assinatura->tipoDocumento ?? ''}} 
         nº  {{$assinatura->numeroDocumento ?? ''}}, reside em {{$assinatura->residencia ?? ''}}.
         @if($assinatura->agregado != null)
-          tem o seu agregado familiar composto {{$assinatura->agregado ?? ''}}.
+          tem o seu agregado familiar composto {{$assinatura->agregado ?? ''}} {{$assinatura->texto ?? ''}}.
         @endif
         </p> 
 
