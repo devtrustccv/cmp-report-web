@@ -10,7 +10,7 @@
           reside em {{$assinatura->residencia ?? ''}}, possui dificuldades financeiras.
     </p>
     <p>O presente atestado serve para efeito de <strong>{{$assinatura->efeito ?? ''}}</strong>.</p>
-    <p>Por ser verdade e me ter sido pedido, mandei passar o presente atestado que vai por mim assinado e devidamente autenticado com o código de barra em uso nesta Instituição.</p>
+    <p>Por ser verdade e me ter sido pedido, mandei passar o presente atestado que vai por mim assinado e devidamente autenticado com o código de barra @{{$assinatura->codBarra}}@ em uso nesta Instituição.</p>
     <p>
         Cidade da Praia, {{ \Carbon\Carbon::parse($assinatura->dataRegisto)->translatedFormat('d \d\e F \d\e Y') }}.
     </p>

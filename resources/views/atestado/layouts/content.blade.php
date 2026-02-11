@@ -98,10 +98,10 @@
 
 <div style="text-align:center; margin-top:10px; position: relative; width: 100%;">
     <!-- Linha de assinatura -->
-    <div style="margin-bottom: 10px; font-size: 13px;">
+    <div style="margin-bottom: -2px; font-size: 13px;">
         /{{ $assinatura->quem_assinatura ?? 'Delegado (a)' }}/
     </div>
-    <div style="padding-top: 40px; position: relative;">
+    <div style="padding-top: 10px; position: relative;">
         @if (!empty($assinatura->assinatura))
             {!! $assinatura->assinaturaHtml(200) !!}
         @endif
