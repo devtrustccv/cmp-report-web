@@ -19,9 +19,9 @@
         portador(a) do {{$assinatura->tipoDocumento ?? ''}} 
         nº  {{$assinatura->numeroDocumento ?? ''}}, reside em {{$assinatura->residencia ?? ''}}
         @if($assinatura->agregado != null)
-          tem o seu agregado familiar composto {{$assinatura->agregado ?? ''}}
+          tem o seu agregado familiar composto {{$assinatura->agregado ?? ''}}.
         @endif
-        .</p> 
+        </p> 
 
     <p> O presente atestado serve para efeito de <strong>{{$assinatura->efeito ?? ''}}</strong>.</p> 
 
