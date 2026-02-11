@@ -17,7 +17,7 @@
         @endif
          
         portador(a) do {{$assinatura->tipoDocumento ?? ''}} 
-        nº  {{$assinatura->numeroDocumento ?? ''}}, reside em {{$assinatura->residencia ?? ''}}
+        nº  {{$assinatura->numeroDocumento ?? ''}}, reside em {{$assinatura->residencia ?? ''}}.
         @if($assinatura->agregado != null)
           tem o seu agregado familiar composto {{$assinatura->agregado ?? ''}}.
         @endif
