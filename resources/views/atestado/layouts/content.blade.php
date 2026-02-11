@@ -67,7 +67,7 @@
     <img src="{{ public_path('images/logo_CMPRAIA.png') }}" alt="Logo" style="height:80px;">
     <h2>Câmara Municipal da Praia</h2>
     <h4>{{ $assinatura->delegacaoDirecao ?? '' }}</h4>
-    <h4>{{ $assinatura->tipoPedido ?? '' }} Nº {{ $assinatura->pedidoId ?? '' }}</h4>
+    <h4>{{ $assinatura->tipoPedido ?? '' }} Nº {{ $assinatura->numeroPedido ?? '' }}</h4>
 </header>
 
 <footer>
