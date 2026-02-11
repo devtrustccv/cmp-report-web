@@ -60,17 +60,4 @@
     {{$dados -> descricao ?? '' }}
 </p>
 
-
-<table width="100%" cellspacing="0" cellpadding="0" style="margin-top:40px;">
-    <tr>
-        <td style="width:50%; text-align:center;">
-            O Tesoureiro
-            <br><br><br> <!-- espaço para assinatura -->
-            <span style="border-top:1px solid #000; display:inline-block; width:200px;"></span>
-        </td>
-    </tr>
-</table>
-
-
-
 @endsection
