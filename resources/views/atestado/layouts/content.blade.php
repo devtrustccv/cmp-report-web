@@ -97,7 +97,7 @@
     @yield('content')
 </main>
 
-<div style="text-align:center; margin-top:10px; position: relative; width: 100%;">
+<div style="text-align:center; margin-top:60px; position: relative; width: 100%;">
     <!-- Linha de assinatura -->
     <div style="margin-bottom: -2px; font-size: 13px;">
         /{{ $assinatura->quem_assinatura ?? 'Delegado (a)' }}/
