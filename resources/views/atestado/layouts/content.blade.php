@@ -71,7 +71,7 @@
 </header>
 
 <footer>
-    <p style="text-align: center;">{{ $assinatura->codBarra ?? '' }} </p>
+    <span style="text-align: center;">{{ $assinatura->codBarra ?? '' }} </span>
     <table style="width: 100%; border-collapse: collapse;">
         <tr>
             <!-- Coluna do texto, 75% -->

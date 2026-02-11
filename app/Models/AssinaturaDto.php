@@ -62,7 +62,7 @@ public ?string $delegacaoDirecao = null;
         $this->efeito = $data['efeito'] ?? null;
         $this->texto = $data['texto'] ?? null;
         $this->agregado = $data['agregado'] ?? null;
-        $this->numeroPedido=$numeroPedido['numeroPedido'] ?? null;
+        $this->numeroPedido= $data['numeroPedido'] ?? null;
 
         // Delegação
         $this->delegacaoDirecao = $data['delegacaoDirecao'] ?? null;
