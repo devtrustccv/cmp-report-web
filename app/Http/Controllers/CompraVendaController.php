@@ -57,7 +57,7 @@ class CompraVendaController extends Controller
                 'qrcode_base64' => $qrcode_base64,
                 'tipo' => 'IUPCOMPRA'
             ])
-            ->setPaper([0, 0, , 400], 'landscape')
+            ->setPaper('A4')
             ->stream('iupcompra.pdf');
     }
 
