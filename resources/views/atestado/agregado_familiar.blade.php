@@ -22,7 +22,7 @@
           ,tem o seu agregado familiar composto {{$assinatura->agregado ?? ''}} 
         @endif
         {{$assinatura->texto ?? ''}}
-        </p>.
+        .</p>
 
     <p> O presente atestado serve para efeito de <strong>{{$assinatura->efeito ?? ''}}</strong>.</p> 
 
