@@ -60,12 +60,16 @@
             margin-right: auto;
         }
 
-        .bloco-assinatura {
-            page-break-inside: avoid;
-            break-inside: avoid;
-            margin-top: 60px;
-            text-align: center;
+       
+
+        .tabela-assinatura {
             width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .tabela-assinatura td {
+            border: none;
         }
 
     </style>
@@ -106,26 +110,30 @@
     @yield('content')
 </main>
 
-<div class="bloco-assinatura">
+<div class="assinatura-fixa">
+    <table class="tabela-assinatura">
+        <tr>
+            <td>
 
-    <!-- Cargo -->
-    <div style="margin-bottom: 5px; font-size: 13px;">
-        {{ $assinatura->quem_assinatura ?? 'Diretor(a) / Delegado(a)' }}
-    </div>
+                <div style="font-size: 13px;">
+                    {{ $assinatura->quem_assinatura ?? 'Diretor(a) / Delegado(a)' }}
+                </div>
 
-    <!-- Imagem da assinatura -->
-    <div>
-        @if (!empty($assinatura->assinatura))
-            {!! $assinatura->assinaturaHtml(200) !!}
-        @endif
-    </div>
+                <div style="margin-top:5px;">
+                    @if (!empty($assinatura->assinatura))
+                        {!! $assinatura->assinaturaHtml(200) !!}
+                    @endif
+                </div>
 
-    <!-- Nome -->
-    <div style="margin-top: 5px; font-weight: bold;">
-        {{ $assinatura->nomeAssina ?? '' }}
-    </div>
+                <div style="margin-top: 5px; font-weight: bold;">
+                    {{ $assinatura->nomeAssina ?? '' }}
+                </div>
 
+            </td>
+        </tr>
+    </table>
 </div>
+
 
 
 
