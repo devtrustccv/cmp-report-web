@@ -80,6 +80,26 @@
 </header>
 
 <footer>
+    <div class="bloco-assinatura">
+
+        <!-- Cargo -->
+        <div style="margin-bottom: 5px; font-size: 13px;">
+            {{ $assinatura->quem_assinatura ?? 'Diretor(a) / Delegado(a)' }}
+        </div>
+
+        <!-- Imagem da assinatura -->
+        <div>
+            @if (!empty($assinatura->assinatura))
+                {!! $assinatura->assinaturaHtml(200) !!}
+            @endif
+        </div>
+
+        <!-- Nome -->
+        <div style="margin-top: 5px; font-weight: bold;">
+            {{ $assinatura->nomeAssina ?? '' }}
+        </div>
+
+    </div>
     @<span style="text-align: center;">{{ $assinatura->codBarra ?? '' }} </span>@
     <table style="width: 100%; border-collapse: collapse;">
         <tr>
@@ -106,26 +126,7 @@
     @yield('content')
 </main>
 
-<div class="bloco-assinatura">
 
-    <!-- Cargo -->
-    <div style="margin-bottom: 5px; font-size: 13px;">
-        {{ $assinatura->quem_assinatura ?? 'Diretor(a) / Delegado(a)' }}
-    </div>
-
-    <!-- Imagem da assinatura -->
-    <div>
-        @if (!empty($assinatura->assinatura))
-            {!! $assinatura->assinaturaHtml(200) !!}
-        @endif
-    </div>
-
-    <!-- Nome -->
-    <div style="margin-top: 5px; font-weight: bold;">
-        {{ $assinatura->nomeAssina ?? '' }}
-    </div>
-
-</div>
 
 
 
