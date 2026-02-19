@@ -59,6 +59,15 @@
             margin-left: auto;
             margin-right: auto;
         }
+
+        .bloco-assinatura {
+            page-break-inside: avoid;
+            break-inside: avoid;
+            margin-top: 60px;
+            text-align: center;
+            width: 100%;
+        }
+
     </style>
 </head>
 <body>
@@ -97,22 +106,27 @@
     @yield('content')
 </main>
 
-<div style="text-align:center; margin-top:60px; position: relative; width: 100%;">
-    <!-- Linha de assinatura -->
-    <div style="margin-bottom: -2px; font-size: 13px;">
+<div class="bloco-assinatura">
+
+    <!-- Cargo -->
+    <div style="margin-bottom: 5px; font-size: 13px;">
         {{ $assinatura->quem_assinatura ?? 'Diretor(a) / Delegado(a)' }}
     </div>
-    <div style="padding-top: -2px; position: relative;">
+
+    <!-- Imagem da assinatura -->
+    <div>
         @if (!empty($assinatura->assinatura))
             {!! $assinatura->assinaturaHtml(200) !!}
         @endif
     </div>
 
-    <!-- Nome abaixo da linha -->
+    <!-- Nome -->
     <div style="margin-top: 5px; font-weight: bold;">
         {{ $assinatura->nomeAssina ?? '' }}
     </div>
+
 </div>
+
 
 
 </body>
