@@ -49,7 +49,13 @@ style="margin-top:50px;">
         <td style="width:25%; text-align:rigth;">
             <div><strong>Nº DUC: </strong><span style="text-decoration: underline;">{{$dados->duc ?? ''}}</span></div>
             <div><strong>Nº Matriz: </strong><span style="text-decoration: underline;">{{$dados->matriz ?? ''}}</span></div>
-            <div><strong>Local: </strong><span style="text-decoration: underline;">{{$dados->local ?? ''}}</span></div>
+            @if(!empty($tipo) && $tipo == 'IUPCOMPRA')
+                <div><strong>Local: </strong><span style="text-decoration: underline;">{{$dados->local ?? ''}}</span></div>
+            @elseif(!empty($tipo) && $tipo == 'IUPPARTILHA')
+               <div><strong>Nº Processo: </strong><span style="text-decoration: underline;">{{$dados->numero_processo ?? ''}}</span></div>
+            @elseif(!empty($tipo) && $tipo == 'IUPDOACAO')
+               <div><strong>Nº Processo: </strong><span style="text-decoration: underline;">{{$dados->numero_processo ?? ''}}</span></div>
+            @endif
         </td>
     </tr>
 </table>
