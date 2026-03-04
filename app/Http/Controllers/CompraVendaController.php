@@ -46,10 +46,6 @@ class CompraVendaController extends Controller
 
        
         $dados = new CompraVenda($dadosApi['data']);
-        
-      /*  $titulo = 'IMPOSTO SOBRE A TRANSMISSÃO DE IMÓVEIS (ITI)';
-        if($dados->anoEscritura < 2026)
-             $titulo = 'IMPOSTO SOBRE O PATRIMONIO';*/
 
         return Pdf::loadView('iupcompra', [
                 'dados' => $dados,
@@ -57,7 +53,7 @@ class CompraVendaController extends Controller
                 'qrcode_base64' => $qrcode_base64,
                 'tipo' => 'IUPCOMPRA'
             ])
-            ->setPaper('A4')
+            ->setPaper([0, 0, 600, 520])
             ->stream('iupcompra.pdf');
     }
 
