@@ -49,7 +49,7 @@ class DoacaoController extends Controller
         $dados = new DoacaoDto($dadosApi['data']);
 
         return Pdf::loadView('iupdoacao', [
-            'qrcode_base64' => null, // $qrcode_base64,
+            'qrcode_base64' =>  $qrcode_base64,
             'tipo' => 'IUPDOACAO',
             'dados' => $dados,
             'titulo' => $dados->titulo
