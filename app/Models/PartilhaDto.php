@@ -46,6 +46,7 @@ class PartilhaDto extends Model
     public $duc;
     public $meioPagamento;
     public $emitido_por;
+    public $superficie;
 
     
     // Construtor para popular o model com JSON ou array
