@@ -27,7 +27,7 @@ class DoacaoController extends Controller
         $urlWeb = config('services.global.url_web') . '/iup-partilha';
 
         $link = $urlWeb.'/'.$id;
-       // $qrcode_base64 = $this->qrService->gerarBase64($link);
+        $qrcode_base64 = $this->qrService->gerarBase64($link);
 
         $response = Http::withoutVerifying()->withHeaders([
                 'Authorization' => 'Bearer ' . $token,
@@ -47,8 +47,6 @@ class DoacaoController extends Controller
 
        
         $dados = new DoacaoDto($dadosApi['data']);
-
-        dd($dados);
 
         return Pdf::loadView('iupdoacao', [
             'qrcode_base64' => null, // $qrcode_base64,
