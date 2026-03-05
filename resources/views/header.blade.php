@@ -10,7 +10,7 @@ style="margin-top:50px;">
                 <span style="display:block; font-size:7px;">Modelo nº 4 (Artigo 79)</span>
                 <span style="display:block; font-size:10px; text-decoration: underline;">
                     <strong>
-                        Prestação Única
+                         {{$infoPrestacoes ?? ''}}
                     </strong>
                 </span>
             </td>
@@ -19,7 +19,7 @@ style="margin-top:50px;">
                 <span style="display:block; font-size:7px;">Modelo nº 4 (Artigo 79)</span>
                 <span style="display:block; font-size:10px; text-decoration: underline;">
                     <strong>
-                        Prestação Única
+                        {{$infoPrestacoes  ?? ''}}
                     </strong>
                 </span>
             </td>
@@ -52,9 +52,9 @@ style="margin-top:50px;">
             @if(!empty($tipo) && $tipo == 'IUPCOMPRA')
                 <div><strong>Local: </strong><span style="text-decoration: underline;">{{$dados->local ?? ''}}</span></div>
             @elseif(!empty($tipo) && $tipo == 'IUPPARTILHA')
-               <div><strong>Nº Processo: </strong><span style="text-decoration: underline;">{{$dados->numero_processo ?? ''}}</span></div>
+               <div><strong>Nº Processo: </strong><span style="text-decoration: underline;">{{$dados->numProcesso ?? ''}}</span></div>
             @elseif(!empty($tipo) && $tipo == 'IUPDOACAO')
-               <div><strong>Nº Processo: </strong><span style="text-decoration: underline;">{{$dados->numero_processo ?? ''}}</span></div>
+               <div><strong>Nº Processo: </strong><span style="text-decoration: underline;">{{$dados->numProcesso ?? ''}}</span></div>
             @endif
         </td>
     </tr>
