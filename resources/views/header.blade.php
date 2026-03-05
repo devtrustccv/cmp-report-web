@@ -52,9 +52,9 @@ style="margin-top:50px;">
             @if(!empty($tipo) && $tipo == 'IUPCOMPRA')
                 <div><strong>Local: </strong><span style="text-decoration: underline;">{{$dados->local ?? ''}}</span></div>
             @elseif(!empty($tipo) && $tipo == 'IUPPARTILHA')
-               <div><strong>Nº Processo: </strong><span style="text-decoration: underline;">{{$dados->numProcesso ?? ''}}</span></div>
+               <div><strong>Nº Processo: </strong><span style="text-decoration: underline;">{{$dados->numero_processo ?? ''}}</span></div>
             @elseif(!empty($tipo) && $tipo == 'IUPDOACAO')
-               <div><strong>Nº Processo: </strong><span style="text-decoration: underline;">{{$dados->numProcesso ?? ''}}</span></div>
+               <div><strong>Nº Processo: </strong><span style="text-decoration: underline;">{{$dados->numero_processo ?? ''}}</span></div>
             @endif
         </td>
     </tr>
