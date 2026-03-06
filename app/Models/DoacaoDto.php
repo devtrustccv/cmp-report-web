@@ -48,6 +48,7 @@ class DoacaoDto extends Model
     public $numero_processo;  
     public $emitido_por;
     public $baseIncidencia;
+    public $infoPrestacoes;
     
 
     // Construtor para popular via JSON ou array

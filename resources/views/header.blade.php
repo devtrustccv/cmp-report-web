@@ -10,7 +10,7 @@ style="margin-top:50px;">
                 <span style="display:block; font-size:7px;">Modelo nº 4 (Artigo 79)</span>
                 <span style="display:block; font-size:10px; text-decoration: underline;">
                     <strong>
-                         {{$infoPrestacoes ?? ''}}
+                         {{$dados->infoPrestacoes ?? ''}}
                     </strong>
                 </span>
             </td>
@@ -19,7 +19,7 @@ style="margin-top:50px;">
                 <span style="display:block; font-size:7px;">Modelo nº 4 (Artigo 79)</span>
                 <span style="display:block; font-size:10px; text-decoration: underline;">
                     <strong>
-                        {{$infoPrestacoes  ?? ''}}
+                        {{$dados->infoPrestacoes  ?? ''}}
                     </strong>
                 </span>
             </td>
