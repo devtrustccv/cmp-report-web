@@ -16,8 +16,6 @@
     </tr>
 </table>
 
-
-
 <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
     <tr>
         <td style="width:100%; padding:3px 3px;"> <strong>Total Pago :</strong> <span style="text-decoration: underline;">

@@ -11,7 +11,7 @@
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
                 <tr>
                     <td style="width:64%; padding:3px 3px;"><strong>TOTAL {{$dados->tipoDuc ?? 'IUP'}} PAGO:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }} </span> </td>
-                    <td style="width:32%; padding:3px 3px;"><strong>Area:</strong> <span style="text-decoration: underline;">{{$dados->superficie}}</span>m2</td>
+                    <td style="width:32%; padding:3px 3px;"><strong>Area:</strong> <span style="text-decoration: underline;">{{$dados->superficie ?? ''}}</span>m2</td>
                 </tr>
             </table>
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
@@ -31,9 +31,9 @@
                     <td style="width:100%; padding:3px 3px;"><strong>Doador:</strong> <span style="text-decoration: underline;">{{$dados->antigosProprietarios ?? '' }} </span> </td>
                 </tr>
             </table>
-            <h4>Confrontação:</h4>
+            <h4 style="margin-top:-2px;">Confrontação:</h4>
             <table width="100%" cellspacing="0" cellpadding="0"
-                style="margin-top:1px; border:1px solid #000;">
+                style="margin-top:-4px; border:1px solid #000;">
                 <tr>
                     <td style="padding:6px;">
                         <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
@@ -57,7 +57,7 @@
     border:1px solid #000;
     min-height:40px;
     padding:8px;
-    margin-top:12px;
+    margin-top: 3px;
     margin-12px;
     margin-bottom:80px; 
     text-align: justify;
