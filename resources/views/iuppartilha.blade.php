@@ -27,7 +27,7 @@
             </table>
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:10px;">
                 <tr>
-                    <td style="width:100%; padding:3px 3px;"><strong>Proprietário:</strong> <span style="text-decoration: underline;">{{$dados->novosProprietarios ?? '' }} </span> </td>
+                    <td style="width:100%; padding:3px 3px;"><strong>Proprietário:</strong> <span style="text-decoration: underline;">{{$dados->antigosProprietarios ?? '' }} </span> </td>
                 </tr>
             </table>
     </tr>
