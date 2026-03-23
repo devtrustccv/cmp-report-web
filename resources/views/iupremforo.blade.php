@@ -22,7 +22,7 @@
             </strong>
         </td>
         <td>
-            <strong>Valor da Remição: </strong><span>{{$dados->remiTaxa ?? ''}} $00</span>
+            <strong>Valor da Remição: </strong><span>{{\App\Http\Utils::formatarComSeparador($dados->remiTaxa ?? 0)}}</span>
         </td>
       </tr>
 </table>
