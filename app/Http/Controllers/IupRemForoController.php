@@ -49,7 +49,7 @@ class IupRemForoController extends Controller
         
          return Pdf::loadView('iupremforo', [
                 'dados' => $dados,
-                'titulo' => $titulo,
+                'titulo' => $dados->titulo,
                 'qrcode_base64' =>  $qrcode_base64,
                 'tipo' =>  'IUPREMFORO'
             ])

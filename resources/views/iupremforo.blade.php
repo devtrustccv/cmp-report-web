@@ -5,7 +5,7 @@
 @include('components.watermark', ['estado' => $dados->estado ?? "REQ_PAG"])
  <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:10px;">
     <tr>
-        <td style="width:50%; padding:6px 8px;"><strong>IUP :</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }} </span> </td>
+        <td style="width:50%; padding:6px 8px;"><strong>{{$dados->tipoDuc ?? ''}} :</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }} </span> </td>
         <td style="width:50%; padding:6px 8px;"><strong>Juros :</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->juro ?? 0)}}</span>  </td>
     </tr>
      <tr>

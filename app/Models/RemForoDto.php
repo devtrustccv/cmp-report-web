@@ -32,6 +32,8 @@ class RemForoDto extends Model
     public $fraccao;
     public $matriz;
     public $descricao;
+    public $titulo;
+    public $tipoDuc;
 
     // Construtor para popular com array ou JSON
     public function __construct(array $attributes = [])
