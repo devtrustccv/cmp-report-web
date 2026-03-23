@@ -55,6 +55,10 @@ style="margin-top:50px;">
                <div><strong>Nº Processo: </strong><span style="text-decoration: underline;">{{$dados->numero_processo ?? ''}}</span></div>
             @elseif(!empty($tipo) && $tipo == 'IUPDOACAO')
                <div><strong>Nº Processo: </strong><span style="text-decoration: underline;">{{$dados->numero_processo ?? ''}}</span></div>
+            @elseif(!empty($tipo) && $tipo == 'IUPDOACAO')
+               <div><strong>Nº Processo: </strong><span style="text-decoration: underline;">{{$dados->numero_processo ?? ''}}</span></div>
+            @elseif(!empty($tipo) && $tipo == 'IUPREMFORO')
+               <div><strong>Nº Processo: </strong><span style="text-decoration: underline;">{{$dados->numero_processo ?? ''}}</span></div>
             @endif
         </td>
     </tr>
