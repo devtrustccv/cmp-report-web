@@ -20,12 +20,12 @@ class IupRemForoController extends Controller
     public function gerarPdf($id)
     {
 
-        $urlWeb = config('services.global.url_web').'/iup-remicao-foro';
+        $urlWeb = config('services.global.url_web').'/iupremforo';
         $baseUrl = config('services.compra_venda.base_url');
         $token   = config('services.compra_venda.token');
 
         $link = $urlWeb.'/'.$id;
-        $qrcode_base64 = null; //$this->qrService->gerarBase64($link);
+        $qrcode_base64 = $this->qrService->gerarBase64($link);
         $titulo= 'IMPOSTO ÚNICO SOBRE O PATRIMONIO';
 
         $response = Http::withoutVerifying()->withHeaders([
