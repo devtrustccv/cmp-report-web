@@ -26,7 +26,7 @@ class TerrenoController extends Controller
         $urlWeb = config('services.global.url_web') . '/iup-terreno';
 
         $link = $urlWeb.'/'.$id;
-        $qrcode_base64 = null; // $this->qrService->gerarBase64($link);
+        $qrcode_base64 = $this->qrService->gerarBase64($link);
 
         $response = Http::withoutVerifying()->withHeaders([
                 'Authorization' => 'Bearer ' . $token,

@@ -27,7 +27,7 @@
             <strong>Nome: </strong><span style="text-decoration: underline; font-size:12px;">{{$dados->nomeRequerente ?? ''}}</span>
         </td>
         <td style="width:50%; padding:6px 8px;">
-            <strong>Valor da Compra: </strong><span style="text-decoration: underline; font-size:12px;">{{\App\Http\Utils::formatarComSeparador($dados->rendimento ?? 0)}}</span>
+            <strong>Valor da Compra: </strong><span style="text-decoration: underline; font-size:12px;">{{\App\Http\Utils::formatarComSeparador($dados->totalOnline ?? 0)}}</span>
         </td>
       </tr>
       <tr>
