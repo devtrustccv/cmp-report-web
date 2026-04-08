@@ -39,6 +39,7 @@ class TerrenoDto extends Model
     public $estado;
     public $data_emissao;
     public $codigoBarra;
+    public $regimeDesc;
 
     // Construtor para popular o model com JSON ou array
     public function __construct(array $attributes = [])
