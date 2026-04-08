@@ -43,7 +43,7 @@ style="margin-top:50px;">
             @elseif(!empty($tipo) && $tipo == 'IUPPARTILHA')
               <div  style="font-size: 10px;  text-decoration: underline;">Referente a Partilha</div>
             @elseif(!empty($tipo) && $tipo == 'IUPTERRENO')
-              <div  style="font-size: 10px;  text-decoration: underline;">Referente a Compra de Terreno</div>
+              <div  style="font-size: 10px;  text-decoration: underline;">Referente a {{$dados->regime ?? ''}}</div>
             @endif
         </td>
 
