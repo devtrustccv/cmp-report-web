@@ -21,40 +21,58 @@ class TerrenoController extends Controller
 
     public function gerarPdf($id)
     {
-        $baseUrl = config('services.compra_venda.base_url');
-        $token   = config('services.compra_venda.token');
-        $urlWeb = config('services.global.url_web') . '/iup-terreno';
+        try{
+ 
+            $baseUrl = config('services.compra_venda.base_url');
+            $token   = config('services.compra_venda.token');
+            $urlWeb = config('services.global.url_web') . '/iup-terreno';
 
-        $link = $urlWeb.'/'.$id;
-        $qrcode_base64 = $this->qrService->gerarBase64($link);
+            $link = $urlWeb.'/'.$id;
+            $qrcode_base64 = $this->qrService->gerarBase64($link);
 
-        $response = Http::withoutVerifying()->withHeaders([
-                'Authorization' => 'Bearer ' . $token,
-                'Accept'        => 'application/json',
-            ])->get("{$baseUrl}/iup-terreno/{$id}");
+            $response = Http::withoutVerifying()->withHeaders([
+                    'Authorization' => 'Bearer ' . $token,
+                    'Accept'        => 'application/json',
+                ])->get("{$baseUrl}/iup-terreno/{$id}");
 
-        if ($response->failed()) {
-            abort(404, "Documento não encontrado na API");
-        }
+            if ($response->failed()) {
+                // Aqui entra a pagina de erro
+                return response()->view('errors.generic', [
+                        'message' => $e->getMessage()
+                ], 500);
+            }
 
-        $dadosApi = $response->json();
+            $dadosApi = $response->json();
+
+            
+            if (!isset($dadosApi['data'])) {
+                // Aqui entra a pagina de erro
+                return response()->view('errors.generic', [
+                        'message' => $e->getMessage()
+                ], 500);
+            }
 
         
-        if (!isset($dadosApi['data'])) {
-            abort(500, 'Resposta inválida da API');
+            $dados = new TerrenoDto($dadosApi['data']);
+
+            return Pdf::loadView('iupterreno', [
+                    'dados' => $dados,
+                    'titulo' =>'IMPOSTO ÚNICO SOBRE O PATRIMONIO',
+                    'qrcode_base64' =>  $qrcode_base64,
+                    'tipo' => 'IUPTERRENO'
+                ])
+                ->setPaper([0, 0, 600, 520])
+                ->stream('iupterreno.pdf');
+
+        } catch (\Throwable $e) {
+
+            // Aqui entra a pagina de erro
+            return response()->view('errors.generic', [
+                    'message' => $e->getMessage()
+            ], 500);
+                
         }
-
-       
-        $dados = new TerrenoDto($dadosApi['data']);
-
-        return Pdf::loadView('iupterreno', [
-                'dados' => $dados,
-                'titulo' => 'IMPOSTO ÚNICO SOBRE O PATRIMONIO',
-                'qrcode_base64' =>  $qrcode_base64,
-                'tipo' => 'IUPTERRENO'
-            ])
-            ->setPaper([0, 0, 600, 520])
-            ->stream('iupterreno.pdf');
+        
     }
 
 }

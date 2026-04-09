@@ -13,54 +13,68 @@ class AtestadoController extends Controller
     public function gerarPdf(Request $request)
     {
         
-        $idProcesso = request('idProcesso', 0);
-        $userName   = request('userName', 'guest');
-        $email      = request('email', '');
+        try{
 
-       
-        $baseUrl = config('services.global.url_api');
-        $token   = config('services.compra_venda.token');
- 
-        $response = Http::withoutVerifying()->withHeaders([
-                'Authorization' => 'Bearer ' . $token,
-                'Accept'        => 'application/json',
-            ])->get("{$baseUrl}/assinatura?userName={$userName}&email={$email}&idProcesso={$idProcesso}");
+            $idProcesso = request('idProcesso', 0);
+            $userName   = request('userName', 'guest');
+            $email      = request('email', '');
 
-           
         
+            $baseUrl = config('services.global.url_api');
+            $token   = config('services.compra_venda.token');
+    
+            $response = Http::withoutVerifying()->withHeaders([
+                    'Authorization' => 'Bearer ' . $token,
+                    'Accept'        => 'application/json',
+                ])->get("{$baseUrl}/assinatura?userName={$userName}&email={$email}&idProcesso={$idProcesso}");
 
-        if ($response->failed()) {
-            abort(404, "Documento não encontrado na API");
-        }
-       
-        $dadosApi = $response->json();
+            if ($response->failed()) {
+                return response()->view('errors.generic', [
+                            'message' => $e->getMessage()
+                    ], 500);
+            }
         
-        if (!isset($dadosApi['data'])) {
-            abort(500, 'Resposta inválida da API');
-        }
-       
-        $dadosAssinatura = new AssinaturaDto($dadosApi['data']);
-
-        $tipo = trim(strtoupper($dadosAssinatura->tipoPedido));
+            $dadosApi = $response->json();
+            
+            if (!isset($dadosApi['data'])) {
+                return response()->view('errors.generic', [
+                            'message' => $e->getMessage()
+                    ], 500);
+            }
         
-        if ($tipo === 'ATESTADO DE AGREGADO FAMILIAR') {
-            return Pdf::loadView('atestado.agregado_familiar', [
-                'assinatura' => $dadosAssinatura
-            ])->setPaper('A4')->stream('agregado_familiar.pdf');
+            $dadosAssinatura = new AssinaturaDto($dadosApi['data']);
 
-        } elseif ($tipo === 'ATESTADO DE RESIDÊNCIA') {
-            return Pdf::loadView('atestado.residencia', [
-                'assinatura' => $dadosAssinatura
-            ])->setPaper('A4')->stream('residencia.pdf');
+            $tipo = trim(strtoupper($dadosAssinatura->tipoPedido));
+            
+            if ($tipo === 'ATESTADO DE AGREGADO FAMILIAR') {
+                return Pdf::loadView('atestado.agregado_familiar', [
+                    'assinatura' => $dadosAssinatura
+                ])->setPaper('A4')->stream('agregado_familiar.pdf');
 
-        } elseif ($tipo === 'ATESTADO DE POBREZA') {
-            return Pdf::loadView('atestado.pobreza', [
-                'assinatura' => $dadosAssinatura
-            ])->setPaper('A4')->stream('pobreza.pdf');
+            } elseif ($tipo === 'ATESTADO DE RESIDÊNCIA') {
+                return Pdf::loadView('atestado.residencia', [
+                    'assinatura' => $dadosAssinatura
+                ])->setPaper('A4')->stream('residencia.pdf');
 
-        } else {
-            abort(404, 'Tipo de atestado não reconhecido: ' . $dadosAssinatura->tipoPedido);
+            } elseif ($tipo === 'ATESTADO DE POBREZA') {
+                return Pdf::loadView('atestado.pobreza', [
+                    'assinatura' => $dadosAssinatura
+                ])->setPaper('A4')->stream('pobreza.pdf');
+
+            } else {
+                abort(404, 'Tipo de atestado não reconhecido: ' . $dadosAssinatura->tipoPedido);
+            }
+
+         } catch (\Throwable $e) {
+
+            // Aqui entra a pagina de erro
+            return response()->view('errors.generic', [
+                    'message' => $e->getMessage()
+            ], 500);
+                
         }
+        
+        
 
                 
     }

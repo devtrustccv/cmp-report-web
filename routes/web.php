@@ -1,22 +1,28 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CompraVendaController;
-use App\Http\Controllers\IupRemForoController;
-use App\Http\Controllers\AtestadoController;
-use App\Http\Controllers\DoacaoController;
-use App\Http\Controllers\PartilhaController;
-use App\Http\Controllers\TerrenoController;
+use App\Http\Controllers\{
+    CompraVendaController,
+    IupRemForoController,
+    AtestadoController,
+    DoacaoController,
+    PartilhaController,
+    TerrenoController,
+    DocumentController
+};
 
-Route::get('/compra-venda/{id}', [CompraVendaController::class, 'gerarPdf']);
-Route::get('/iupremforo/{id}', [IupRemForoController::class, 'gerarPdf']);
-Route::get('/iuppartilha/{id}', [PartilhaController::class, 'gerarPdf']);
-Route::get('/iupdoacao/{id}', [DoacaoController::class, 'gerarPdf']);
-Route::get('/iupterreno/{id}', [TerrenoController::class, 'gerarPdf']);
+Route::prefix('/')->group(function () {
 
+    Route::get('compra-venda/{id}', [CompraVendaController::class, 'gerarPdf']);
+    Route::get('iupremforo/{id}', [IupRemForoController::class, 'gerarPdf']);
+    Route::get('iuppartilha/{id}', [PartilhaController::class, 'gerarPdf']);
+    Route::get('iupdoacao/{id}', [DoacaoController::class, 'gerarPdf']);
+    Route::get('iupterreno/{id}', [TerrenoController::class, 'gerarPdf']);
+    Route::get('document-link-public/{id}', [DocumentController::class, 'loadDocument']);
 
-// Atestado - parâmetros via query string
+});
+
 Route::get('/atestado', [AtestadoController::class, 'gerarPdf'])
-     ->name('atestado.gerarPdf');
+    ->name('atestado.gerarPdf');
 
 
