@@ -8,7 +8,8 @@ use App\Http\Controllers\{
     DoacaoController,
     PartilhaController,
     TerrenoController,
-    DocumentController
+    DocumentController,
+    CertidaoMatricialController
 };
 
 Route::prefix('/')->group(function () {
@@ -19,6 +20,8 @@ Route::prefix('/')->group(function () {
     Route::get('iupdoacao/{id}', [DoacaoController::class, 'gerarPdf']);
     Route::get('iupterreno/{id}', [TerrenoController::class, 'gerarPdf']);
     Route::get('document-link-public/{id}', [DocumentController::class, 'loadDocument']);
+    Route::get('reports/certidao-matricial', [CertidaoMatricialController::class, 'gerarPdf']);
+    
 
 });
 
