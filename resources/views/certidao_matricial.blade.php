@@ -216,7 +216,7 @@
             <tr>
                 <td class="duc-left">
                     <div class="title">
-                        CONTA - DUC Nº &nbsp;&nbsp; 5484620
+                        CONTA - DUC {{$dados->duc ?? ''}}
                     </div>
 
                     <br>
