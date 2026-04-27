@@ -24,7 +24,7 @@ class CertidaoMatricialController extends Controller
         $urlWeb = config('services.global.url_web') . '/reports/certidao-matricial';
 
         $link = $urlWeb.'/'.$id;
-       // $qrcode_base64 = $this->qrService->gerarBase64($link);
+        $qrcode_base64 = $this->qrService->gerarBase64($link);
 
         $response = Http::withoutVerifying()->withHeaders([
                     //'Authorization' => 'Bearer ' . $token,
@@ -53,7 +53,7 @@ class CertidaoMatricialController extends Controller
 
         return Pdf::loadView('certidao_matricial', [
                             'dados' => $dados,
-                            'qrcode_base64' => null, // $qrcode_base64
+                            'qrcode_base64' => $qrcode_base64
                         ])
                         ->setPaper('A4', 'portrait')
                         ->stream('iupcompra.pdf');
