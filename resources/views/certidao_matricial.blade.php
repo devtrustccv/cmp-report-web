@@ -175,9 +175,7 @@
                     overflow-wrap: break-word;
                 ">
                 <span style="font-size:12px;">
-                    <strong>
-                        Nome: {{$dados->proprietario ?? ""}}
-                    </strong>
+                    <strong>Nome: </strong>{{$dados->proprietario ?? ""}}
                 </span>
             </div>
             <spam style="font-size:12px;"><strong>INFORMAÇÃO MATRICIAL</strong></spam><br>
