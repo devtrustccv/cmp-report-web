@@ -183,7 +183,7 @@
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
                 <tr>
                     <td style="width:25%; padding:3px 3px;"><strong style="font-size:12px;">Matriz: </strong><span style="font-size:12px;">{{$dados->tipo ?? ""}}</span>  </td>
-                    <td style="width:15%; padding:3px 3px;"><strong style="font-size:12px;">Nº : </strong><span style="font-size:12px;">{{$dados->numMatriz ?? ""}} / {{$dados->fraccao ?? ""}}</span>  </td>
+                    <td style="width:15%; padding:3px 3px;"><strong style="font-size:12px;">Nº: </strong><span style="font-size:12px;">{{$dados->numMatriz ?? ""}}/{{$dados->fraccao ?? ""}}</span>  </td>
                     <td style="width:35%; padding:3px 3px;"><strong style="font-size:12px;">Freguesia: </strong><span style="font-size:12px;">{{$dados->freguesia ?? ""}}</span> </td>
                     <td style="width:35%; padding:3px 3px;"><strong style="font-size:12px;">Localização: </strong><span style="font-size:12px;">{{$dados->local ?? ""}}</span> </td>
                 </tr>
@@ -273,9 +273,9 @@
         style="width:50px !important; height:50px !important; display:block; margin:0 auto 5px auto;">
         </td>
         <td style="font-size: 10px; width:20%;">
-            <div style="margin-bottom:5px;"><strong>Entidade :</strong> 112</div>
-            <div style="margin-bottom:5px;"><strong>Referencia :</strong>{{$dados->duc ?? ''}}</div>
-            <div style="margin-bottom:5px;"><strong>Valor :</strong>{{\App\Http\Utils::formatarComSeparador($dados->totalEmolumentos)}}
+            <div style="margin-bottom:5px;"><strong>Entidade: </strong> 112</div>
+            <div style="margin-bottom:5px;"><strong>Referencia: </strong>{{$dados->duc ?? ''}}</div>
+            <div style="margin-bottom:5px;"><strong>Valor: </strong>{{\App\Http\Utils::formatarComSeparador($dados->totalEmolumentos)}}
             </div>
         </td>
         <td align="center width:20%; text-align:center;">
