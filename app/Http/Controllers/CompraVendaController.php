@@ -30,6 +30,7 @@ class CompraVendaController extends Controller
             $link = $urlWeb.'/'.$id;
             $qrcode_base64 = $this->qrService->gerarBase64($link);
 
+
             $response = Http::withoutVerifying()->withHeaders([
                     'Authorization' => 'Bearer ' . $token,
                     'Accept'        => 'application/json',

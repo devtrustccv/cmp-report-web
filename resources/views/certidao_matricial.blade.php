@@ -116,6 +116,9 @@
 </head>
 <body>
 
+     {{-- WATERMARK --}}
+    @include('components.watermark', ['estado' => $dados->estadoDuc ?? 'REQ_PAG'])
+
     <div class="header">
         <img src="{{ public_path('images/logo_CMPRAIA.png') }}">
         <div class="title">Câmara Municipal da Praia</div>
@@ -136,12 +139,12 @@
                 ">
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
                 <tr>
-                    <td style="width:5%; padding:3px 3px;"> <strong style="font-size:12px;">Nº </strong><span style="font-size:12px;">132122/2026</span>  </td>
-                    <td style="width:50%; padding:3px 3px;"> <strong style="font-size:12px;">Para efeito de:</strong><span style="font-size:12px;">Convinientes</span>  </td>
-                    <td style="width:45%; padding:3px 3px;"></td>
+                    <td style="width:5%; padding:3px 3px;"> <strong style="font-size:12px;">Nº </strong><span style="font-size:12px;">{{$dados->certidao ?? ""}}/2026</span>  </td>
+                    <td style="width:55%; padding:3px 3px;"> <strong style="font-size:12px;">Para efeito de: </strong><span style="font-size:12px;">{{$dados->efeito ?? ""}}</span>  </td>
+                    <td style="width:40%; padding:3px 3px;"></td>
                 </tr>
                 <tr>
-                    <td style="width:100%; padding:3px 3px;"> <strong style="font-size:12px;">Requerente :</strong> <span style="font-size:12px;">Inês Rosário Varela Gonçalves</span> </td>
+                    <td style="width:100%; padding:3px 3px;"> <strong style="font-size:12px;">Requerente :</strong> <span style="font-size:12px;">{{$dados->requerente ?? ""}}</span> </td>
                 </tr>
             </table>
             <div style="
@@ -157,7 +160,7 @@
                 ">
                 <span style="font-size:12px;">
                     <strong>
-                        TITULAR: NA QUALIDADE DE PROPRIETÁRIO
+                        TITULAR: {{$dados->categoria ?? ""}}
                     </strong>
                 </span>
             </div>
@@ -173,36 +176,39 @@
                 ">
                 <span style="font-size:12px;">
                     <strong>
-                        Nome: INÊS ROSÁRIO VARELA GONÇALVES
+                        Nome: {{$dados->proprietario ?? ""}}
                     </strong>
                 </span>
             </div>
             <spam style="font-size:12px;"><strong>INFORMAÇÃO MATRICIAL</strong></spam><br>
-            <spam style="font-size:12px;"><strong>Tipo Prédio: </strong>CONSTRUÇÃO</spam><br>
+            <spam style="font-size:12px;"><strong>Tipo Prédio: </strong>{{$dados->tipoPredio ?? ""}}</spam><br>
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
                 <tr>
-                    <td style="width:15%; padding:3px 3px;"><strong style="font-size:12px;">Matriz: </strong><span style="font-size:12px;">URBANA</span>  </td>
-                    <td style="width:25%; padding:3px 3px;"><strong style="font-size:12px;">Para efeito de: </strong><span style="font-size:12px;">25496/ 41</span>  </td>
-                    <td style="width:25%; padding:3px 3px;"><strong style="font-size:12px;">Freguesia: </strong><span style="font-size:12px;">N. S. DA GRACA</span> </td>
-                    <td style="width:35%; padding:3px 3px;"><strong style="font-size:12px;">Localização: </strong><span style="font-size:12px;">Palmarejo Grande</span> </td>
+                    <td style="width:25%; padding:3px 3px;"><strong style="font-size:12px;">Matriz: </strong><span style="font-size:12px;">{{$dados->tipo ?? ""}}</span>  </td>
+                    <td style="width:15%; padding:3px 3px;"><strong style="font-size:12px;">Nº : </strong><span style="font-size:12px;">{{$dados->numMatriz ?? ""}} / {{$dados->fraccao ?? ""}}</span>  </td>
+                    <td style="width:35%; padding:3px 3px;"><strong style="font-size:12px;">Freguesia: </strong><span style="font-size:12px;">{{$dados->freguesia ?? ""}}</span> </td>
+                    <td style="width:35%; padding:3px 3px;"><strong style="font-size:12px;">Localização: </strong><span style="font-size:12px;">{{$dados->local ?? ""}}</span> </td>
                 </tr>
             </table>
             <spam style="font-size:12px;"><strong>Confrontações</strong></spam><br>
             <ul style=" font-size:12px; list-style: none; padding-left: 20px; font-style: italic;">
-                <li style="margin-bottom:5px;">Norte: Via Pública</li>
-                <li style="margin-bottom:5px;">Sul: Via Pública</li>
-                <li style="margin-bottom:5px;">Este: Via Pública</li>
-                <li style="margin-bottom:5px;">Oeste: Via Pública</li>
+                <li style="margin-bottom:5px;">Norte: {{$dados->norte ?? ""}}</li>
+                <li style="margin-bottom:5px;">Sul: {{$dados->sul ?? ""}}</li>
+                <li style="margin-bottom:5px;">Este: {{$dados->este ?? ""}}</li>
+                <li style="margin-bottom:5px;">Oeste: {{$dados->oeste ?? ""}}</li>
             </ul>
-            <spam style="font-size:12px;"><strong>Área: </strong>91.59 m2</spam><br>
-            <spam style="font-size:12px;"><strong>Valor Matricial:</strong>4.167.000,00 (Quatro Milhões Cento e Sessenta e Sete Mil Escudos)</spam>
-
+            <spam style="font-size:12px;"><strong>Área: </strong>{{$dados->superficie ?? ""}}</spam><br>
+            <spam style="font-size:12px;"><strong>Valor Matricial: </strong>{{\App\Http\Utils::formatarComSeparador($dados->rendimento) ?? ""}} $00 {{$dados->rendExt ?? ""}}</spam><br>
+            <spam style="font-size:12px;"><strong>Descrição: </strong></spam><br>
             <p style="font-size:10px;">
-                    PREDIO URBANO, MORADIA CONSTRUIDA EM ALVENARIA DE PEDRAS E BLOCOS, ASSENTES COM ARGAMASSA DE CIMENTO E AREIA E
-                    COBERTO COM LAJE DE BETÃO ARMADO DA QUAL FAZ PARTE INTEGRANTE:
-                    Fracção AO, Piso 2, Apartamento 216, T2 (91,59 m2), composto por dois quartos de dormir, uma sala comum, cozinha, estendal e casa de banho,
-                    correspondente a 5.60¿
+                    {{$dados->descircao ?? ""}}
             </p>
+
+            @if(!empty($dados->quoataDesc))
+                <spam style="font-size:12px;"><strong>Quaota: </strong></spam><br>
+                <p>{{ $dados->quoataDesc }}</p>
+            @endif
+
         </div>
     </div>
     <div class="footer">
@@ -215,26 +221,20 @@
 
                     <br>
 
-                    <div class="row">
-                        <span class="label">Selo</span>
-                        <span class="value">0$00</span>
-                    </div>
-
-                    <div class="row">
-                        <span class="label">Emolumentos</span>
-                        <span class="value">1233$00</span>
-                    </div>
-
-                    <div class="row">
-                        <span class="label">Impresso</span>
-                        <span class="value">10$00</span>
-                    </div>
+                    @foreach($dados->emolumentos as $item)
+                        <div class="row">
+                            <span class="label">{{ $item->codigo }}</span>
+                            <span class="value">
+                                {{ \App\Http\Utils::formatarComSeparador($item->valor ?? 0) }}
+                            </span>
+                        </div>
+                    @endforeach
 
                     <div class="line"></div>
 
                     <div class="row">
                         <span class="label">Total .................</span>
-                        <span class="value">1243$00</span>
+                        <span class="value">{{\App\Http\Utils::formatarComSeparador($dados->totalEmolumentos)}}</span>
                     </div>
                 </td>
 
@@ -242,19 +242,19 @@
                     <div class="title">EMISSÃO</div>
 
                     <div style="margin-top:4px;">
-                        Emitido por: &nbsp;&nbsp; Alto Da Glória - Front Office Nair Moura
+                        Emitido por: {{$dados->utilizador}}
                     </div>
 
                     <div style="margin-top:12px;">
-                        Em: &nbsp;&nbsp;&nbsp; 06-04-2026 15:26:54
+                        Em:  {{$dados->dataEmissao}}
                     </div>
 
                     <div class="right-line"></div>
 
                     <table style="width:100%; margin-top:2px; font-size:8px; font-weight:bold;">
                         <tr>
-                            <td>Cobrado por:Alto Da Glória - Front Office Nair Moura</td>
-                            <td style="text-align:right;">06-04-2026 15:27:4</td>
+                            <td>Cobrado por: {{$dados->cobradoPor}}</td>
+                            <td style="text-align:right;">{{$dados->dataCobranca}}</td>
                         </tr>
                     </table>
 
@@ -263,7 +263,7 @@
                     </div>
 
                     <div class="barcode-text">
-                        @003010100000548462046@
+                      {{$dados->codigoBarra}}
                     </div>
                 </td>
             </tr>
@@ -277,7 +277,7 @@
         <td style="font-size: 10px; width:20%;">
             <div style="margin-bottom:5px;"><strong>Entidade :</strong> 112</div>
             <div style="margin-bottom:5px;"><strong>Referencia :</strong>{{$dados->duc ?? ''}}</div>
-            <div style="margin-bottom:5px;"><strong>Valor :</strong>{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }}
+            <div style="margin-bottom:5px;"><strong>Valor :</strong>{{\App\Http\Utils::formatarComSeparador($dados->totalEmolumentos)}}
             </div>
         </td>
         <td align="center width:20%; text-align:center;">
