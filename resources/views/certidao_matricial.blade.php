@@ -128,7 +128,7 @@
     <div class="content">
        <div style="
                     border:1px solid #000;
-                    min-height:500px;
+                    min-height:680px;
                     padding:8px;
                     margin-top:30px;
                     margin-12px;
