@@ -43,6 +43,7 @@ class CertidaoMatricialDto extends Model
     public $dataCobranca;
     public $dataEmissao;
     public $codigoBarra;
+    public $ano;
     public $emolumentos = [];
     public $totalEmolumentos;
 
