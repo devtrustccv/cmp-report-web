@@ -286,7 +286,8 @@
            </span>      
         </td>
         <td style="text-align: right; width:20%;">
-            <img src="data:image/png;base64, {{ $qrcode_base64 }}" alt="QR Code">
+            <img src="data:image/png;base64, {{ $qrcode_base64 }}" alt="QR Code"
+            style="width:100px; height:100px;">
         </td>
 
     </tr>
