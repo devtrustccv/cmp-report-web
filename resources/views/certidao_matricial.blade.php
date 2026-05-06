@@ -196,7 +196,7 @@
                 <li style="margin-bottom:5px;">Oeste: {{$dados->oeste ?? ""}}</li>
             </ul>
             <span style="font-size:12px;"><strong>Área: </strong>{{$dados->superficie ?? ""}}</span><br>
-            <span style="font-size:12px;"><strong>Valor Matricial: </strong>{{\App\Http\Utils::formatarComSeparador($dados->rendimento) ?? ""}} $00 {{$dados->rendExt ?? ""}}</span>
+            <span style="font-size:12px;"><strong>Valor Matricial: </strong>{{\App\Http\Utils::formatarComSeparador($dados->rendimento) ?? ""}} {{$dados->rendExt ?? ""}}</span>
             <br><br>
             <span style="font-size:12px; margin-top:10px;"><strong>Descrição: </strong></span><br>
             <p style="font-size:10px;">
