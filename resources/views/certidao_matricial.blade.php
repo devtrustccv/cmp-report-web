@@ -139,9 +139,9 @@
                 ">
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
                 <tr>
-                    <td style="width:5%; padding:3px 3px;"> <strong style="font-size:12px;">Nº </strong><span style="font-size:12px;">{{$dados->certidao ?? ""}}/{{$dados->ano ?? ""}}</span>  </td>
+                    <td style="width:20%; padding:3px 3px;"> <strong style="font-size:12px;">Nº </strong><span style="font-size:12px;">{{$dados->certidao ?? ""}}/{{$dados->ano ?? ""}}</span>  </td>
                     <td style="width:55%; padding:3px 3px;"> <strong style="font-size:12px;">Para efeito de: </strong><span style="font-size:12px;">{{$dados->efeito ?? ""}}</span>  </td>
-                    <td style="width:40%; padding:3px 3px;"></td>
+                    <td style="width:20%; padding:3px 3px;"></td>
                 </tr>
                 <tr>
                     <td colspan="3" style="width:100%; padding:3px 3px;"> <strong style="font-size:12px;">Requerente :</strong> <span style="font-size:12px;">{{$dados->requerente ?? ""}}</span> </td>
