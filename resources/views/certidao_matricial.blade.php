@@ -144,7 +144,7 @@
                     <td style="width:40%; padding:3px 3px;"></td>
                 </tr>
                 <tr>
-                    <td style="width:100%; padding:3px 3px;"> <strong style="font-size:12px;">Requerente :</strong> <span style="font-size:12px;">{{$dados->requerente ?? ""}}</span> </td>
+                    <td colspan="3" style="width:100%; padding:3px 3px;"> <strong style="font-size:12px;">Requerente :</strong> <span style="font-size:12px;">{{$dados->requerente ?? ""}}</span> </td>
                 </tr>
             </table>
             <div style="
