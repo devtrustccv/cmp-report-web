@@ -178,8 +178,8 @@
                     <strong>Nome: </strong>{{$dados->proprietario ?? ""}}
                 </span>
             </div>
-            <spam style="font-size:12px;"><strong>INFORMAÇÃO MATRICIAL</strong></spam><br>
-            <spam style="font-size:12px;"><strong>Tipo Prédio: </strong>{{$dados->tipoPredio ?? ""}}</spam><br>
+            <span style="font-size:12px;"><strong>INFORMAÇÃO MATRICIAL</strong></span><br>
+            <span style="font-size:12px;"><strong>Tipo Prédio: </strong>{{$dados->tipoPredio ?? ""}}</span><br>
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
                 <tr>
                     <td style="width:25%; padding:3px 3px;"><strong style="font-size:12px;">Matriz: </strong><span style="font-size:12px;">{{$dados->tipo ?? ""}}</span>  </td>
@@ -188,22 +188,23 @@
                     <td style="width:35%; padding:3px 3px;"><strong style="font-size:12px;">Localização: </strong><span style="font-size:12px;">{{$dados->local ?? ""}}</span> </td>
                 </tr>
             </table>
-            <spam style="font-size:12px;"><strong>Confrontações</strong></spam><br>
+            <span style="font-size:12px;"><strong>Confrontações</strong></span><br>
             <ul style=" font-size:12px; list-style: none; padding-left: 20px; font-style: italic;">
                 <li style="margin-bottom:5px;">Norte: {{$dados->norte ?? ""}}</li>
                 <li style="margin-bottom:5px;">Sul: {{$dados->sul ?? ""}}</li>
                 <li style="margin-bottom:5px;">Este: {{$dados->este ?? ""}}</li>
                 <li style="margin-bottom:5px;">Oeste: {{$dados->oeste ?? ""}}</li>
             </ul>
-            <spam style="font-size:12px;"><strong>Área: </strong>{{$dados->superficie ?? ""}}</spam><br>
-            <spam style="font-size:12px;"><strong>Valor Matricial: </strong>{{\App\Http\Utils::formatarComSeparador($dados->rendimento) ?? ""}} $00 {{$dados->rendExt ?? ""}}</spam><br>
-            <spam style="font-size:12px; margin-top:10px;"><strong>Descrição: </strong></spam><br>
+            <span style="font-size:12px;"><strong>Área: </strong>{{$dados->superficie ?? ""}}</span><br>
+            <span style="font-size:12px;"><strong>Valor Matricial: </strong>{{\App\Http\Utils::formatarComSeparador($dados->rendimento) ?? ""}} $00 {{$dados->rendExt ?? ""}}</span>
+            <br><br><br>
+            <span style="font-size:12px; margin-top:10px;"><strong>Descrição: </strong></span><br>
             <p style="font-size:10px;">
                     {{$dados->descricao ?? ""}}
             </p>
 
             @if(!empty($dados->quoataDesc))
-                <spam style="font-size:12px;"><strong>Quaota: </strong></spam><br>
+                <span style="font-size:12px;"><strong>Quaota: </strong></span><br>
                 <p>{{ $dados->quoataDesc }}</p>
             @endif
 
