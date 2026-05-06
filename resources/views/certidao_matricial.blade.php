@@ -197,7 +197,7 @@
             </ul>
             <spam style="font-size:12px;"><strong>Área: </strong>{{$dados->superficie ?? ""}}</spam><br>
             <spam style="font-size:12px;"><strong>Valor Matricial: </strong>{{\App\Http\Utils::formatarComSeparador($dados->rendimento) ?? ""}} $00 {{$dados->rendExt ?? ""}}</spam><br>
-            <spam style="font-size:12px;"><strong>Descrição: </strong></spam><br>
+            <spam style="font-size:12px; margin-top:10px;"><strong>Descrição: </strong></spam><br>
             <p style="font-size:10px;">
                     {{$dados->descricao ?? ""}}
             </p>
