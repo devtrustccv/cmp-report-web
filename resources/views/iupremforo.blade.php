@@ -90,7 +90,7 @@
     min-height:50px;        
     padding:8px;             
     margin-top:12px;   
-    font-size:12px;     
+    font-size:10px;     
     text-align: justify;
 ">
     <!-- espaço para assinatura ou texto -->
