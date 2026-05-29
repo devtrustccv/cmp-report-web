@@ -1,4 +1,4 @@
-# DGE Web Report
+# CMP Web Report
 
 Sistema de geração de relatórios e documentos oficiais desenvolvido com Laravel.
 
@@ -93,7 +93,7 @@ git clone <url-do-repositorio>
 Entrar na pasta:
 
 ```bash
-cd dge-web-report
+cd  cmp-web-report
 ```
 
 ---
