@@ -31,7 +31,7 @@ style="margin-top:50px;">
             <img src="{{ public_path('images/logo.png') }}"
                  style="width:30px; height:30px; display:block; margin:0 auto 5px auto;">
             <div>República de Cabo Verde</div>
-            <div style="font-size: 14px;"><strong>DOCUMENTO SO PARA USO INTERNO DO MUNICIPIO</strong></div>
+            <div style="font-size: 14px;"><strong>Câmara Municipal da Praia</strong></div>
             <div>{{$titulo ?? 'IMPOSTO SOBRE A TRANSMISSÃO DE IMÓVEIS (ITI)'}} </div>
             
             @if(!empty($tipo) && $tipo == 'IUPCOMPRA')
