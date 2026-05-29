@@ -53,7 +53,7 @@ class IupController extends Controller
             $dados = $this->appService->{$method}($id);
 
             return Utils::renderPdf(
-                $tipo->view(),
+                "duc".$tipo->view(),
                 [
                     'dados' => $dados,
                     'titulo' => $dados->titulo,

@@ -32,7 +32,7 @@ class CertidaoMatricialController extends Controller
             // SERVICE
             $dados = $this->appService->getDadosCertidaoMatricial($id);
 
-            return Utils::generateReport(TipoRelatorioEnum::CERTIDAO_MATRICIAL->view(),
+            return Utils::generateReport("duc".TipoRelatorioEnum::CERTIDAO_MATRICIAL->view(),
                             $dados,
                             "",
                             "",
