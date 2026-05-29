@@ -1,8 +1,8 @@
 <?php
-namespace App;
+namespace App\Http\Helpers;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class Utils{
+class BasicMethods{
     public static function renderPdf(
         string $view,
         array $data,

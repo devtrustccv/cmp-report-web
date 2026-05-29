@@ -38,11 +38,11 @@
 <body>
 
 <header>
-    @include('header')
+    @include('duc.header')
 </header>
 
 <footer>
-    @include('footer')
+    @include('duc.footer')
 </footer>
 
 <div class="content">

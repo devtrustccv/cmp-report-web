@@ -6,7 +6,7 @@ use App\Http\Helpers\Enums\TipoRelatorioEnum;
 use App\Http\Helpers\QrCodeHelper;
 use App\Http\QrCodeService;
 use App\Services\AppService;
-use App\Utils;
+use App\Http\Helpers\BasicMethods;
 use Exception;
 
 
@@ -33,7 +33,7 @@ class CertidaoMatricialController extends Controller
             // SERVICE
             $dados = $this->appService->getDadosCertidaoMatricial($id);
 
-            return Utils::generateReport("duc".(TipoRelatorioEnum::CERTIDAO_MATRICIAL->view()),
+            return BasicMethods::generateReport("duc.".(TipoRelatorioEnum::CERTIDAO_MATRICIAL->view()),
                             $dados,
                             "",
                             "",

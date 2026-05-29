@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Helpers\Enums\TipoRelatorioEnum;
-use App\Http\Helpers\QrCodeHelper;
 use App\Services\AppService;
-use App\Utils;
+use App\Http\Helpers\BasicMethods;
 
 class IupController extends Controller
 {
@@ -45,15 +44,14 @@ class IupController extends Controller
     ) {
         try {
 
-            $qrcode_base64 = QrCodeHelper::generateReportQrCode(
+            $qrcode_base64 = null; /* QrCodeHelper::generateReportQrCode(
                 $tipo->view(),
                 $id
-            );
-
+            );*/
             $dados = $this->appService->{$method}($id);
 
-            return Utils::renderPdf(
-                "duc".$tipo->view(),
+            return BasicMethods::renderPdf(
+                "duc.".($tipo->view()),
                 [
                     'dados' => $dados,
                     'titulo' => $dados->titulo,
