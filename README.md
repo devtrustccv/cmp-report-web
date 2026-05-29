@@ -171,6 +171,7 @@ resources/
 └── views/
     └──
 ---
+```
 
 ## Estrutura de Serviços
 
