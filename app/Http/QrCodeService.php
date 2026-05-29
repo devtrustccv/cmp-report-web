@@ -13,8 +13,8 @@ class QrCodeService
     {
         // gera PNG binário
         $png = QrCode::format('png')
-        ->size(50)
-        ->margin(2)->generate($link);
+        ->size(70)
+        ->margin(1)->generate($link);
         // converte para base64 e retorna
         return base64_encode($png);
     }
