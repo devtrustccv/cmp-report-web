@@ -22,7 +22,9 @@ class QrCodeService
      */
     public function gerarSvg(string $link): string
     {
-        return QrCode::format('svg')->size(50)->generate($link);
+        return QrCode::format('svg')
+        ->size(250)
+        ->margin(2)->generate($link);
     }
 
 }
