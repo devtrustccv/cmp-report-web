@@ -21,7 +21,7 @@ class CertidaoMatricialController extends Controller
         $this->appService = $appService;
     }
    
-    public function gerarPdf($id){
+    public function gerarCertidaoMatricial($id){
         try {
 
             $qrcode_base64 = QrCodeHelper::generateReportQrCode(
