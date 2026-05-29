@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Enums\TipoAtestadoEnum;
+use App\Helpers\Enums\TipoAtestadoEnum;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Services\AppService;
 use Illuminate\Http\Request;
