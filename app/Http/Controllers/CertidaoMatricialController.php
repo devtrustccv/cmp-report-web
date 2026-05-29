@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+
 use App\Http\Helpers\Enums\TipoRelatorioEnum;
-use App\Helpers\QrCodeHelper;
+use App\Http\Helpers\QrCodeHelper;
 use App\Http\QrCodeService;
 use App\Services\AppService;
 use App\Utils;
