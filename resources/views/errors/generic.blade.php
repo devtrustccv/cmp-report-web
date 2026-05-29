@@ -113,6 +113,25 @@
                 font-size: 26px;
             }
         }
+
+        .logo-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 3px solid #0d6efd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+        }
+
+        .logo-container img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -120,10 +139,8 @@
 <div class="error-container">
     <div class="error-card">
 
-        <div class="icon">
-            <svg viewBox="0 0 24 24">
-                <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-            </svg>
+        <div class="logo-container">
+            <img src="{{ asset('images/logo_CMPRAIA.png') }}" alt="CMP">
         </div>
 
         <div class="error-code">
