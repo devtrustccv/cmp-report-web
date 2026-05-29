@@ -2,30 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\AppService;
 use Illuminate\Support\Facades\Http;
 
 class DocumentController extends Controller
 {
+    private AppService $appService;
+
+    public function __construct(AppService $appService)
+    {
+        $this->appService = $appService;
+    }
+
     public function loadDocument($id)
     {
         try {
-            $baseUrl = config('services.global.url_api');
-            $token   = config('services.global.token');
-
-            $response = Http::withoutVerifying()->withHeaders([
-                'Authorization' => 'Bearer ' . $token,
-                'Accept'        => 'application/json',
-            ])->get("{$baseUrl}/documento/{$id}");
-
-            if ($response->failed()) {
-                return $this->renderGenericError('Documento não encontrado.', 404);
-            }
-
-            $dadosApi = $response->json();
-
+           
+            $dadosApi = $this->appService->getDocumentData($id);
             $base64Pdf = $dadosApi['data']['blobContent'] ?? null;
             $mimeType  = $dadosApi['data']['mimeType'] ?? 'application/pdf';
-
             return $this->renderPdfFromBase64($base64Pdf, $mimeType);
 
         } catch (\Throwable $e) {

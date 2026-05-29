@@ -1,8 +1,11 @@
 <?php
 namespace App\Http\Controllers;
-use Barryvdh\DomPDF\Facade\Pdf;
+
+use App\Enums\TipoRelatorioEnum;
+use App\Helpers\QrCodeHelper;
 use App\Http\QrCodeService;
 use App\Services\AppService;
+use App\Utils;
 use Exception;
 
 
@@ -20,18 +23,20 @@ class CertidaoMatricialController extends Controller
    
     public function gerarPdf($id){
         try {
-            $urlWeb = config('services.global.url_web') . '/reports/certidao-matricial';
-            $link = $urlWeb.'/'.$id;
-            $qrcode_base64 = $this->qrService->gerarBase64($link);
+
+            $qrcode_base64 = QrCodeHelper::generateReportQrCode(
+                'reports/certidao-matricial',
+                $id
+            );
+
             // SERVICE
             $dados = $this->appService->getDadosCertidaoMatricial($id);
 
-            return Pdf::loadView('certidao_matricial', [
-                                'dados' => $dados,
-                                'qrcode_base64' => $qrcode_base64
-                            ])
-                            ->setPaper('A4', 'portrait')
-                            ->stream('iupcompra.pdf');
+            return Utils::generateReport(TipoRelatorioEnum::CERTIDAO_MATRICIAL->view(),
+                            $dados,
+                            "",
+                            "",
+                            $qrcode_base64);
 
          } catch (Exception $e) {
 
