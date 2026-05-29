@@ -5,7 +5,7 @@ namespace App\Http\Helpers\Enums;
 enum TipoRelatorioEnum: string
 {
     case IUPDOACAO   = 'IUPDOACAO';
-    case IUPCOMPRA   = 'IUPCOMPRA';
+    case IUPCOMPRA   = 'COMPRA-VENDA';
     case IUPPARTILHA = 'IUPPARTILHA';
     case IUPHERANCA  = 'IUPHERANCA';
     case IUPTERRENO  = 'IUPTERRENO';
