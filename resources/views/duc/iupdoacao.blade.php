@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('duc.layout')
 
 @section('content')
 
