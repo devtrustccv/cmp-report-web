@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Helpers\Enums\TipoRelatorioEnum;
+use App\Http\Helpers\Enums\TipoRelatorioEnum;
 use App\Helpers\QrCodeHelper;
 use App\Http\QrCodeService;
 use App\Services\AppService;
@@ -32,7 +32,7 @@ class CertidaoMatricialController extends Controller
             // SERVICE
             $dados = $this->appService->getDadosCertidaoMatricial($id);
 
-            return Utils::generateReport("duc".TipoRelatorioEnum::CERTIDAO_MATRICIAL->view(),
+            return Utils::generateReport("duc".(TipoRelatorioEnum::CERTIDAO_MATRICIAL->view()),
                             $dados,
                             "",
                             "",

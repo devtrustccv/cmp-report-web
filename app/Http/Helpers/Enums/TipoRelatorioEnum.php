@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers\Enums;
+namespace App\Http\Helpers\Enums;
 
 enum TipoRelatorioEnum: string
 {

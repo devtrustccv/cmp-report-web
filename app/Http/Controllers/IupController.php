@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Enums\TipoRelatorioEnum;
+use App\Http\Helpers\Enums\TipoRelatorioEnum;
 use App\Helpers\QrCodeHelper;
 use App\Services\AppService;
 use App\Utils;
