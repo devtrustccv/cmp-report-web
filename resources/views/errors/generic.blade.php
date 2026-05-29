@@ -145,7 +145,7 @@
         </a>
 
         <div class="footer">
-            Sistema de Gestão Documental
+            Sistema de Gestão Documental - Câmara Municipal da Praia
         </div>
 
     </div>
