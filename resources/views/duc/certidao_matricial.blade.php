@@ -112,9 +112,19 @@
                 left: 0;
                 right: 0;
             }
+
+            .modelo {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 8px;
+                font-weight: bold;
+            }
     </style>
 </head>
 <body>
+
+    <div class="modelo">Modelo C0009</div>
 
      {{-- WATERMARK --}}
     @include('components.watermark', ['estado' => $dados->estadoDuc ?? 'REQ_PAG'])
