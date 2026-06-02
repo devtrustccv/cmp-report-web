@@ -99,7 +99,7 @@
     </style>
 </head>
 <body>
-    @if($verificacao !== null)
+    @if($verificacao !== null && $verificacao !== '')
 
         <div class="watermark {{ $verificacao == 2 ? 'valid' : 'invalid' }}">
 
