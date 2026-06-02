@@ -72,9 +72,42 @@
             border: none;
         }
 
+
+        .watermark {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-35deg);
+
+            font-size: 90px;
+            font-weight: bold;
+
+            opacity: 0.12;
+            z-index: -1;
+
+            white-space: nowrap;
+        }
+
+        .watermark.valid {
+            color: #008000;
+        }
+
+        .watermark.invalid {
+            color: #cc0000;
+        }
+
     </style>
 </head>
 <body>
+    @if($verificacao !== null)
+
+        <div class="watermark {{ $verificacao == 2 ? 'valid' : 'invalid' }}">
+
+            {{ $verificacao == 2 ? 'VÁLIDO' : 'INVÁLIDO' }}
+
+        </div>
+
+    @endif
 
 <header>
     <img src="{{ public_path('images/logo_CMPRAIA.png') }}" alt="Logo" style="height:80px;">

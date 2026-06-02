@@ -34,12 +34,30 @@ class QrCodeHelper
 
     public static function generateReportQrCodeDocumentPublic(
         string $path,
-        int|string $id
+        int $idProcesso,
+        string $userName,
+        string $email,
+        bool $isVerificacao = false
     ): string {
+
+        $params = [
+            'idProcesso' => $idProcesso,
+            'userName' => $userName,
+            'email' => $email
+        ];
+
+
+         if ($isVerificacao) {
+            $params['verificacao'] = 2;
+        }
+
+        $queryString = http_build_query($params);
+
+        $token = app(UrlCryptoService::class)->encrypt($queryString);
     
         $url = rtrim(config('services.global.url_web'), '/');
 
-        $link = $url . '/' . trim($path, '/') . '/' . $id;
+        $link = $url . '/' . trim($path, '/') . '/' . $token;
 
         return app(QrCodeService::class)->gerarBase64($link);
     }
