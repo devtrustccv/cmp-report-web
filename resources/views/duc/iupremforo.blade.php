@@ -1,8 +1,11 @@
 @extends('duc.layout')
 
 @section('content')
+@include('components.watermark', [
+    'estado' => $dados->estado ?? 'REQ_PAG',
+    'isVerificacao' => $isVerificacao ?? false
+])
 
-@include('components.watermark', ['estado' => $dados->estado ?? "REQ_PAG"])
  <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:10px;">
     <tr>
         <td style="width:50%; padding:6px 8px;"><strong>{{$dados->tipoDuc ?? ''}} :</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }} </span> </td>

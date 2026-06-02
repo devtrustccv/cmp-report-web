@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Services;
-
+use Exception;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\Response;
 
@@ -15,11 +15,19 @@ class BaseApiService
     }
 
     protected function get(string $endpoint, array $params = []): Response
-    {
-        return Http::withoutVerifying()
-            ->withHeaders([
-                'Accept' => 'application/json',
-            ])
-            ->get($this->baseUrl . $endpoint, $params);
+    {   
+        try{
+             
+            return Http::withoutVerifying()
+                ->timeout(30)
+                ->acceptJson()
+                ->get($this->baseUrl . '/' . ltrim($endpoint, '/'), $params);
+
+            } catch (Exception $e) {
+
+                 throw new Exception(
+                    'O serviço de documentos encontra-se temporariamente indisponível.'
+                );
+        }
     }
 }

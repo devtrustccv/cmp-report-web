@@ -17,11 +17,11 @@ return [
     'global' => [
         'url_web' => env('URL_WEB'),
         'url_api' => env('URL_API'),
+        'token'    => env('TOKEN_API'),
     ],
-    
-    'compra_venda' => [
-        'base_url' => env('API_COMPRA_VENDA'),
-        'token'    => env('COMPRA_VENDA_API_TOKEN'),
+
+    'report_crypto' => [
+        'secret' => env('REPORT_CRYPTO_SECRET'),
     ],
 
     'postmark' => [

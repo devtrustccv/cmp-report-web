@@ -2,34 +2,33 @@
 namespace App\Http\Controllers;
 
 use App\Http\Helpers\Enums\TipoAtestadoEnum;
+use App\Http\Helpers\QrCodeHelper;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Services\AppService;
-use Illuminate\Http\Request;
+use App\Services\UrlCryptoService;
 
 class AtestadoController extends Controller
 {
 
     private AppService $appService;
+    private UrlCryptoService $cryptoService;
 
-    public function __construct(AppService $appService)
+    public function __construct(AppService $appService,UrlCryptoService $cryptoService)
     {
         $this->appService = $appService;
+        $this->cryptoService = $cryptoService;
     }
 
-    public function gerarPdf(Request $request)
+    public function gerarPdf($params)
     {
         
         try{
 
-            $request->validate([
-                'idProcesso' => 'required|integer',
-                'userName'   => 'required|string',
-                'email'      => 'required|email',
-            ]);
+            $values = $this->cryptoService->decrypt($params);
 
-            $idProcesso = (int) $request->query('idProcesso');
-            $userName   = (string) $request->query('userName');
-            $email      = (string) $request->query('email');
+            $idProcesso = (string) ($values['idProcesso'] ?? ""); 
+            $userName = (string) ($values['userName'] ?? ""); 
+            $email = (string) ($values['email'] ?? ""); 
 
             $dadosAssinatura = $this->appService->getAtestado($userName, $email, $idProcesso);
 
@@ -39,8 +38,14 @@ class AtestadoController extends Controller
                 abort(404, 'Tipo de atestado não reconhecido: ' . $dadosAssinatura->tipoPedido);
             }
 
+             $qrcode_base64 = QrCodeHelper::generateReportQrCodeDocumentPublic(
+                'document-link-public',
+                $idProcesso
+            );
+
             return Pdf::loadView($tipoAtestado->view(), [
-                    'assinatura' => $dadosAssinatura
+                    'assinatura' => $dadosAssinatura,
+                    'qrcode_base64' => $qrcode_base64
                 ])->setPaper('A4')->stream($tipoAtestado->fileName());
         
 

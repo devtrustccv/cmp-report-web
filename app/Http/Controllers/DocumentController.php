@@ -14,7 +14,7 @@ class DocumentController extends Controller
         $this->appService = $appService;
     }
 
-    public function loadDocument($id)
+    public function loadDocument(int $id)
     {
         try {
            

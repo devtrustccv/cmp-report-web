@@ -15,9 +15,9 @@ use Exception;
 class AppService extends BaseApiService
 {
 
-    private function getDto(string $endpoint, string $dtoClass): object
+    private function getDto(string $endpoint, string $dtoClass , array $params = []): object
     {
-        $response = $this->get($endpoint);
+        $response = $this->get($endpoint,  $params);
 
         if ($response->failed()) {
             throw new Exception('Erro ao consumir API.');
@@ -95,8 +95,13 @@ class AppService extends BaseApiService
     public function getAtestado(string $userName, string $email, string $idProcesso): AssinaturaDto
     {
         return $this->getDto(
-            "/assinatura?userName={$userName}&email={$email}&idProcesso={$idProcesso}",
-            AssinaturaDto::class
+            '/assinatura',
+            AssinaturaDto::class,
+            [
+                'userName'   => $userName,
+                'email'      => $email,
+                'idProcesso' => $idProcesso,
+            ]
         );
     }
 

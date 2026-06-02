@@ -4,44 +4,63 @@ namespace App\Http\Controllers;
 
 use App\Http\Helpers\Enums\TipoRelatorioEnum;
 use App\Http\Helpers\QrCodeHelper;
-use App\Http\QrCodeService;
 use App\Services\AppService;
 use App\Http\Helpers\BasicMethods;
+use App\Services\UrlCryptoService;
 use Exception;
 
 
 class CertidaoMatricialController extends Controller
 {
-    private QrCodeService $qrService;
+    private UrlCryptoService $cryptoService;
     private AppService $appService;
 
 
-    public function __construct(QrCodeService $qrService, AppService $appService)
+    public function __construct(UrlCryptoService $cryptoService, AppService $appService)
     {
-        $this->qrService = $qrService;
+        $this->cryptoService = $cryptoService;
         $this->appService = $appService;
     }
    
-    public function gerarCertidaoMatricial($id){
+    public function gerarCertidaoMatricial($params){
         try {
+
+            $values = $this->cryptoService->decrypt($params);
+
+            $id = (int) ($values['id'] ?? 0);
+            
+            $isVerificacao = (int) ($values['verificacao'] ?? 3); 
 
             $qrcode_base64 = QrCodeHelper::generateReportQrCode(
                 'reports/certidao-matricial',
-                $id
+                $id,
+                true
             );
 
             // SERVICE
             $dados = $this->appService->getDadosCertidaoMatricial($id);
 
-            return BasicMethods::generateReport("duc.".(TipoRelatorioEnum::CERTIDAO_MATRICIAL->view()),
-                            $dados,
-                            "",
-                            "",
-                            $qrcode_base64);
+            $estado = $dados->estado ?? null;
+
+            $isCertificado = $estado === 'FIM';
+
+            $tipo = TipoRelatorioEnum::CERTIDAO_MATRICIAL;
+
+            return BasicMethods::generateReport("duc.".($tipo->view()),
+                            [
+                                'dados' => $dados,
+                                'titulo' => $dados->titulo ?? null,
+                                'qrcode_base64' => $qrcode_base64,
+                                'tipo' => $tipo,
+                                'estado' => $estado,
+                                'isVerificacao' => $isVerificacao,
+                                'isCertificado' => $isCertificado,
+                            ],
+                            $tipo->fileName() . '.pdf');
 
          } catch (Exception $e) {
 
-            return response()->view('errors.generic', [
+            return response()->view('errors.500', [
                 'message' => $e->getMessage()
             ], 500);
         }

@@ -157,7 +157,7 @@
             Caso o problema persista, contacte o administrador do sistema ou tente novamente mais tarde.
         </div>
 
-        <a href="javascript:history.back()" class="btn">
+        <a href="/" class="btn">
             Voltar
         </a>
 

@@ -94,13 +94,14 @@
                 TEL.:(238) 5347005/5347000 - site: www.cmpraia.cv - 
                 email:camaradapraia@gmail.com
             </td>
-
-            <!-- Coluna do QR code, 25% 
-            <td style="width: 25%; text-align: right; vertical-align: top; padding-left: 20px;">
-                @if(!empty($qrCodePath))
-                    <img alt="QR Code" src="{{ $qrCodePath }}" style="width:80px; height:80px;">
-                @endif
-            </td>-->
+            @if(!empty($qrcode_base64))
+            <td style="text-align: right;">
+                <img
+                    src="data:image/png;base64,{{ $qrcode_base64 }}"
+                    style="width:60px;height:60px;"
+                >
+            </td>
+            @endif
         </tr>
     </table>
 

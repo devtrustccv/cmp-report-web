@@ -16,17 +16,13 @@ class BasicMethods{
 
     public static function generateReport(
         string $view,
-        object $dados,
-        string $tipo,
-        string $filename,
-        ?string $qrcode = null
+        array $data,
+        ## object $dados,
+        ## string $tipo,
+        ##  ?string $qrcode = null,
+      string $filename
     ) {
-        return Pdf::loadView($view, [
-            'dados' => $dados,
-            'titulo' => $dados->titulo ?? null,
-            'qrcode_base64' => $qrcode,
-            'tipo' => $tipo,
-        ])
+        return Pdf::loadView($view, $data)
         ->setPaper('A4', 'portrait')
         ->stream($filename);
     }

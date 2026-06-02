@@ -5,7 +5,9 @@ use App\Http\Controllers\{
     AtestadoController,
     DocumentController,
     CertidaoMatricialController,
-    IupController
+    IupController,
+    SucessorioController,
+    PermutaController
 };
 
 
@@ -14,19 +16,27 @@ use App\Http\Controllers\{
  */
 Route::prefix('/')->group(function () {
 
-    Route::get('compra-venda/{id}', [IupController::class, 'compraVenda']);
-    Route::get('iupremforo/{id}', [IupController::class, 'remForo']);
-    Route::get('iuppartilha/{id}', [IupController::class, 'partilha']);
-    Route::get('iupdoacao/{id}', [IupController::class, 'doacao']);
-    Route::get('iupterreno/{id}', [IupController::class, 'terreno']);
+    Route::get('compra-venda/{token}', [IupController::class, 'compraVenda']);
+    Route::get('iupremforo/{token}', [IupController::class, 'remForo']);
+    Route::get('iuppartilha/{token}', [IupController::class, 'partilha']);
+    Route::get('iupdoacao/{token}', [IupController::class, 'doacao']);
+    Route::get('iupterreno/{token}', [IupController::class, 'terreno']);
     Route::get('document-link-public/{id}', [DocumentController::class, 'loadDocument']);
-    Route::get('reports/certidao-matricial/{id}', [CertidaoMatricialController::class, 'gerarCertidaoMatricial']);
-    
+    Route::get('reports/certidao-matricial/{token}', [CertidaoMatricialController::class, 'gerarCertidaoMatricial']);
+    Route::get('sucessorio/{id}', [SucessorioController::class, 'index']);
+    Route::get('permuta/{id}', [PermutaController::class, 'index']);
 
 });
 
 
-Route::get('/atestado', [AtestadoController::class, 'gerarPdf'])
+
+
+
+Route::get('/', function () { return view('home_cmp');
+})->name('home');
+
+
+Route::get('/atestado/{token}', [AtestadoController::class, 'gerarPdf'])
     ->name('atestado.gerarPdf');
 
 
