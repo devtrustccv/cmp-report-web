@@ -115,21 +115,22 @@
 
             .modelo {
                 position: absolute;
-                top: 10px;
-                right: 10px;
-                font-size: 8px;
+                right: 0;
+                top: 15px;
+                font-size: 10px;
                 font-weight: bold;
             }
     </style>
 </head>
 <body>
 
-    <div class="modelo">Modelo C0009</div>
+  
 
      {{-- WATERMARK --}}
     @include('components.watermark', ['estado' => $dados->estadoDuc ?? 'REQ_PAG'])
 
-    <div class="header">
+    <div class="header">  
+        <div class="modelo">Modelo C0009</div>
         <img src="{{ public_path('images/logo_CMPRAIA.png') }}">
         <div class="title">Câmara Municipal da Praia</div>
         <div class="title">CERTIDÃO MATRICIAL</div>
