@@ -72,7 +72,7 @@ class IupController extends Controller
                     'dados' => $dados,
                     'titulo' => $dados->titulo,
                     'qrcode_base64' => $qrcode_base64,
-                    'tipo' => $tipo->view(),
+                    'tipo' => $tipo->code(),
                     'estado' => $estado,
                     'isVerificacao' => $isVerificacao,
                     'isCertificado' => $isCertificado,

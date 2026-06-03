@@ -2,7 +2,7 @@
 style="margin-top:50px;">
     <tr>
         <!-- COLUNA ESQUERDA -->
-        @if(!empty($tipo) && ($tipo === 'IUPCOMPRA' || $tipo === 'COMPRA-VENDA'))
+        @if(!empty($tipo) && $tipo === 'IUPCOMPRA')
            <td style="width:15%; font-size:7px;">Modelo nº 3 (Artigo 74)</td>
         
         @elseif($tipo === 'IUPDOACAO')
@@ -34,7 +34,7 @@ style="margin-top:50px;">
             <div style="font-size: 14px;"><strong>Câmara Municipal da Praia</strong></div>
             <div>{{$titulo ?? 'IMPOSTO SOBRE A TRANSMISSÃO DE IMÓVEIS (ITI)'}} </div>
             
-            @if(!empty($tipo) && ($tipo === 'IUPCOMPRA' || $tipo === 'COMPRA-VENDA'))
+            @if(!empty($tipo) && $tipo === 'IUPCOMPRA')
                 <div style="font-size: 10px;  text-decoration: underline;">Referente a Compra - Proc. Nº {{$dados->numero_processo ?? ''}}</div>
             @elseif(!empty($tipo) && $tipo == 'IUPREMFORO')
                <div style="font-size: 10px;  text-decoration: underline;">Referente a Remição de FORO</div>
@@ -51,7 +51,7 @@ style="margin-top:50px;">
         <td style="width:25%; text-align:rigth;">
             <div><strong>Nº DUC: </strong><span style="text-decoration: underline; ">{{$dados->duc ?? ''}}</span></div>
             <div><strong>Nº Matriz: </strong><span style="text-decoration: underline; ">{{$dados->matriz ?? ''}}</span></div>
-            @if(!empty($tipo) && ($tipo === 'IUPCOMPRA' || $tipo === 'COMPRA-VENDA'))
+            @if(!empty($tipo) && $tipo === 'IUPCOMPRA')
                 <div><strong>Local: </strong><span style="text-decoration: underline; ">{{$dados->local ?? ''}}</span></div>
             @elseif(!empty($tipo) && $tipo == 'IUPPARTILHA')
                <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>

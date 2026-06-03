@@ -17,6 +17,11 @@ enum TipoRelatorioEnum: string
         return strtolower($this->value);
     }
 
+    public function code(): string
+    {
+        return $this->name;
+    }
+
     public function fileName(): string
     {
         return $this->view() . '.pdf';
