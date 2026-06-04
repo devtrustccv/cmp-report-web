@@ -39,6 +39,7 @@ class CertidaoMatricialController extends Controller
 
             // SERVICE
             $dados = $this->appService->getDadosCertidaoMatricial($id);
+            
 
             $estado = $dados->estado ?? null;
 

@@ -9,15 +9,20 @@ use App\Models\DoacaoDto;
 use App\Models\PartilhaDto;
 use App\Models\RemForoDto;
 use App\Models\TerrenoDto;
+use App\Services\Traits\GatewayClientTrait;
 use Exception;
 
 
 class AppService extends BaseApiService
 {
 
-    private function getDto(string $endpoint, string $dtoClass , array $params = []): object
+     use GatewayClientTrait;
+
+    private function getDto(string $endpoint, string $dtoClass , array $params = [], array $headers = []): object
     {
-        $response = $this->get($endpoint,  $params);
+        $response = $this->get($endpoint,  $params, $headers);
+
+        dd($response);
 
         if ($response->failed()) {
             throw new Exception('Erro ao consumir API.');
@@ -35,48 +40,60 @@ class AppService extends BaseApiService
     public function getDadosCertidaoMatricial(int $id): CertidaoMatricialDto
     {
         return $this->getDto(
-            "/certidao_matricial/{$id}",
-            CertidaoMatricialDto::class
+            "reports/certidao_matricial/{$id}",
+            CertidaoMatricialDto::class,
+            [],
+            $this->reportHeaders()
         );
     }
 
     public function getCompraVenda(int $id): CompraVenda
     {
         return $this->getDto(
-            "/compra-venda/{$id}",
-            CompraVenda::class
+            "reports/compra-venda/{$id}",
+            CompraVenda::class,
+            [],
+            $this->reportHeaders()
         );
     }
 
     public function getDoacao(int $id): DoacaoDto
     {
         return $this->getDto(
-            "/iup-doacao/{$id}",
-            DoacaoDto::class
+            "reports/iup-doacao/{$id}",
+            DoacaoDto::class,
+            [],
+            $this->reportHeaders()
         );
     }
 
     public function getPartilha(int $id): PartilhaDto
     {
         return $this->getDto(
-            "/iup-partilha/{$id}",
-            PartilhaDto::class
+            "reports/iup-partilha/{$id}",
+            PartilhaDto::class,
+            [],
+            $this->reportHeaders()
         );
     }
 
     public function getRemForo(int $id): RemForoDto
     {
         return $this->getDto(
-            "/iup-remicao-foro/{$id}",
-            RemForoDto::class
+            "reports/iup-remicao-foro/{$id}",
+            RemForoDto::class,
+            [],
+            $this->reportHeaders()
         );
     }
 
     public function getTerreno(int $id): TerrenoDto
     {
         return $this->getDto(
-            "/iup-terreno/{$id}",
-            TerrenoDto::class
+            "reports/iup-terreno/{$id}",
+            TerrenoDto::class,
+            [],
+            $this->reportHeaders()
         );
     }
 

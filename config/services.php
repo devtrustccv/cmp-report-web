@@ -45,4 +45,10 @@ return [
         ],
     ],
 
+    'gateway' => [
+            'report_token' => env('TOKEN_REPORT'),
+            'cmp_token' => env('TOKEN_CMP'),
+        ],
+    
+
 ];
