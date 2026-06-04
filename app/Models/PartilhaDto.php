@@ -48,6 +48,7 @@ class PartilhaDto extends Model
     public $emitido_por;
     public $superficie;
     public $baseIncidencia;
+    public $estado;
 
     
     // Construtor para popular o model com JSON ou array
