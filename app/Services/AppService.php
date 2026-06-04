@@ -22,8 +22,6 @@ class AppService extends BaseApiService
     {
         $response = $this->get($endpoint,  $params, $headers);
 
-        dd($response);
-
         if ($response->failed()) {
             throw new Exception('Erro ao consumir API.');
         }
