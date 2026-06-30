@@ -59,7 +59,7 @@
     overflow-wrap: break-word;
 ">
     <!-- espaço para assinatura ou texto -->
-    {{$dados -> descricao ?? 'dasddasdasdadasdasdsadsadsadsadasasdsadsa dasddasdasdadasdasdsadsadsadsadasasdsadsa dasddasdasdadasdasdsadsadsadsadasasdsadsa dasddasdasdadasdasdsadsadsadsadasasdsadsa dasddasdasdadasdasdsadsadsadsadasasdsadsa dasddasdasdadasdasdsadsadsadsadasasdsadsa dasddasdasdadasdasdsadsadsadsadasasdsadsa dasddasdasdadasdasdsadsadsadsadasasdsadsa dasddasdasdadasdasdsadsadsadsadasasdsadsa dasddasdasdadasdasdsadsadsadsadasasdsadsa' }}
+    {{$dados -> descricao ?? '' }}
 </p>
 
 @endsection
