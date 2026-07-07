@@ -10,7 +10,7 @@
         <td style="padding:6px;">
  <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
     <tr>
-        <td style="width:25%; padding:3px 3px;"><strong>{{$dados->tipoDuc ?? ''}} :</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }} </span> </td>
+        <td style="width:25%; padding:3px 3px;"><strong>{{$dados->tipoDuc ?? ''}} :</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->dividaComprador ?? 0) }} </span> </td>
         <td style="width:25%; padding:3px 3px;"><strong>Multa :</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->multa ?? 0)}}</span> </td>
         <td style="width:25%; padding:3px 3px;"><strong>Juros :</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->juro ?? 0)}}</span>  </td>
     </tr>
@@ -20,7 +20,7 @@
     <tr>
         <td style="width:100%; padding:3px 3px;"> <strong>Total Pago :</strong> <span style="text-decoration: underline;">
             {{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }}
-              </span> <span>({{$dados->extenso ?? ''}})</span> </td>
+              </span> <span>({{$dados->totalExtenso ?? ''}})</span> </td>
     </tr>
 </table>
 
