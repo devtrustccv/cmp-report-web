@@ -47,6 +47,14 @@
             margin-top: 10px;
         }
 
+        .assinatura {
+            position: fixed;
+            bottom: 110px; /* acima do footer */
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+
 
         .tabela-assinatura {
             width: 100%;
@@ -128,29 +136,22 @@
 
 <main style ="margin-top: 115px;">
     @yield('content')
-    <table class="tabela-assinatura">
-            <tr>
-                <td>
-                    <div style="font-size: 13px;">
-                        {{ $assinatura->quem_assinatura ?? 'Diretor(a) / Delegado(a)' }}
-                    </div>
+    <div class="assinatura">
 
-                    <div style="margin-top:5px;">
-                        @if (!empty($assinatura->assinatura))
-                            {!! $assinatura->assinaturaHtml(200) !!}
-                        @endif
-                    </div>
+        <div style="font-size:13px;">
+            {{ $assinatura->quem_assinatura ?? 'Diretor(a) / Delegado(a)' }}
+        </div>
 
-                    <div style="margin-top: 5px; font-weight: bold;">
-                        {{ $assinatura->nomeAssina ?? '' }}
-                    </div>
-                </td>
-            </tr>
-    </table>
+        @if (!empty($assinatura->assinatura))
+            {!! $assinatura->assinaturaHtml(200) !!}
+        @endif
+
+        <div style="font-weight:bold;">
+            {{ $assinatura->nomeAssina }}
+        </div>
+
+    </div>
         
 </main>
-
-
-
 </body>
 </html>
