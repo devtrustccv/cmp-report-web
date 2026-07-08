@@ -49,7 +49,7 @@
 
         .assinatura {
             position: fixed;
-            bottom: 110px; /* acima do footer */
+            bottom: 40px; /* acima do footer */
             left: 0;
             width: 100%;
             text-align: center;
