@@ -47,8 +47,12 @@
             margin-top: 10px;
         }
 
-        .assinatura-wrapper {
-            padding-top: 60px;  /* padding não colapsa no topo de página, ao contrário de margin */
+
+
+        .espacador-assinatura {
+            height: 60px;
+            display: block;
+            width: 100%;
         }
 
         .assinatura {
@@ -59,7 +63,7 @@
             font-size: 12px;
             margin-left: auto;
             margin-right: auto;
-            page-break-inside: avoid;
+            page-break-inside: avoid;   /* nunca corta nome + assinatura + texto ao meio */
         }
 
         .tabela-assinatura {
@@ -144,29 +148,32 @@
     @yield('content')
 </main>
 
-<div class="assinatura-wrapper">
-    <div class="assinatura">
-        <table class="tabela-assinatura">
-            <tr>
-                <td>
-                    <div style="font-size: 13px;">
-                        {{ $assinatura->quem_assinatura ?? 'Diretor(a) / Delegado(a)' }}
-                    </div>
+<div class="espacador-assinatura"></div>
 
-                    <div style="margin-top:5px;">
-                        @if (!empty($assinatura->assinatura))
-                            {!! $assinatura->assinaturaHtml(200) !!}
-                        @endif
-                    </div>
+<div class="assinatura">
+    <table class="tabela-assinatura">
+        <tr>
+            <td>
+                <div style="font-size: 13px;">
+                    {{ $assinatura->quem_assinatura ?? 'Diretor(a) / Delegado(a)' }}
+                </div>
 
-                    <div style="margin-top: 5px; font-weight: bold;">
-                        {{ $assinatura->nomeAssina ?? '' }}
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
+                <div style="margin-top:5px;">
+                    @if (!empty($assinatura->assinatura))
+                        {!! $assinatura->assinaturaHtml(200) !!}
+                    @endif
+                </div>
+
+                <div style="margin-top: 5px; font-weight: bold;">
+                    {{ $assinatura->nomeAssina ?? '' }}
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
+
+
+
 
 </body>
 </html>
