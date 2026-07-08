@@ -48,24 +48,6 @@
         }
 
 
-
-        .espacador-assinatura {
-            height: 60px;
-            display: block;
-            width: 100%;
-        }
-
-        .assinatura {
-            text-align: center;
-            border-top: 1px solid #000;
-            width: 300px;
-            padding-top: 5px;
-            font-size: 12px;
-            margin-left: auto;
-            margin-right: auto;
-            page-break-inside: avoid;   /* nunca corta nome + assinatura + texto ao meio */
-        }
-
         .tabela-assinatura {
             width: 100%;
             border-collapse: collapse;
@@ -146,32 +128,27 @@
 
 <main style ="margin-top: 115px;">
     @yield('content')
-</main>
-
-<div class="espacador-assinatura"></div>
-
-<div class="assinatura">
     <table class="tabela-assinatura">
-        <tr>
-            <td>
-                <div style="font-size: 13px;">
-                    {{ $assinatura->quem_assinatura ?? 'Diretor(a) / Delegado(a)' }}
-                </div>
+            <tr>
+                <td>
+                    <div style="font-size: 13px;">
+                        {{ $assinatura->quem_assinatura ?? 'Diretor(a) / Delegado(a)' }}
+                    </div>
 
-                <div style="margin-top:5px;">
-                    @if (!empty($assinatura->assinatura))
-                        {!! $assinatura->assinaturaHtml(200) !!}
-                    @endif
-                </div>
+                    <div style="margin-top:5px;">
+                        @if (!empty($assinatura->assinatura))
+                            {!! $assinatura->assinaturaHtml(200) !!}
+                        @endif
+                    </div>
 
-                <div style="margin-top: 5px; font-weight: bold;">
-                    {{ $assinatura->nomeAssina ?? '' }}
-                </div>
-            </td>
-        </tr>
+                    <div style="margin-top: 5px; font-weight: bold;">
+                        {{ $assinatura->nomeAssina ?? '' }}
+                    </div>
+                </td>
+            </tr>
     </table>
-</div>
-
+        
+</main>
 
 
 
