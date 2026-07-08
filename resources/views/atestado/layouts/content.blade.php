@@ -50,7 +50,7 @@
          /* Área de assinatura global */
         .assinatura {
             position: relative; /* relativo ao main */
-            margin-top: 100px;
+            margin-top: 40px; 
             text-align: center;
             border-top: 1px solid #000;
             width: 300px; /* largura da assinatura */
@@ -58,6 +58,7 @@
             font-size: 12px;
             margin-left: auto;
             margin-right: auto;
+            page-break-inside: avoid; 
         }
 
        
@@ -144,7 +145,7 @@
     @yield('content')
 </main>
 
-<div class="assinatura-fixa">
+<div class="assinatura">
     <table class="tabela-assinatura">
         <tr>
             <td>
