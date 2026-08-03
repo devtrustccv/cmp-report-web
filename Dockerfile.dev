@@ -15,7 +15,9 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libmagickwand-dev --no-install-recommends \
     imagemagick \
-    ghostscript
+    ghostscript \
+    pdftk \
+    qpdf
 
 # Instala extensões PHP necessárias
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
