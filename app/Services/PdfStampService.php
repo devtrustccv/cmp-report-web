@@ -67,11 +67,11 @@ class PdfStampService
         string $competencia = ''
     ): string {
         $data_atual = Carbon::now()->format('d-m-Y');
-        $pelo = utf8_decode($pelo);
-        $competencia = utf8_decode($competencia);
-        $nome_assinatura = utf8_decode($nome_assinatura);
-        $numero_processo = utf8_decode($numero_processo);
-        $contraprova = utf8_decode($contraprova);
+        $pelo = mb_convert_encoding($pelo, 'ISO-8859-1', 'UTF-8');
+        $competencia = mb_convert_encoding($competencia, 'ISO-8859-1', 'UTF-8');
+        $nome_assinatura = mb_convert_encoding($nome_assinatura, 'ISO-8859-1', 'UTF-8');
+        $numero_processo = mb_convert_encoding($numero_processo, 'ISO-8859-1', 'UTF-8');
+        $contraprova = mb_convert_encoding($contraprova, 'ISO-8859-1', 'UTF-8');
         try {
             // definir o limite de memória usada pelo PHP para carregar o PDF grandes.
             //ini_set('memory_limit', '1024M');
@@ -146,7 +146,7 @@ class PdfStampService
             $pdf->SetFont('Times', '', 9);
             $pdf->Text($width - 65, $height - 5, 'Data de Assinatura: '.$data_atual);// x(145), y(292)
             $pdf->SetFont('Times', '', 12);
-            $pdf->Text(25, $height - 27, utf8_decode('Despacho Digital CMP / Nº Processo: ').$numero_processo); // x(25), y(270)
+            $pdf->Text(25, $height - 27, mb_convert_encoding('Despacho Digital CMP / Nº Processo: ', 'ISO-8859-1', 'UTF-8').$numero_processo); // x(25), y(270)
             $pdf->SetFont('Times', 'B', 12);
             $pdf->Text(25, $height - 17, 'Contra Prova / Validation Code'); // x(25), y(280)
             $pdf->Text(25, $height - 7, $contraprova);// x(25), y(290)
