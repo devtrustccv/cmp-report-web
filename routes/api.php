@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CompraVendaController;
-use App\Http\Controllers\RelatorioController;
+use App\Http\Controllers\AssinaturaController;
 
-Route::get('/compra-venda', [CompraVendaController::class, 'gerarPdf']);
+Route::post('/sign_document', [AssinaturaController::class, 'signPdfDocument']);
+Route::post('/merge_pdf', [AssinaturaController::class, 'mergePDFs']);
 
 

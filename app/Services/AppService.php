@@ -96,7 +96,7 @@ class AppService extends BaseApiService
     }
 
     public function getDocumentData(int $id){
-       
+
         $response = $this->get("/documento/{$id}");
 
         if ($response->failed()) {
@@ -106,7 +106,44 @@ class AppService extends BaseApiService
         return $response->json();
     }
 
-    
+    /**
+     * Busca um documento (PDF, imagem, etc.) pelo ID e devolve o conteúdo binário já descodificado.
+     */
+    public function getDocumentBinary(int $id): array
+    {
+        $dadosApi = $this->getDocumentData($id);
+
+        $base64 = $dadosApi['data']['blobContent'] ?? null;
+        $mimeType = $dadosApi['data']['mimeType'] ?? null;
+
+        if (!$base64) {
+            throw new Exception("Documento {$id} não encontrado ou sem conteúdo.");
+        }
+
+        $content = base64_decode($base64, true);
+
+        if ($content === false) {
+            throw new Exception("Erro ao descodificar o documento {$id}.");
+        }
+
+        return ['content' => $content, 'mimeType' => $mimeType];
+    }
+
+    /**
+     * Envia o conteúdo binário de um documento (ex: PDF assinado) para a API de documentos.
+     */
+    public function uploadDocument(string $contents, string $filename, string $mimeType = 'application/pdf'): array
+    {
+        $response = $this->postFile('/documento', 'file', $contents, $filename, $mimeType);
+
+        if ($response->failed()) {
+            throw new Exception('Erro ao enviar documento assinado.');
+        }
+
+        return $response->json();
+    }
+
+
     public function getAtestado(string $userName, string $email, string $idProcesso): AssinaturaDto
     {
         return $this->getDto(

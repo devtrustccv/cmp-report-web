@@ -33,4 +33,30 @@ class BaseApiService
                 );
         }
     }
+
+    protected function postFile(
+        string $endpoint,
+        string $fieldName,
+        string $contents,
+        string $filename,
+        string $mimeType = 'application/pdf',
+        array $headers = []
+    ): Response
+    {
+        try{
+
+            return Http::withoutVerifying()
+                ->timeout(30)
+                ->withHeaders($headers)
+                ->acceptJson()
+                ->attach($fieldName, $contents, $filename, ['Content-Type' => $mimeType])
+                ->post($this->baseUrl . '/' . ltrim($endpoint, '/'));
+
+            } catch (Exception $e) {
+
+                 throw new Exception(
+                    'O serviço de documentos encontra-se temporariamente indisponível.'
+                );
+        }
+    }
 }

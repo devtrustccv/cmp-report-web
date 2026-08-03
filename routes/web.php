@@ -29,9 +29,6 @@ Route::prefix('/')->group(function () {
 });
 
 
-
-
-
 Route::get('/', function () { return view('home_cmp');
 })->name('home');
 
