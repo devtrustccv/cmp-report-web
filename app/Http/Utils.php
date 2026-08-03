@@ -39,11 +39,17 @@ class Utils
 
         $gs = $this->resolveGhostscriptBinary();
 
-        $cmd = $gs . " -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -sOutputFile=" . escapeshellarg($cleanedAbsolutPath) . " " . escapeshellarg($inputAbsolutPath);
+        $cmd = $gs . " -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -sOutputFile=" . escapeshellarg($cleanedAbsolutPath) . " " . escapeshellarg($inputAbsolutPath) . " 2>&1";
         exec($cmd, $output, $return_var);
 
         if ($return_var !== 0) {
-            throw new \Exception('Ghostscript falhou ao limpar o PDF. Certifica-te que está instalado.');
+            \Illuminate\Support\Facades\Log::error('Ghostscript falhou ao limpar o PDF', [
+                'binario' => $gs,
+                'comando' => $cmd,
+                'return_var' => $return_var,
+                'output' => implode("\n", $output),
+            ]);
+            throw new \Exception('Ghostscript falhou ao limpar o PDF (' . $gs . '): ' . implode(' | ', $output));
         }
 
         return $cleanedPath;

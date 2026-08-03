@@ -34,6 +34,24 @@ class BaseApiService
         }
     }
 
+    protected function put(string $endpoint, array $data = [], array $headers = []): Response
+    {
+        try{
+
+            return Http::withoutVerifying()
+                ->timeout(30)
+                ->withHeaders($headers)
+                ->acceptJson()
+                ->put($this->baseUrl . '/' . ltrim($endpoint, '/'), $data);
+
+            } catch (Exception $e) {
+
+                 throw new Exception(
+                    'O serviço de documentos encontra-se temporariamente indisponível.'
+                );
+        }
+    }
+
     protected function postFile(
         string $endpoint,
         string $fieldName,

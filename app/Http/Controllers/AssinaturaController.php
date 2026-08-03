@@ -7,22 +7,22 @@ use Illuminate\Support\Facades\Response; // Importar Storage facade
 use Illuminate\Support\Facades\Validator;
 use App\Services\PdfStampService;
 use App\Services\AppService;
-use App\Http\Controllers\Traits\FetchesRemoteDocuments;
+use App\Services\AssinaturaProcessorService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class AssinaturaController extends Controller
 {
-    use FetchesRemoteDocuments;
-
     protected $pdfStampService;
     protected $appService;
+    protected $assinaturaProcessorService;
 
-    // Injeção da dependência PdfStampService e AppService
-    public function __construct(PdfStampService $pdfStampService, AppService $appService)
+    // Injeção da dependência PdfStampService, AppService e AssinaturaProcessorService
+    public function __construct(PdfStampService $pdfStampService, AppService $appService, AssinaturaProcessorService $assinaturaProcessorService)
     {
         $this->pdfStampService = $pdfStampService;
         $this->appService = $appService;
+        $this->assinaturaProcessorService = $assinaturaProcessorService;
     }
 
     public function signPdfDocument(Request $request) {
@@ -59,16 +59,18 @@ class AssinaturaController extends Controller
         $competencia=$request->get('p_competencia');
 
         try {
-            $filePath = $this->storeRemoteDocument($this->appService, (int) $request->get('p_file_id'), 'uploads/documents');
-
-            $signaturePath = null;
-            if ($request->get('p_signature_id')) {
-                $signaturePath = $this->storeRemoteDocument($this->appService, (int) $request->get('p_signature_id'), 'uploads/signature');
-            }
-
-            $stampedContent = $this->pdfStampService->cleanAndSignPDF($filePath, $signaturePath, $signature_url, $position, $nome_assinatura, $contraprova, $numero_processo, $link, $pelo, $competencia);
-
-            $resultado = $this->appService->uploadDocument($stampedContent, "documento_assinado_{$numero_processo}.pdf");
+            $resultado = $this->assinaturaProcessorService->processar([
+                'file_id' => (int) $request->get('p_file_id'),
+                'signature_id' => $request->get('p_signature_id'),
+                'signature_url' => $signature_url,
+                'position' => $position,
+                'nome_assinatura' => $nome_assinatura,
+                'contraprova' => $contraprova,
+                'numero_processo' => $numero_processo,
+                'link' => $link,
+                'pelo' => $pelo,
+                'competencia' => $competencia,
+            ]);
         } catch (\Exception $e) {
             Log::channel('pdfstamper')->error("Erro ao assinar/enviar documento: " . $e->getMessage());
 

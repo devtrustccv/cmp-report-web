@@ -40,8 +40,11 @@ RUN composer install --no-interaction --optimize-autoloader --no-dev
 # Gera a key da aplicação
 RUN php artisan key:generate
 
+# Script de arranque: corre o servidor HTTP e o scheduler (jobs agendados) em paralelo
+RUN chmod +x docker/start.sh
+
 # Exponha a porta
 EXPOSE 8000
 
 # Comando para rodar o Laravel
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD ["docker/start.sh"]
