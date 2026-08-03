@@ -69,6 +69,9 @@ class PdfStampService
         $data_atual = Carbon::now()->format('d-m-Y');
         $pelo = utf8_decode($pelo);
         $competencia = utf8_decode($competencia);
+        $nome_assinatura = utf8_decode($nome_assinatura);
+        $numero_processo = utf8_decode($numero_processo);
+        $contraprova = utf8_decode($contraprova);
         try {
             // definir o limite de memória usada pelo PHP para carregar o PDF grandes.
             //ini_set('memory_limit', '1024M');
