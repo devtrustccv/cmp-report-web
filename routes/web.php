@@ -7,7 +7,8 @@ use App\Http\Controllers\{
     CertidaoMatricialController,
     IupController,
     SucessorioController,
-    PermutaController
+    PermutaController,
+    ValidadorController
 };
 
 
@@ -31,6 +32,9 @@ Route::prefix('/')->group(function () {
 
 Route::get('/', function () { return view('home_cmp');
 })->name('home');
+
+Route::get('validar', [ValidadorController::class, 'index'])->name('validar.index');
+Route::post('validar', [ValidadorController::class, 'validar'])->name('validar.submit');
 
 
 Route::get('/atestado/{token}', [AtestadoController::class, 'gerarPdf'])

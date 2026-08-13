@@ -3,14 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Gestão Documental - CMP</title>
+    <title>Validar Documento - CMP</title>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             min-height: 100vh;
@@ -68,46 +64,85 @@
 
         h1 {
             color: #212529;
-            font-size: 31px;
+            font-size: 28px;
             margin-bottom: 16px;
         }
 
         .message {
             color: #495057;
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.7;
-            margin-bottom: 26px;
-        }
-
-        .info-box {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 12px;
-            padding: 18px;
-            color: #495057;
-            font-size: 14px;
-            line-height: 1.7;
-            text-align: left;
             margin-bottom: 28px;
         }
 
-        .info-box strong {
+        form {
+            text-align: left;
+            margin-bottom: 8px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
             color: #212529;
+            margin-bottom: 6px;
+        }
+
+        select,
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #212529;
+            background: #ffffff;
+        }
+
+        select:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #0d6efd;
+        }
+
+        .error {
+            color: #dc3545;
+            font-size: 13px;
+            margin-top: 6px;
         }
 
         .btn {
             display: inline-block;
+            width: 100%;
             background: #0d6efd;
             color: #ffffff;
             text-decoration: none;
-            padding: 12px 30px;
+            border: none;
+            padding: 13px 30px;
             border-radius: 8px;
             font-size: 15px;
             font-weight: 600;
+            cursor: pointer;
         }
 
         .btn:hover {
             background: #0b5ed7;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 18px;
+            color: #6c757d;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: #495057;
         }
 
         .footer {
@@ -124,17 +159,8 @@
         }
 
         @media (max-width: 600px) {
-            .card {
-                padding: 34px 24px;
-            }
-
-            h1 {
-                font-size: 25px;
-            }
-
-            .info-box {
-                text-align: left;
-            }
+            .card { padding: 34px 24px; }
+            h1 { font-size: 23px; }
         }
     </style>
 </head>
@@ -151,30 +177,48 @@
             Câmara Municipal da Praia
         </div>
 
-        <h1>Sistema de Gestão Documental</h1>
+        <h1>Validar Documento</h1>
 
         <div class="message">
-            Este portal é destinado à consulta, validação e verificação de documentos
-            emitidos pela Câmara Municipal da Praia.
+            Introduza o tipo de documento e o número DUC indicado no documento para
+            consultar e validar a sua autenticidade — o mesmo resultado que obteria ao ler o QR Code.
         </div>
 
-        <div class="info-box">
-            <strong>Informações disponíveis neste sistema:</strong><br><br>
+        <form method="POST" action="{{ route('validar.submit') }}">
+            @csrf
 
-            • Consulta de documentos emitidos pela Câmara Municipal da Praia<br>
-            • Validação de documentos através de QR Code<br>
-            • Verificação de autenticidade documental<br>
-            • Acesso seguro a documentos oficiais disponibilizados pelo município
-        </div>
+            <div class="field">
+                <label for="tipo">Tipo de Documento</label>
+                <select name="tipo" id="tipo" required>
+                    <option value="" disabled {{ old('tipo') ? '' : 'selected' }}>Selecione o tipo de documento</option>
+                    @foreach ($tipos as $chave => $tipo)
+                        <option value="{{ $chave }}" {{ old('tipo') === $chave ? 'selected' : '' }}>
+                            {{ $tipo['label'] }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('tipo')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            </div>
 
-        <a href="{{ route('validar.index') }}" class="btn">
-            Validar documento
-        </a>
+            <div class="field">
+                <label for="duc">Número DUC</label>
+                <input type="text" name="duc" id="duc" inputmode="numeric" autocomplete="off"
+                       placeholder="Ex: 123456" value="{{ old('duc') }}" required>
+                @error('duc')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <button type="submit" class="btn">Validar documento</button>
+        </form>
+
+        <a href="{{ route('home') }}" class="back-link">&larr; Voltar</a>
 
         <div class="footer">
             <strong>Câmara Municipal da Praia</strong><br>
             Sistema de Gestão Documental<br><br>
-
             <strong>Contact Center:</strong> 8005002
         </div>
 
