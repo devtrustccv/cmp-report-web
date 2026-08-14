@@ -41,7 +41,7 @@ class ValidadorController extends Controller
 
     public function index()
     {
-        return view('validador', [
+        return view('home_cmp', [
             'tipos' => self::TIPOS,
         ]);
     }
@@ -53,7 +53,7 @@ class ValidadorController extends Controller
             'duc'  => 'required|digits_between:1,20',
         ], [], [
             'tipo' => 'Tipo de documento',
-            'duc'  => 'Número DUC',
+            'duc'  => 'DUC',
         ]);
 
         if ($validator->fails()) {
