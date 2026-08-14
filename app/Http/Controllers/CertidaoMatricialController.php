@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Exceptions\DocumentoNaoEncontradoException;
 use App\Http\Helpers\Enums\TipoRelatorioEnum;
 use App\Http\Helpers\QrCodeHelper;
 use App\Services\AppService;
@@ -58,6 +59,10 @@ class CertidaoMatricialController extends Controller
                                 'isCertificado' => $isCertificado,
                             ],
                             $tipo->fileName() . '.pdf');
+
+         } catch (DocumentoNaoEncontradoException $e) {
+
+            return response()->view('errors.documento-nao-encontrado', [], 404);
 
          } catch (Exception $e) {
 

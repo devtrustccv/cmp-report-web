@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Exceptions\DocumentoNaoEncontradoException;
 use App\Models\AssinaturaDto;
 use App\Models\CertidaoMatricialDto;
 use App\Models\CompraVenda;
@@ -22,6 +23,10 @@ class AppService extends BaseApiService
     {
         $response = $this->get($endpoint,  $params, $headers);
 
+        if ($response->status() === 404) {
+            throw new DocumentoNaoEncontradoException('Documento não encontrado.');
+        }
+
         if ($response->failed()) {
             throw new Exception('Erro ao consumir API.');
         }
@@ -29,7 +34,7 @@ class AppService extends BaseApiService
         $dadosApi = $response->json();
 
         if (!isset($dadosApi['data'])) {
-            throw new Exception('Dados inválidos.');
+            throw new DocumentoNaoEncontradoException('Documento não encontrado.');
         }
 
         return new $dtoClass($dadosApi['data']);

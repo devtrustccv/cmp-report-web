@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\DocumentoNaoEncontradoException;
 use App\Http\Helpers\Enums\TipoRelatorioEnum;
 use App\Http\Helpers\BasicMethods;
 use App\Http\Helpers\QrCodeHelper;
@@ -80,6 +81,8 @@ class IupController extends Controller
                 $tipo->fileName() . '.pdf'
             );
 
+        } catch (DocumentoNaoEncontradoException $e) {
+            return response()->view('errors.documento-nao-encontrado', [], 404);
         } catch (\Throwable $e) {
             return response()->view('errors.500', [
                 'message' => $e->getMessage()
