@@ -25,12 +25,7 @@ style="margin-top:50px;">
             </td>
         @elseif($tipo === 'IUPSUCESSORIO')
             <td style="width:15%; font-size:7px;">
-                <span style="display:block; font-size:7px;">Modelo nº 4 (Artigo 79)</span>
-                <span style="display:block; font-size:10px; text-decoration: underline;">
-                    <strong>
-                        {{$dados->infoPrestacoes  ?? ''}}
-                    </strong>
-                </span>
+                <span style="display:block; font-size:7px;">Modelo nº 3 (Artigo 74)</span>
             </td>
         @else
            <td style="width:15%; font-size:7px;"></td>
