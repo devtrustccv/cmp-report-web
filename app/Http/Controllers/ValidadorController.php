@@ -25,6 +25,10 @@ class ValidadorController extends Controller
             'label' => 'IUP - Doação',
             'path'  => 'iupdoacao',
         ],
+        'iupsucessorio' => [
+            'label' => 'IUP - Sucessório',
+            'path'  => 'iupsucessorio',
+        ],
         'iupterreno' => [
             'label' => 'IUP - Terreno',
             'path'  => 'iupterreno',

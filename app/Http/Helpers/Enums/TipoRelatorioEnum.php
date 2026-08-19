@@ -7,7 +7,7 @@ enum TipoRelatorioEnum: string
     case IUPDOACAO   = 'IUPDOACAO';
     case IUPCOMPRA   = 'COMPRA-VENDA';
     case IUPPARTILHA = 'IUPPARTILHA';
-    case IUPHERANCA  = 'IUPHERANCA';
+    case IUPSUCESSORIO  = 'IUPSUCESSORIO';
     case IUPTERRENO  = 'IUPTERRENO';
     case IUPREMFORO  = 'IUPREMFORO';
     case CERTIDAO_MATRICIAL  = 'CERTIDAO_MATRICIAL';

@@ -6,7 +6,6 @@ use App\Http\Controllers\{
     DocumentController,
     CertidaoMatricialController,
     IupController,
-    SucessorioController,
     PermutaController,
     ValidadorController
 };
@@ -22,9 +21,9 @@ Route::prefix('/')->group(function () {
     Route::get('iuppartilha/{token}', [IupController::class, 'partilha']);
     Route::get('iupdoacao/{token}', [IupController::class, 'doacao']);
     Route::get('iupterreno/{token}', [IupController::class, 'terreno']);
+    Route::get('iupsucessorio/{token}', [IupController::class, 'sucessorio']);
     Route::get('document-link-public/{id}', [DocumentController::class, 'loadDocument']);
     Route::get('reports/certidao-matricial/{token}', [CertidaoMatricialController::class, 'gerarCertidaoMatricial']);
-    Route::get('sucessorio/{id}', [SucessorioController::class, 'index']);
     Route::get('permuta/{id}', [PermutaController::class, 'index']);
 
 });

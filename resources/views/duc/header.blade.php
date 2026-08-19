@@ -23,6 +23,15 @@ style="margin-top:50px;">
                     </strong>
                 </span>
             </td>
+        @elseif($tipo === 'IUPSUCESSORIO')
+            <td style="width:15%; font-size:7px;">
+                <span style="display:block; font-size:7px;">Modelo nº 4 (Artigo 79)</span>
+                <span style="display:block; font-size:10px; text-decoration: underline;">
+                    <strong>
+                        {{$dados->infoPrestacoes  ?? ''}}
+                    </strong>
+                </span>
+            </td>
         @else
            <td style="width:15%; font-size:7px;"></td>
         @endif
@@ -42,6 +51,8 @@ style="margin-top:50px;">
               <div  style="font-size: 10px;  text-decoration: underline;">Referente a Doação</div>
             @elseif(!empty($tipo) && $tipo == 'IUPPARTILHA')
               <div  style="font-size: 10px;  text-decoration: underline;">Referente a Partilha</div>
+            @elseif(!empty($tipo) && $tipo == 'IUPSUCESSORIO')
+              <div  style="font-size: 10px;  text-decoration: underline;">Referente a Sucessão</div>
             @elseif(!empty($tipo) && $tipo == 'IUPTERRENO')
               <div  style="font-size: 10px;  text-decoration: underline;">Referente a {{$dados->regimeDesc ?? ''}}</div>
             @endif
@@ -60,6 +71,8 @@ style="margin-top:50px;">
             @elseif(!empty($tipo) && $tipo == 'IUPDOACAO')
                <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>
             @elseif(!empty($tipo) && $tipo == 'IUPREMFORO')
+               <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>
+            @elseif(!empty($tipo) && $tipo == 'IUPSUCESSORIO')
                <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>
             @elseif(!empty($tipo) && $tipo == 'IUPTERRENO')
                <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>

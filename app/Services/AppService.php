@@ -8,6 +8,7 @@ use App\Models\CertidaoMatricialDto;
 use App\Models\CompraVenda;
 use App\Models\DoacaoDto;
 use App\Models\PartilhaDto;
+use App\Models\SucessorioDto;
 use App\Models\RemForoDto;
 use App\Models\TerrenoDto;
 use App\Services\Traits\GatewayClientTrait;
@@ -65,6 +66,16 @@ class AppService extends BaseApiService
         return $this->getDto(
             "reports/iup-doacao/{$id}",
             DoacaoDto::class,
+            [],
+            $this->reportHeaders()
+        );
+    }
+
+    public function getSucessorio(int $id): SucessorioDto
+    {
+        return $this->getDto(
+            "reports/iup-sucessorio/{$id}",
+            SucessorioDto::class,
             [],
             $this->reportHeaders()
         );

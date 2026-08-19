@@ -31,6 +31,11 @@ class IupController extends Controller
         return $this->gerar($params, TipoRelatorioEnum::IUPPARTILHA, 'getPartilha');
     }
 
+    public function sucessorio(string $params)
+    {
+        return $this->gerar($params, TipoRelatorioEnum::IUPSUCESSORIO, 'getSucessorio');
+    }
+
     public function terreno(string $params)
     {
         return $this->gerar($params, TipoRelatorioEnum::IUPTERRENO, 'getTerreno');
