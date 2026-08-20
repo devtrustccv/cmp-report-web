@@ -10,16 +10,15 @@
         <td style="padding:6px;">
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
                 <tr>
-                    <td style="width:34%; padding:3px 3px;"><strong>TOTAL {{$dados->tipoDuc ?? 'IUP'}} PAGO:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total ?? 0) }}</span><span> {{ $dados->totalExtenso ?? ''}}</span> </td>
-                    <td style="width:16%; padding:3px 3px;"><strong>Multa:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->multa ?? 0) }}</span> </td>
-                    <td style="width:16%; padding:3px 3px;"><strong>Juros:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->juro ?? 0) }}</span> </td>
-                    <td style="width:32%; padding:3px 3px;"><strong>Area:</strong> <span style="text-decoration: underline;">{{$dados->superficie ?? ''}}</span>m2</td>
+                    <td style="width:64%; padding:3px 3px;"><strong>TOTAL {{$dados->tipoDuc ?? 'IUP'}} PAGO:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }}</span><span> {{ $dados->totalExtenso ?? ''}}</span> </td>
+                    <td style="width:36%; padding:3px 3px;"><strong>Juros:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->juro ?? 0) }}</span> </td>
                 </tr>
             </table>
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
                 <tr>
-                    <td style="width:50%; padding:3px 3px;"><strong>Valor Avaliado:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->valorTransaccao ?? 0) }} </span> </td>
-                    <td style="width:50%; padding:3px 3px;"><strong>V.Matricial:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->valorInicial ?? 0) }} </span> </td>
+                    <td style="width:34%; padding:3px 3px;"><strong>Valor Avaliado:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->valorTransaccao ?? 0) }} </span> </td>
+                    <td style="width:33%; padding:3px 3px;"><strong>V.Matricial:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->valorInicial ?? 0) }} </span> </td>
+                    <td style="width:33%; padding:3px 3px;"><strong>Area:</strong> <span style="text-decoration: underline;">{{$dados->superficie ?? ''}}</span>m2</td>
                 </tr>
             </table>
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
@@ -53,21 +52,23 @@
         </td>
     </tr>
 </table>
-<h4>Descrição:</h4>
-<p style="
-    border:1px solid #000;
-    min-height:40px;
-    padding:8px;
-    margin-top: 3px;
-    margin-12px;
-    margin-bottom:80px;
-    text-align: justify;
-    font-size: 10px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-">
-        {{$dados -> descMatriz ?? 'SEM DADOS' }}
-</p>
+<div style="page-break-inside: avoid;">
+    <h4>Descrição:</h4>
+    <p style="
+        border:1px solid #000;
+        min-height:40px;
+        padding:8px;
+        margin-top: 3px;
+        margin-12px;
+        margin-bottom:80px;
+        text-align: justify;
+        font-size: 10px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    ">
+            {{$dados -> descMatriz ?? 'SEM DADOS' }}
+    </p>
+</div>
 
 
 

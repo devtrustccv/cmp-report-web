@@ -21,12 +21,11 @@ class SucessorioDto extends Model
     public $numTransmissao;
     public $novosProprietarios;
     public $ducComprador;
-    public $multa;
     public $juro;
     public $dtEscritura;
     public $ducVendedor;
     public $dividaComprador;
-    public $total;
+    public $total_pago;
     public $totalExtenso;
     public $dividaDevedor;
     public $valorInicial;
