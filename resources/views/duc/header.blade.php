@@ -47,7 +47,7 @@ style="margin-top:50px;">
             @elseif(!empty($tipo) && $tipo == 'IUPPARTILHA')
               <div  style="font-size: 10px;  text-decoration: underline;">Referente a Partilha</div>
             @elseif(!empty($tipo) && $tipo == 'IUPSUCESSORIO')
-              <div  style="font-size: 10px;  text-decoration: underline;">Referente a Sucessão</div>
+              <div style="font-size: 10px;  text-decoration: underline;">Referente a Sucessão - Proc. Nº {{$dados->numero_processo ?? ''}}</div>
             @elseif(!empty($tipo) && $tipo == 'IUPTERRENO')
               <div  style="font-size: 10px;  text-decoration: underline;">Referente a {{$dados->regimeDesc ?? ''}}</div>
             @endif
@@ -68,7 +68,7 @@ style="margin-top:50px;">
             @elseif(!empty($tipo) && $tipo == 'IUPREMFORO')
                <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>
             @elseif(!empty($tipo) && $tipo == 'IUPSUCESSORIO')
-               <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>
+               <div><strong>Local: </strong><span style="text-decoration: underline; ">{{$dados->local ?? ''}}</span></div>
             @elseif(!empty($tipo) && $tipo == 'IUPTERRENO')
                <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>
             @endif
