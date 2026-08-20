@@ -13,6 +13,7 @@ use App\Models\RemForoDto;
 use App\Models\TerrenoDto;
 use App\Services\Traits\GatewayClientTrait;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 
 class AppService extends BaseApiService
@@ -25,6 +26,11 @@ class AppService extends BaseApiService
         $response = $this->get($endpoint,  $params, $headers);
 
         if ($response->status() === 404) {
+            Log::warning('getDto: API devolveu 404', [
+                'endpoint' => $endpoint,
+                'body' => $response->body(),
+            ]);
+
             throw new DocumentoNaoEncontradoException('Documento não encontrado.');
         }
 
@@ -37,6 +43,12 @@ class AppService extends BaseApiService
         $dadosApi = $response->json();
 
         if (!isset($dadosApi['data'])) {
+            Log::warning('getDto: resposta sem chave "data"', [
+                'endpoint' => $endpoint,
+                'status' => $response->status(),
+                'body' => $response->body(),
+            ]);
+
             throw new DocumentoNaoEncontradoException('Documento não encontrado.');
         }
 
