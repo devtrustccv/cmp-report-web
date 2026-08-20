@@ -29,7 +29,9 @@ class AppService extends BaseApiService
         }
 
         if ($response->failed()) {
-            throw new Exception('Erro ao consumir API.');
+            $erroApi = $response->json('message') ?? $response->json('error') ?? $response->body();
+
+            throw new Exception($erroApi ?: 'Erro ao consumir API.');
         }
 
         $dadosApi = $response->json();
