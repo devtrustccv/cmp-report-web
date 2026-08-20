@@ -10,52 +10,39 @@ class SucessorioDto extends Model
     public $timestamps = false;
     protected $table = null;
 
-    public $id;
-    public $matriz;
-    public $fraccao;
-    public $superficie;
-    public $antigosProprietarios;
-    public $tipoTransmissao;
-    public $data_emissao;
-    public $numTransmissao;
-    public $ducComprador;
-    public $ducVendedor;
-    public $dividaComprador;
-    public $dividaDevedor;
-    public $valorInicial;
-    public $valorFinal;
-    public $valorTransaccao;
-    public $isencao;
-    public $impAPagar;
-    public $cobrado_por;
-    public $data_pagamento;
-    public $norte;
-    public $sul;
-    public $este;
-    public $oeste;
-    public $descMatriz;
-    public $extenso;
-    public $novosProprietarios;
-    public $numPrestacao;
+    // Atributos que o Model pode ter
+    public $multa;
+    public $juro;
     public $total_pago;
-    public $valorOnline;
-    public $estado;
-    public $meioPagamento;
-    public $codigoBarra;
-    public $titulo;
-    public $tipoDuc;
+    public $valor_avalidado;
+    public $valor_declarado;
+    public $area;
+    public $comprador;
+    public $vendedor;
+    public $descricao;
     public $duc;
+    public $matriz;
+    public $local;
     public $numero_processo;
+    public $data_emissao;
+    public $data_pagamento;
     public $emitido_por;
-    public $baseIncidencia;
-    public $infoPrestacoes;
+    public $cobrado_por;
+    public $estado;
+    public $titulo;
+    public $extenso;
+    public $codigoBarra;
+    public $meioPagamento;
+    public $tipoDuc;
+    public $totalExtenso;
+    public $dividaComprador;
 
 
-    // Construtor para popular via JSON ou array
+    // Construtor para popular o model direto com array (ex: resposta da API)
     public function __construct(array $attributes = [])
     {
         foreach ($attributes as $key => $value) {
-            if (property_exists($this, $key)) {
+            if(property_exists($this, $key)){
                 $this->$key = $value;
             }
         }
