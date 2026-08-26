@@ -52,6 +52,7 @@ class SucessorioDto extends Model
     public $titulo;
     public $tipoDuc;
     public $emitido_por;
+    public $baseIncidencia;
 
 
     // Construtor para popular via JSON ou array
