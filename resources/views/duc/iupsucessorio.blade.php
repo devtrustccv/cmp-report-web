@@ -17,8 +17,8 @@
             </table>
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
                 <tr>
-                   <td style="width:80%; padding:3px 3px;"><strong>Total Pago:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }}</span><span> {{ $dados->totalExtenso ?? ''}}</span> </td>
-                   <td style="width:20%; padding:3px 3px;"><strong>Area:</strong> <span style="text-decoration: underline;">{{$dados->superficie ?? ''}}</span>m2</td>
+                   <td style="width:70%; padding:3px 3px;"><strong>Total Pago:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }}</span><span> {{ $dados->totalExtenso ?? ''}}</span> </td>
+                   <td style="width:30%; padding:3px 3px;"><strong>Area:</strong> <span style="text-decoration: underline;">{{$dados->superficie ?? ''}}</span>m2</td>
                 </tr>
             </table>
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:3px;">
