@@ -223,7 +223,7 @@ class AppService extends BaseApiService
     public function getExpedientesEncaminhadosPorInterveniente(array $params = []): array
     {
         return $this->getDtoList(
-            'reports/expedientes-encaminhados-por-interveniente',
+            'fase-actual-pedido',
             ExpedienteEncaminhadoDto::class,
             $params,
             $this->reportHeaders()
