@@ -20,10 +20,11 @@ class BasicMethods{
         ## object $dados,
         ## string $tipo,
         ##  ?string $qrcode = null,
-      string $filename
+      string $filename,
+      string $orientation = 'portrait'
     ) {
         return Pdf::loadView($view, $data)
-        ->setPaper('A4', 'portrait')
+        ->setPaper('A4', $orientation)
         ->stream($filename);
     }
 }

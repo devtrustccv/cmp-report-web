@@ -6,7 +6,9 @@ use App\Exceptions\DocumentoNaoEncontradoException;
 use App\Models\AssinaturaDto;
 use App\Models\CertidaoMatricialDto;
 use App\Models\CompraVenda;
+use App\Models\DeclaracaoPrediosRegistadosDto;
 use App\Models\DoacaoDto;
+use App\Models\ExpedienteEncaminhadoDto;
 use App\Models\PartilhaDto;
 use App\Models\SucessorioDto;
 use App\Models\RemForoDto;
@@ -54,7 +56,25 @@ class AppService extends BaseApiService
 
         return new $dtoClass($dadosApi['data']);
     }
-   
+
+    private function getDtoList(string $endpoint, string $dtoClass, array $params = [], array $headers = []): array
+    {
+        $response = $this->get($endpoint, $params, $headers);
+
+        if ($response->failed()) {
+            $erroApi = $response->json('message') ?? $response->json('error') ?? $response->body();
+
+            throw new Exception($erroApi ?: 'Erro ao consumir API.');
+        }
+
+        $dadosApi = $response->json();
+
+        return array_map(
+            fn (array $item) => new $dtoClass($item),
+            $dadosApi['data'] ?? []
+        );
+    }
+
     public function getDadosCertidaoMatricial(int $id): CertidaoMatricialDto
     {
         return $this->getDto(
@@ -187,5 +207,27 @@ class AppService extends BaseApiService
         );
     }
 
-    
+    public function getDeclaracaoPrediosRegistados(int $id): DeclaracaoPrediosRegistadosDto
+    {
+        return $this->getDto(
+            "reports/declaracao-predios-registados/{$id}",
+            DeclaracaoPrediosRegistadosDto::class,
+            [],
+            $this->reportHeaders()
+        );
+    }
+
+    /**
+     * @return ExpedienteEncaminhadoDto[]
+     */
+    public function getExpedientesEncaminhadosPorInterveniente(array $params = []): array
+    {
+        return $this->getDtoList(
+            'reports/expedientes-encaminhados-por-interveniente',
+            ExpedienteEncaminhadoDto::class,
+            $params,
+            $this->reportHeaders()
+        );
+    }
+
 }

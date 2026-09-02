@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     AtestadoController,
+    DeclaracaoController,
+    ExpedientesIntervenienteController,
+    ImpostoCirculacaoController,
     DocumentController,
     CertidaoMatricialController,
     IupController,
@@ -24,6 +27,9 @@ Route::prefix('/')->group(function () {
     Route::get('iupsucessorio/{token}', [IupController::class, 'sucessorio']);
     Route::get('document-link-public/{id}', [DocumentController::class, 'loadDocument']);
     Route::get('reports/certidao-matricial/{token}', [CertidaoMatricialController::class, 'gerarCertidaoMatricial']);
+    Route::get('reports/declaracao/{tipo}/{token}', [DeclaracaoController::class, 'gerar']);
+    Route::get('reports/imposto-circulacao/{token}', [ImpostoCirculacaoController::class, 'gerar']);
+    Route::get('reports/expedientes-interveniente/{token}', [ExpedientesIntervenienteController::class, 'gerar']);
     Route::get('permuta/{id}', [PermutaController::class, 'index']);
 
 });
