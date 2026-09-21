@@ -66,9 +66,9 @@ class IupController extends Controller
 
        
 
-            $dados = null; // $this->appService->{$method}($id);
+            $dados =  $this->appService->{$method}($id);
 
-            $estado ='null';// $dados->estado ?? null;
+            $estado = $dados->estado ?? null;
 
             $isCertificado = $estado === 'FIM';
 
