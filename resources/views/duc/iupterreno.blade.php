@@ -84,17 +84,21 @@
     </table>
 </div>
 
-<strong style="margin-top: 4px;">Descrição:</strong>
-<p style="
-    border:1px solid #000;   
-    min-height:30px;        
-    padding:8px;             
-    margin-top:12px;   
-    font-size:12px;     
-    text-align: justify;
-">
-    <!-- espaço para assinatura ou texto -->
-    {{$dados -> descricao ?? '' }}
-</p>
+<div style="page-break-inside: avoid;">
+    <strong style="margin-top: 4px;">Descrição:</strong>
+    <p style="
+        border:1px solid #000;
+        min-height:30px;
+        padding:8px;
+        margin-top:12px;
+        margin-bottom:80px;
+        font-size:12px;
+        text-align: justify;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    ">
+        {{$dados -> descricao ?? '' }}
+    </p>
+</div>
 
 @endsection
