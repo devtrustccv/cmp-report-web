@@ -40,7 +40,7 @@
       </tr>
       <tr>
         <td style="width:100%; padding:6px 8px;">
-            <strong>Vendedor: DOCUMENTO SO PARA USO INTERNO DO MUNICIPIO</strong>
+            <strong>Vendedor: {{$dados->vendedor ?? "DOCUMENTO SO PARA USO INTERNO DO MUNICIPIO"}}</strong>
         </td>
       </tr>
 </table>
