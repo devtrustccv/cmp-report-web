@@ -27,6 +27,10 @@ style="margin-top:50px;">
             <td style="width:15%; font-size:7px;">
                 <span style="display:block; font-size:7px;">Modelo nº 3 (Artigo 74)</span>
             </td>
+        @elseif($tipo === 'IUPPERMUTA')
+            <td style="width:15%; font-size:7px;">
+                <span style="display:block; font-size:7px;">Modelo nº 3 (Artigo 74)</span>
+            </td>
         @else
            <td style="width:15%; font-size:7px;"></td>
         @endif
@@ -50,13 +54,17 @@ style="margin-top:50px;">
               <div style="font-size: 10px;  text-decoration: underline;">Referente a Sucessão - Proc. Nº {{$dados->numero_processo ?? ''}}</div>
             @elseif(!empty($tipo) && $tipo == 'IUPTERRENO')
               <div  style="font-size: 10px;  text-decoration: underline;">Referente a {{$dados->regimeDesc ?? ''}}</div>
+            @elseif(!empty($tipo) && $tipo == 'IUPPERMUTA')
+              <div  style="font-size: 10px;  text-decoration: underline;">Referente a Permuta - Proc. Nº {{$dados->numero_processo ?? ''}}</div>
             @endif
         </td>
 
         <!-- COLUNA DIREITA -->
         <td style="width:25%; text-align:rigth;">
             <div><strong>Nº DUC: </strong><span style="text-decoration: underline; ">{{$dados->duc ?? ''}}</span></div>
-            <div><strong>Nº Matriz: </strong><span style="text-decoration: underline; ">{{$dados->matriz ?? ''}}</span></div>
+            @if(!empty($tipo) && $tipo !== 'IUPPERMUTA')
+                <div><strong>Nº Matriz: </strong><span style="text-decoration: underline; ">{{$dados->matriz ?? ''}}</span></div>
+            @endif
             @if(!empty($tipo) && $tipo === 'IUPCOMPRA')
                 <div><strong>Local: </strong><span style="text-decoration: underline; ">{{$dados->local ?? ''}}</span></div>
             @elseif(!empty($tipo) && $tipo == 'IUPPARTILHA')
@@ -70,6 +78,8 @@ style="margin-top:50px;">
             @elseif(!empty($tipo) && $tipo == 'IUPSUCESSORIO')
                <div><strong>Local: </strong><span style="text-decoration: underline; ">{{$dados->local ?? ''}}</span></div>
             @elseif(!empty($tipo) && $tipo == 'IUPTERRENO')
+               <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>
+            @elseif(!empty($tipo) && $tipo == 'IUPPERMUTA')
                <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>
             @endif
         </td>

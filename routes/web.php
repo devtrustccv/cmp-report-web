@@ -9,7 +9,6 @@ use App\Http\Controllers\{
     DocumentController,
     CertidaoMatricialController,
     IupController,
-    PermutaController,
     ValidadorController
 };
 
@@ -25,12 +24,12 @@ Route::prefix('/')->group(function () {
     Route::get('iupdoacao/{token}', [IupController::class, 'doacao']);
     Route::get('iupterreno/{token}', [IupController::class, 'terreno']);
     Route::get('iupsucessorio/{token}', [IupController::class, 'sucessorio']);
+    Route::get('iuppermuta/{token}', [IupController::class, 'permuta']);
     Route::get('document-link-public/{id}', [DocumentController::class, 'loadDocument']);
     Route::get('reports/certidao-matricial/{token}', [CertidaoMatricialController::class, 'gerarCertidaoMatricial']);
     Route::get('reports/declaracao/{tipo}/{token}', [DeclaracaoController::class, 'gerar']);
     Route::get('reports/imposto-circulacao/{token}', [ImpostoCirculacaoController::class, 'gerar']);
     Route::get('reports/expedientes-interveniente/{token}', [ExpedientesIntervenienteController::class, 'gerar']);
-    Route::get('permuta/{id}', [PermutaController::class, 'index']);
 
 });
 

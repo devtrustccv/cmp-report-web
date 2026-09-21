@@ -10,6 +10,7 @@ use App\Models\DeclaracaoPrediosRegistadosDto;
 use App\Models\DoacaoDto;
 use App\Models\ExpedienteEncaminhadoDto;
 use App\Models\PartilhaDto;
+use App\Models\PermutaDto;
 use App\Models\SucessorioDto;
 use App\Models\RemForoDto;
 use App\Models\TerrenoDto;
@@ -130,6 +131,16 @@ class AppService extends BaseApiService
         return $this->getDto(
             "reports/iup-remicao-foro/{$id}",
             RemForoDto::class,
+            [],
+            $this->reportHeaders()
+        );
+    }
+
+    public function getPermuta(int $id): PermutaDto
+    {
+        return $this->getDto(
+            "reports/iup-permuta/{$id}",
+            PermutaDto::class,
             [],
             $this->reportHeaders()
         );

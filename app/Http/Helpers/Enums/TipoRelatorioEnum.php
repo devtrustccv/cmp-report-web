@@ -10,6 +10,7 @@ enum TipoRelatorioEnum: string
     case IUPSUCESSORIO  = 'IUPSUCESSORIO';
     case IUPTERRENO  = 'IUPTERRENO';
     case IUPREMFORO  = 'IUPREMFORO';
+    case IUPPERMUTA  = 'IUPPERMUTA';
     case CERTIDAO_MATRICIAL  = 'CERTIDAO_MATRICIAL';
 
     public function view(): string

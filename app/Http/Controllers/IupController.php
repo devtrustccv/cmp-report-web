@@ -44,7 +44,12 @@ class IupController extends Controller
     public function compraVenda(string $params)
     {
         return $this->gerar($params, TipoRelatorioEnum::IUPCOMPRA, 'getCompraVenda');
-        
+
+    }
+
+    public function permuta(string $params)
+    {
+        return $this->gerar($params, TipoRelatorioEnum::IUPPERMUTA, 'getPermuta');
     }
 
     private function gerar(
@@ -54,16 +59,16 @@ class IupController extends Controller
     ) {
         try {
 
-            $values = $this->cryptoService->decrypt($params);
+           //$values = $this->cryptoService->decrypt($params);
 
-            $id = (int) ($values['id'] ?? 0);
-            $isVerificacao = (int) ($values['verificacao'] ?? 3); 
+            $id = 1; //(int) ($values['id'] ?? 0);
+            $isVerificacao = 1; //(int) ($values['verificacao'] ?? 3); 
 
        
 
-            $dados = $this->appService->{$method}($id);
+            $dados = null; // $this->appService->{$method}($id);
 
-            $estado = $dados->estado ?? null;
+            $estado ='null';// $dados->estado ?? null;
 
             $isCertificado = $estado === 'FIM';
 
@@ -77,7 +82,7 @@ class IupController extends Controller
                 'duc.' . $tipo->view(),
                 [
                     'dados' => $dados,
-                    'titulo' => $dados->titulo,
+                    'titulo' => null, //$dados->titulo,
                     'qrcode_base64' => $qrcode_base64,
                     'tipo' => $tipo->code(),
                     'estado' => $estado,
