@@ -30,17 +30,17 @@
             <strong>Valor da Compra: </strong><span style="text-decoration: underline; font-size:12px;">{{\App\Http\Utils::formatarComSeparador($dados->totalOnline ?? 0)}}</span>
         </td>
       </tr>
-      <tr>
+      <!--<tr>
         <td style="width:50%; padding:6px 8px;">
             <strong>Morada: </strong><span style="text-decoration: underline; font-size:12px;">{{$dados->morada ?? ''}}</span>
         </td>
         <td style="width:50%; padding:6px 8px;">
             <strong>BI/Passaporte: </strong><span style="text-decoration: underline; font-size:12px;">{{$dados->bi ?? ''}}</span>
         </td>
-      </tr>
+      </tr>-->
       <tr>
         <td style="width:100%; padding:6px 8px;">
-            <strong>Vendedor: {{$dados->vendedor ?? "DOCUMENTO SO PARA USO INTERNO DO MUNICIPIO"}}</strong>
+            <strong> {{$dados->vendedor ?? "Proprietario: Câmara Municipal Da Praia"}}</strong>
         </td>
       </tr>
 </table>
