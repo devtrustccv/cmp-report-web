@@ -83,7 +83,7 @@ class IupController extends Controller
                 'duc.' . $tipo->view(),
                 [
                     'dados' => $dados,
-                    'titulo' => null, //$dados->titulo,
+                    'titulo' => $dados->titulo,
                     'qrcode_base64' => $qrcode_base64,
                     'tipo' => $tipo->code(),
                     'estado' => $estado,
