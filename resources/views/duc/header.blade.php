@@ -40,7 +40,11 @@ style="margin-top:50px;">
                  style="width:30px; height:30px; display:block; margin:0 auto 5px auto;">
             <div>República de Cabo Verde</div>
             <div style="font-size: 14px;"><strong>Câmara Municipal da Praia</strong></div>
-            <div>{{$titulo ?? 'IMPOSTO SOBRE A TRANSMISSÃO DE IMÓVEIS (ITI)'}} </div>
+            @if(empty($titulo) && $tipo === 'IUPPERMUTA' && ($dados->tipoDuc ?? '') === 'IUP')
+                <div>IMPOSTO ÚNICO SOBRE O PATRIMÓNIO (IUP)</div>
+            @else
+                <div>{{$titulo ?? 'IMPOSTO SOBRE A TRANSMISSÃO DE IMÓVEIS (ITI)'}} </div>
+            @endif
             
             @if(!empty($tipo) && $tipo === 'IUPCOMPRA')
                 <div style="font-size: 10px;  text-decoration: underline;">Referente a Compra - Proc. Nº {{$dados->numero_processo ?? ''}}</div>

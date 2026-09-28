@@ -30,6 +30,101 @@ class Utils
         return number_format($valor) . $moeda.'00';
     }
 
+    /**
+     * Converte um valor em escudos para texto por extenso.
+     * Ex: 482 => "Quatrocentos e oitenta e dois escudos"
+     */
+    public static function valorPorExtenso(float $valor): string
+    {
+        $inteiro = (int) round($valor);
+
+        $moeda = $inteiro === 1 ? 'escudo' : 'escudos';
+
+        // "um milhão de escudos", "dois milhões de escudos"
+        if ($inteiro >= 1000000 && $inteiro % 1000000 === 0) {
+            $moeda = 'de ' . $moeda;
+        }
+
+        $texto = self::inteiroPorExtenso($inteiro);
+
+        return mb_strtoupper(mb_substr($texto, 0, 1)) . mb_substr($texto, 1) . ' ' . $moeda;
+    }
+
+    private static function inteiroPorExtenso(int $n): string
+    {
+        if ($n === 0) {
+            return 'zero';
+        }
+
+        $milhoes = intdiv($n, 1000000);
+        $milhares = intdiv($n % 1000000, 1000);
+        $resto = $n % 1000;
+
+        $grupos = [];
+
+        if ($milhoes) {
+            $grupos[] = [$milhoes * 1000000, $milhoes === 1 ? 'um milhão' : self::inteiroPorExtenso($milhoes) . ' milhões'];
+        }
+
+        if ($milhares) {
+            $grupos[] = [$milhares * 1000, $milhares === 1 ? 'mil' : self::ate999PorExtenso($milhares) . ' mil'];
+        }
+
+        if ($resto) {
+            $grupos[] = [$resto, self::ate999PorExtenso($resto)];
+        }
+
+        $texto = '';
+
+        foreach ($grupos as $i => [$valorGrupo, $textoGrupo]) {
+            if ($i === 0) {
+                $texto = $textoGrupo;
+                continue;
+            }
+
+            // Usa "e" antes do último grupo quando é < 100 ou uma centena redonda (ex: "mil e quinhentos")
+            $ultimo = $i === count($grupos) - 1;
+            $semMilhar = $valorGrupo < 1000 ? $valorGrupo : intdiv($valorGrupo, 1000);
+            $usaE = $ultimo && ($semMilhar < 100 || $semMilhar % 100 === 0);
+
+            $texto .= ($usaE ? ' e ' : ' ') . $textoGrupo;
+        }
+
+        return $texto;
+    }
+
+    private static function ate999PorExtenso(int $n): string
+    {
+        $unidades = ['', 'um', 'dois', 'três', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove',
+            'dez', 'onze', 'doze', 'treze', 'catorze', 'quinze', 'dezasseis', 'dezassete', 'dezoito', 'dezanove'];
+        $dezenas = ['', '', 'vinte', 'trinta', 'quarenta', 'cinquenta', 'sessenta', 'setenta', 'oitenta', 'noventa'];
+        $centenas = ['', 'cento', 'duzentos', 'trezentos', 'quatrocentos', 'quinhentos',
+            'seiscentos', 'setecentos', 'oitocentos', 'novecentos'];
+
+        if ($n === 100) {
+            return 'cem';
+        }
+
+        $partes = [];
+        $c = intdiv($n, 100);
+        $r = $n % 100;
+
+        if ($c) {
+            $partes[] = $centenas[$c];
+        }
+
+        if ($r) {
+            if ($r < 20) {
+                $partes[] = $unidades[$r];
+            } else {
+                $u = $r % 10;
+                $partes[] = $dezenas[intdiv($r, 10)] . ($u ? ' e ' . $unidades[$u] : '');
+            }
+        }
+
+        return implode(' e ', $partes);
+    }
+
     // método para o "Clean PDF"
     public function cleanPdf(string $inputPath): string
     {

@@ -28,6 +28,8 @@ class AppService extends BaseApiService
     {
         $response = $this->get($endpoint,  $params, $headers);
 
+
+
         if ($response->status() === 404) {
             Log::warning('getDto: API devolveu 404', [
                 'endpoint' => $endpoint,
@@ -136,14 +138,32 @@ class AppService extends BaseApiService
         );
     }
 
-    public function getPermuta(int $id): PermutaDto
+    /**
+     * A API devolve uma lista (CMP_V_RECIBO_PERMUTA) com um registo por lado da permuta.
+     */
+    public function getPermuta(int $duc): PermutaDto
     {
-        return $this->getDto(
-            "reports/iup-permuta/{$id}",
-            PermutaDto::class,
-            [],
-            $this->reportHeaders()
-        );
+        $response = $this->get("reports/iup-permuta/{$duc}", [], $this->reportHeaders());
+
+        if ($response->status() === 404) {
+            throw new DocumentoNaoEncontradoException('Documento não encontrado.');
+        }
+
+        if ($response->failed()) {
+            $erroApi = $response->json('message') ?? $response->json('error') ?? $response->body();
+
+            throw new Exception($erroApi ?: 'Erro ao consumir API.');
+        }
+
+        $itens = $response->json('data') ?? [];
+
+        if (empty($itens)) {
+            Log::warning('getPermuta: lista vazia', ['duc' => $duc, 'body' => $response->body()]);
+
+            throw new DocumentoNaoEncontradoException('Documento não encontrado.');
+        }
+
+        return PermutaDto::fromRecibos($itens, $duc);
     }
 
     public function getTerreno(int $id): TerrenoDto

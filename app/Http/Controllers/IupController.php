@@ -60,13 +60,14 @@ class IupController extends Controller
         try {
 
            $values = $this->cryptoService->decrypt($params);
+           
 
-            $id = (int) ($values['id'] ?? 0);
+            $id =(int) ($values['id'] ?? 0);
             $isVerificacao = (int) ($values['verificacao'] ?? 3); 
 
-       
 
             $dados =  $this->appService->{$method}($id);
+
 
             $estado = $dados->estado ?? null;
 

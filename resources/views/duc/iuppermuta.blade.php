@@ -10,14 +10,14 @@
         <td style="padding:3px 6px;">
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:1px;">
                 <tr>
-                    <td style="width:25%; padding:1px 3px;"><strong>{{$dados->tipoDuc ?? 'IUP'}}:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }}</span> </td>
-                    <td style="width:25%; padding:1px 3px;"><strong>Multa:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->multa ?? 0) }}</span> </td>
-                    <td style="width:25%; padding:1px 3px;"><strong>Juro:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->juro ?? 0) }}</span> </td>
+                    <td style="width:33%; padding:1px 3px;"><strong>{{$dados->tipoDuc ?? 'ITI'}}:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }}</span> </td>
+                    <td style="width:33%; padding:1px 3px;"><strong>Multa:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->multa ?? 0) }}</span> </td>
+                    <td style="width:33%; padding:1px 3px;"><strong>Juro:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->juro ?? 0) }}</span> </td>
                 </tr>
             </table>
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:1px;">
                 <tr>
-                   <td style="width:100%; padding:1px 3px;"><strong>Total Pago:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }}</span><span> {{ $dados->totalExtenso ?? ''}}</span> </td>
+                   <td style="width:100%; padding:1px 3px;"><strong>Total Pago:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }}</span>@if(!empty($dados->totalExtenso))<span style="font-size:10px;"> ({{ $dados->totalExtenso }})</span>@endif </td>
                 </tr>
             </table>
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:4px; border:1px solid #000;">
@@ -28,10 +28,10 @@
                                 <td style="padding:1px 3px;"><strong>Permutante:</strong> <span style="text-decoration: underline;">{{$dados->permutante1 ?? '' }}</span></td>
                             </tr>
                             <tr>
-                                <td style="padding:1px 3px;"><strong>Matriz:</strong> <span style="text-decoration: underline;">{{$dados->matriz1 ?? '' }}</span></td>
+                                <td style="padding:1px 3px;"><strong>Matriz:</strong> <span style="text-decoration: underline;">{{$dados->matriz1 ?? ''}}-{{$dados->fraccao1 ?? ''}}</span></td>
                             </tr>
                              <tr>
-                                <td style="padding:1px 3px;"><strong>Valor Matriz:</strong> <span style="text-decoration: underline;">{{$dados->matriz2 ?? '' }}</span></td>
+                                <td style="padding:1px 3px;"><strong>Valor Matriz:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->valorMatriz1 ?? 0) }}</span></td>
                             </tr>
                             <tr>
                                 <td style="padding:1px 3px;"><strong>Área:</strong> <span style="text-decoration: underline;">{{$dados->superficie1 ?? '' }}</span>m2</td>
@@ -44,10 +44,10 @@
                                 <td style="padding:1px 3px;"><strong>Permutante:</strong> <span style="text-decoration: underline;">{{$dados->permutante2 ?? '' }}</span></td>
                             </tr>
                             <tr>
-                                <td style="padding:1px 3px;"><strong>Matriz:</strong> <span style="text-decoration: underline;">{{$dados->matriz2 ?? '' }}</span></td>
+                                <td style="padding:1px 3px;"><strong>Matriz:</strong> <span style="text-decoration: underline;">{{$dados->matriz2 ?? ''}}-{{$dados->fraccao2 ?? ''}}</span></td>
                             </tr>
                             <tr>
-                                <td style="padding:1px 3px;"><strong>Valor Matriz:</strong> <span style="text-decoration: underline;">{{$dados->matriz2 ?? '' }}</span></td>
+                                <td style="padding:1px 3px;"><strong>Valor Matriz:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->valorMatriz2 ?? 0) }}</span></td>
                             </tr>
                             <tr>
                                 <td style="padding:1px 3px;"><strong>Área:</strong> <span style="text-decoration: underline;">{{$dados->superficie2 ?? '' }}</span>m2</td>
@@ -60,8 +60,8 @@
             @if(!empty($dados->torna))
                 <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:4px;">
                     <tr>
-                        <td style="width:33%; padding:1px 3px;"><strong>B.Incidência:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->baseIncidencia ?? 0) }} </span> </td>
-                        <td style="width:50%; padding:1px 3px;"><strong>A cargo de:</strong> <span style="text-decoration: underline;">{{ $dados->tornaBeneficiario ?? '' }}</span></td>
+                        <td style="width:50%; padding:1px 3px;"><strong>B. Incidência:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->baseIncidencia ?? 0) }}</span> </td>
+                        <td style="width:50%; padding:1px 3px;"><strong>Pago por:</strong> <span style="text-decoration: underline;">{{ $dados->tornaPagador ?? '' }}</span></td>
                     </tr>
                 </table>
             @endif
