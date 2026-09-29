@@ -98,7 +98,7 @@
                 word-wrap: break-word;
                 overflow-wrap: break-word;
             ">
-                {{$dados->descricao ?? '' }}
+                {{$dados->descMatriz2 ?? '' }}
             </p>
         </td>
     </tr>

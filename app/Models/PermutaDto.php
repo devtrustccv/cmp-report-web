@@ -114,14 +114,14 @@ class PermutaDto extends Model
             'matriz1' => $lado1['numMatriz'] ?? $lado1['matriz'] ?? null,
             'fraccao1' => $lado1['fraccao'] ?? null,
             'superficie1' => $lado1['superficie'] ?? null,
-            'descMatriz1' => $lado1['localizacao'] ?? null,
+            'descMatriz1' => $lado1['descricao'] ?? null,
             'valorMatriz1' => $lado1['valorTransmissao'] ?? 0,
 
             'permutante2' => $lado2['antigosProprietarios'] ?? null,
             'matriz2' => $lado2['numMatriz'] ?? $lado2['matriz'] ?? null,
             'fraccao2' => $lado2['fraccao'] ?? null,
             'superficie2' => $lado2['superficie'] ?? null,
-            'descMatriz2' => $lado2['localizacao'] ?? null,
+            'descMatriz2' => $lado2['descricao'] ?? null,
             'valorMatriz2' => $lado2['valorTransmissao'] ?? 0,
 
             // Base sobre a qual é calculada a percentagem de ITI: diferença entre os valores dos imóveis
@@ -135,7 +135,6 @@ class PermutaDto extends Model
             'codigoBarra' => $pago['codigoBarra'] ?? $lado1['codigoBarra'] ?? null,
             'meioPagamento' => $pago['meioPagamento'] ?? $lado1['meioPagamento'] ?? null,
             'numero_processo' => $pago['numero_processo'] ?? $lado1['numero_processo'] ?? null,
-            'descricao' => $pago['descricao'] ?? $lado1['descricao'] ?? null,
 
             // tipo: tipo do documento (ex: IUPPERMUTA)
             'tipo' => $pago['tipo'] ?? $lado1['tipo'] ?? null,
