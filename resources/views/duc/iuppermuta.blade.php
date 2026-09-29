@@ -57,11 +57,11 @@
                 </tr>
             </table>
 
-            @if(!empty($dados->torna))
+            @if(!empty($dados->pagoPor))
                 <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:4px;">
                     <tr>
                         <td style="width:50%; padding:1px 3px;"><strong>B. Incidência:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->baseIncidencia ?? 0) }}</span> </td>
-                        <td style="width:50%; padding:1px 3px;"><strong>Pago por:</strong> <span style="text-decoration: underline;">{{ $dados->tornaPagador ?? '' }}</span></td>
+                        <td style="width:50%; padding:1px 3px;"><strong>Pago por:</strong> <span style="text-decoration: underline;">{{ $dados->pagoPor ?? '' }}</span></td>
                     </tr>
                 </table>
             @endif

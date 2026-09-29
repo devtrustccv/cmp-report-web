@@ -46,6 +46,7 @@ class PermutaDto extends Model
     public $torna;
     public $tornaBeneficiario;
     public $tornaPagador;
+    public $pagoPor;
     public $tornaExtenso;
     public $totalPermuta;
 
@@ -140,15 +141,23 @@ class PermutaDto extends Model
             // tipoDuc: imposto (ITI / IUP)
             'tipoDuc' => $pago['tipoDuc'] ?? $lado1['tipoDuc'] ?? 'ITI',
             'estado' => $pago ? 'FIM' : 'REQ_PAG',
+
+            // Primeiro registo da lista que tenha pagoPor preenchido
+            'pagoPor' => collect($itens)->pluck('pagoPor')->first(fn ($valor) => filled($valor)),
         ]);
+
+        // Primeiro registo da lista com valorAPagar preenchido e diferente de 0
+        $valorAPagar = (float) (collect($itens)->pluck('valorAPagar')
+            ->first(fn ($valor) => $valor !== null && (float) $valor != 0) ?? 0);
+
+        $dto->torna = $valorAPagar;
+        $dto->total_pago = $valorAPagar;
+        $dto->totalExtenso = \App\Http\Utils::valorPorExtenso($valorAPagar);
 
         if ($pago) {
             // Quem pagou é o adquirente do registo pago; o outro lado recebe a diferença
             $recebe = collect($itens)->first(fn ($item) => $item !== $pago) ?? [];
 
-            $dto->torna = $pago['valorAPagar'] ?? 0;
-            $dto->total_pago = $pago['valorAPagar'] ?? 0;
-            $dto->totalExtenso = \App\Http\Utils::valorPorExtenso((float) $dto->total_pago);
             $dto->tornaPagador = $pago['novosProprietarios'] ?? null;
             $dto->tornaBeneficiario = $recebe['novosProprietarios'] ?? $pago['antigosProprietarios'] ?? null;
         }
