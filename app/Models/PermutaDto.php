@@ -135,6 +135,7 @@ class PermutaDto extends Model
             'codigoBarra' => $pago['codigoBarra'] ?? $lado1['codigoBarra'] ?? null,
             'meioPagamento' => $pago['meioPagamento'] ?? $lado1['meioPagamento'] ?? null,
             'numero_processo' => $pago['numero_processo'] ?? $lado1['numero_processo'] ?? null,
+            'descricao' => $pago['descricao'] ?? $lado1['descricao'] ?? null,
 
             // tipo: tipo do documento (ex: IUPPERMUTA)
             'tipo' => $pago['tipo'] ?? $lado1['tipo'] ?? null,
