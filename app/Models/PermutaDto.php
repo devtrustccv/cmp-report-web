@@ -106,7 +106,7 @@ class PermutaDto extends Model
         $dto = new self([
             'duc' => $duc,
             'id' => $pago['cmcTrmId'] ?? $lado1['cmcTrmId'] ?? null,
-            'data_emissao' => now()->format('d/m/Y'),
+            'data_emissao' => $pago['data_emissao'] ?? $lado1['data_emissao'] ?? null,
             'dtEscritura' => self::formatarData($lado1['dataPermuta'] ?? null),
             'local' => $lado1['localizacao'] ?? null,
 
@@ -131,7 +131,7 @@ class PermutaDto extends Model
 
             'emitido_por' => $pago['emitido_por'] ?? $lado1['emitido_por'] ?? null,
             'cobrado_por' => $pago['cobrado_por'] ?? $lado1['cobrado_por'] ?? null,
-            'data_pagamento' => self::formatarData($pago['data_pagamento'] ?? $lado1['data_pagamento'] ?? null),
+            'data_pagamento' => $pago['data_pagamento'] ?? $lado1['data_pagamento'] ?? null,
             'codigoBarra' => $pago['codigoBarra'] ?? $lado1['codigoBarra'] ?? null,
             'meioPagamento' => $pago['meioPagamento'] ?? $lado1['meioPagamento'] ?? null,
             'numero_processo' => $pago['numero_processo'] ?? $lado1['numero_processo'] ?? null,
