@@ -89,8 +89,7 @@ class PermutaDto extends Model
 
     /**
      * Monta o DTO a partir da lista devolvida pela API (CmpVReciboPermutaEntity).
-     * O registo com estadoPagamento = 'Pago' é o lado que pagou a diferença;
-     * o outro lado é quem a recebe.
+     * Quem paga a diferença é quem entrega o imóvel de menor valor matricial.
      */
     public static function fromRecibos(array $itens, int $duc): self
     {
@@ -154,13 +153,19 @@ class PermutaDto extends Model
         $dto->total_pago = $valorAPagar;
         $dto->totalExtenso = \App\Http\Utils::valorPorExtenso($valorAPagar);
 
-        if ($pago) {
-            // Quem pagou é o adquirente do registo pago; o outro lado recebe a diferença
-            $recebe = collect($itens)->first(fn ($item) => $item !== $pago) ?? [];
+        // Na permuta paga a diferença quem entrega o imóvel de menor valor matricial;
+        // quem entrega o de maior valor recebe. Com valores iguais não há diferença a pagar.
+        $valor1 = (float) ($lado1['valorTransmissao'] ?? 0);
+        $valor2 = (float) ($lado2['valorTransmissao'] ?? 0);
 
-            $dto->tornaPagador = $pago['novosProprietarios'] ?? null;
-            $dto->tornaBeneficiario = $recebe['novosProprietarios'] ?? $pago['antigosProprietarios'] ?? null;
+        if ($lado2 && $valor1 != $valor2) {
+            [$menor, $maior] = $valor1 < $valor2 ? [$lado1, $lado2] : [$lado2, $lado1];
+
+            $dto->tornaPagador = $menor['antigosProprietarios'] ?? null;
+            $dto->tornaBeneficiario = $maior['antigosProprietarios'] ?? null;
         }
+
+        $dto->pagoPor ??= $dto->tornaPagador;
 
         return $dto;
     }
