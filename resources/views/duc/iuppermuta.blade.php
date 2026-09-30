@@ -12,7 +12,7 @@
                 <tr>
                     <td style="width:33%; padding:1px 3px;"><strong>{{$dados->tipoDuc ?? 'ITI'}}:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->total_pago ?? 0) }}</span> </td>
                     <td style="width:33%; padding:1px 3px;"><strong>Multa:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->multa ?? 0) }}</span> </td>
-                    <td style="width:33%; padding:1px 3px;"><strong>Juro:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->juro ?? 0) }}</span> </td>
+                    <td style="width:33%; padding:1px 3px;"><strong>Juros:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->juro ?? 0) }}</span> </td>
                 </tr>
             </table>
             <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:1px;">
