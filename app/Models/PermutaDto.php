@@ -165,7 +165,8 @@ class PermutaDto extends Model
             $dto->tornaBeneficiario = $maior['antigosProprietarios'] ?? null;
         }
 
-        $dto->pagoPor ??= $dto->tornaPagador;
+        // A regra do menor valor matricial prevalece sobre o pagoPor da API
+        $dto->pagoPor = $dto->tornaPagador ?? $dto->pagoPor;
 
         return $dto;
     }
