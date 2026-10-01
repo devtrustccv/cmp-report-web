@@ -36,6 +36,9 @@
                             <tr>
                                 <td style="padding:1px 3px;"><strong>Área:</strong> <span style="text-decoration: underline;">{{$dados->superficie1 ?? '' }}</span>m2</td>
                             </tr>
+                            <tr>
+                                <td style="padding:1px 3px;"><strong>Local:</strong> <span style="text-decoration: underline;">{{$dados->local1 ?? '' }}</span></td>
+                            </tr>
                         </table>
                     </td>
                     <td width="50%" valign="top" style="padding:3px 6px;">
@@ -52,6 +55,9 @@
                             <tr>
                                 <td style="padding:1px 3px;"><strong>Área:</strong> <span style="text-decoration: underline;">{{$dados->superficie2 ?? '' }}</span>m2</td>
                             </tr>
+                            <tr>
+                                <td style="padding:1px 3px;"><strong>Local:</strong> <span style="text-decoration: underline;">{{$dados->local2 ?? '' }}</span></td>
+                            </tr>
                         </table>
                     </td>
                 </tr>
@@ -60,7 +66,9 @@
             @if(!empty($dados->pagoPor))
                 <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:4px;">
                     <tr>
-                        <td style="width:50%; padding:1px 3px;"><strong>B. Incidência:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->baseIncidencia ?? 0) }}</span> </td>
+                        @if(($dados->tipoDuc ?? 'ITI') === 'ITI')
+                          <td style="width:50%; padding:1px 3px;"><strong>B. Incidência:</strong> <span style="text-decoration: underline;">{{\App\Http\Utils::formatarComSeparador($dados->baseIncidencia ?? 0) }}</span> </td>
+                        @endif
                         <td style="width:50%; padding:1px 3px;"><strong>Pago por:</strong> <span style="text-decoration: underline;">{{ $dados->pagoPor ?? '' }}</span></td>
                     </tr>
                 </table>

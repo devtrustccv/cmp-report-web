@@ -24,6 +24,7 @@ class PermutaDto extends Model
     public $fraccao1;
     public $superficie1;
     public $descMatriz1;
+    public $local1;
     public $valorMatriz1;
     public $norte1;
     public $sul1;
@@ -36,6 +37,7 @@ class PermutaDto extends Model
     public $fraccao2;
     public $superficie2;
     public $descMatriz2;
+    public $local2;
     public $valorMatriz2;
     public $norte2;
     public $sul2;
@@ -115,6 +117,7 @@ class PermutaDto extends Model
             'superficie1' => $lado1['superficie'] ?? null,
             'descMatriz1' => $lado1['descricao'] ?? null,
             'valorMatriz1' => $lado1['valorTransmissao'] ?? 0,
+            'local1' => $lado1['localizacao'] ?? null,
 
             'permutante2' => $lado2['antigosProprietarios'] ?? null,
             'matriz2' => $lado2['numMatriz'] ?? $lado2['matriz'] ?? null,
@@ -122,6 +125,7 @@ class PermutaDto extends Model
             'superficie2' => $lado2['superficie'] ?? null,
             'descMatriz2' => $lado2['descricao'] ?? null,
             'valorMatriz2' => $lado2['valorTransmissao'] ?? 0,
+            'local2' => $lado2['localizacao'] ?? null,
 
             // Base sobre a qual é calculada a percentagem de ITI: diferença entre os valores dos imóveis
             'baseIncidencia' => abs(($lado1['valorTransmissao'] ?? 0) - ($lado2['valorTransmissao'] ?? 0)),
@@ -138,7 +142,7 @@ class PermutaDto extends Model
             // tipo: tipo do documento (ex: IUPPERMUTA)
             'tipo' => $pago['tipo'] ?? $lado1['tipo'] ?? null,
             // tipoDuc: imposto (ITI / IUP)
-            'tipoDuc' => $pago['tipoDuc'] ?? $lado1['tipoDuc'] ?? 'ITI',
+            'tipoDuc' => strtoupper(trim($pago['tipoDuc'] ?? $lado1['tipoDuc'] ?? '')) ?: 'ITI',
             'estado' => $pago ? 'FIM' : 'REQ_PAG',
 
             // Primeiro registo da lista que tenha pagoPor preenchido
