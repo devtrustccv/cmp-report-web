@@ -157,19 +157,33 @@ class PermutaDto extends Model
         $dto->total_pago = $valorAPagar;
         $dto->totalExtenso = \App\Http\Utils::valorPorExtenso($valorAPagar);
 
-        // Na permuta paga a diferença quem entrega o imóvel de menor valor matricial;
-        // quem entrega o de maior valor recebe. Com valores iguais não há diferença a pagar.
         $valor1 = (float) ($lado1['valorTransmissao'] ?? 0);
         $valor2 = (float) ($lado2['valorTransmissao'] ?? 0);
 
-        if ($lado2 && $valor1 != $valor2) {
+        if ($dto->tipoDuc === 'IUP') {
+            // IUP: cada permutante paga a transmissão do imóvel que recebe,
+            // logo quem paga este DUC é o novo proprietário do registo deste DUC
+            $registoDuc = collect($itens)->first(fn ($item) => (int) ($item['duc'] ?? 0) === $duc)
+                ?? collect($itens)->first(fn ($item) => (float) ($item['valorAPagar'] ?? 0) != 0)
+                ?? $lado1;
+
+            $dto->tornaPagador = $registoDuc['novosProprietarios'] ?? null;
+
+            // O valor a pagar também é o do registo deste DUC
+            if (filled($registoDuc['valorAPagar'] ?? null)) {
+                $dto->torna = $dto->total_pago = (float) $registoDuc['valorAPagar'];
+                $dto->totalExtenso = \App\Http\Utils::valorPorExtenso($dto->total_pago);
+            }
+        } elseif ($lado2 && $valor1 != $valor2) {
+            // ITI: paga a diferença quem entrega o imóvel de menor valor matricial;
+            // quem entrega o de maior valor recebe. Com valores iguais não há diferença a pagar.
             [$menor, $maior] = $valor1 < $valor2 ? [$lado1, $lado2] : [$lado2, $lado1];
 
             $dto->tornaPagador = $menor['antigosProprietarios'] ?? null;
             $dto->tornaBeneficiario = $maior['antigosProprietarios'] ?? null;
         }
 
-        // A regra do menor valor matricial prevalece sobre o pagoPor da API
+        // A regra calculada (ITI / IUP) prevalece sobre o pagoPor da API
         $dto->pagoPor = $dto->tornaPagador ?? $dto->pagoPor;
 
         return $dto;
