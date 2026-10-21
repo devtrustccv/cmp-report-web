@@ -46,22 +46,23 @@ style="margin-top:50px;">
                 <div>{{$titulo ?? 'IMPOSTO SOBRE A TRANSMISSÃO DE IMÓVEIS (ITI)'}} </div>
             @endif
             
-            @if(!empty($tipo) && $tipo === 'IUPCOMPRA')
-                <div style="font-size: 10px;  text-decoration: underline;">Referente a Compra - Proc. Nº {{$dados->numero_processo ?? ''}}</div>
-            @elseif(!empty($tipo) && $tipo === 'IUPDACAO')
-                <div style="font-size: 10px;  text-decoration: underline;">Referente a Dação em Cumprimento - Proc. Nº {{$dados->numero_processo ?? ''}}</div>
-            @elseif(!empty($tipo) && $tipo == 'IUPREMFORO')
-               <div style="font-size: 10px;  text-decoration: underline;">Referente a Remição de FORO</div>
-            @elseif(!empty($tipo) && $tipo == 'IUPDOACAO')
-              <div  style="font-size: 10px;  text-decoration: underline;">Referente a Doação</div>
-            @elseif(!empty($tipo) && $tipo == 'IUPPARTILHA')
-              <div  style="font-size: 10px;  text-decoration: underline;">Referente a Partilha</div>
-            @elseif(!empty($tipo) && $tipo == 'IUPSUCESSORIO')
-              <div style="font-size: 10px;  text-decoration: underline;">Referente a Sucessão - Proc. Nº {{$dados->numero_processo ?? ''}}</div>
-            @elseif(!empty($tipo) && $tipo == 'IUPTERRENO')
-              <div  style="font-size: 10px;  text-decoration: underline;">Referente a {{$dados->regimeDesc ?? ''}}</div>
-            @elseif(!empty($tipo) && $tipo == 'IUPPERMUTA')
-              <div  style="font-size: 10px;  text-decoration: underline;">Referente a Permuta - Proc. Nº {{$dados->numero_processo ?? ''}}</div>
+            @php
+                $referente = match ($tipo ?? null) {
+                    'IUPCOMPRA'     => 'Compra',
+                    'IUPDACAO'      => 'Dação em Cumprimento',
+                    'IUPREMFORO'    => 'Remição de FORO',
+                    'IUPDOACAO'     => 'Doação',
+                    'IUPPARTILHA'   => 'Partilha',
+                    'IUPSUCESSORIO' => 'Sucessão',
+                    'IUPTERRENO'    => $dados->regimeDesc ?? '',
+                    'IUPPERMUTA'    => 'Permuta',
+                    default         => null,
+                };
+            @endphp
+
+            {{-- Mesma lógica da compra e venda: "Referente a ... - Proc. Nº" --}}
+            @if(!is_null($referente))
+                <div style="font-size: 10px;  text-decoration: underline;">Referente a {{ $referente }} - Proc. Nº {{$dados->numero_processo ?? ''}}</div>
             @endif
         </td>
 
@@ -71,22 +72,9 @@ style="margin-top:50px;">
             @if(!empty($tipo) && $tipo !== 'IUPPERMUTA')
                 <div><strong>Nº Matriz: </strong><span style="text-decoration: underline; ">{{$dados->matriz ?? ''}}</span></div>
             @endif
-            @if(!empty($tipo) && in_array($tipo, ['IUPCOMPRA', 'IUPDACAO']))
-                <div><strong>Local: </strong><span style="text-decoration: underline; ">{{$dados->local ?? ''}}</span></div>
-            @elseif(!empty($tipo) && $tipo == 'IUPPARTILHA')
-               <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>
-            @elseif(!empty($tipo) && $tipo == 'IUPDOACAO')
-               <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>
-            @elseif(!empty($tipo) && $tipo == 'IUPDOACAO')
-               <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>
-            @elseif(!empty($tipo) && $tipo == 'IUPREMFORO')
-               <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>
-            @elseif(!empty($tipo) && $tipo == 'IUPSUCESSORIO')
-               <div><strong>Local: </strong><span style="text-decoration: underline; ">{{$dados->local ?? ''}}</span></div>
-            @elseif(!empty($tipo) && $tipo == 'IUPTERRENO')
-               <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>
-            @elseif(!empty($tipo) && $tipo == 'IUPPERMUTA')
-               <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>
+            {{-- Local em todos os relatórios (a permuta mostra o local de cada imóvel no corpo) --}}
+            @if(!empty($tipo) && $tipo !== 'IUPPERMUTA')
+                <div><strong>Local: </strong><span style="text-decoration: underline; ">{{$dados->local ?? $dados->localizacao ?? ''}}</span></div>
             @endif
         </td>
     </tr>

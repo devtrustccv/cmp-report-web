@@ -14,6 +14,8 @@ class RemForoDto extends Model
     public $area;
     public $remiResidencia;
     public $localizacao;
+    public $local;
+    public $numero_processo;
     public $refCadastral;
     public $remiDuc;
     public $ficha;

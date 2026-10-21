@@ -42,6 +42,7 @@ class PartilhaDto extends Model
     public $codigoBarra;
     public $titulo;
     public $numero_processo;
+    public $local;
     public $tipoDuc;
     public $duc;
     public $meioPagamento;

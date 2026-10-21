@@ -45,7 +45,8 @@ class DoacaoDto extends Model
     public $titulo;
     public $tipoDuc;
     public $duc;
-    public $numero_processo;  
+    public $numero_processo;
+    public $local;  
     public $emitido_por;
     public $baseIncidencia;
     public $infoPrestacoes;
