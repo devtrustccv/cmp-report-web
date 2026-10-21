@@ -19,6 +19,7 @@ use App\Http\Controllers\{
 Route::prefix('/')->group(function () {
 
     Route::get('compra-venda/{token}', [IupController::class, 'compraVenda']);
+    Route::get('dacao-cumprimento/{token}', [IupController::class, 'dacaoCumprimento']);
     Route::get('iupremforo/{token}', [IupController::class, 'remForo']);
     Route::get('iuppartilha/{token}', [IupController::class, 'partilha']);
     Route::get('iupdoacao/{token}', [IupController::class, 'doacao']);

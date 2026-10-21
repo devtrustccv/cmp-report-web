@@ -37,6 +37,10 @@ class ValidadorController extends Controller
             'label' => 'Compra e Venda',
             'path'  => 'compra-venda',
         ],
+        'dacao-cumprimento' => [
+            'label' => 'Dação em Cumprimento',
+            'path'  => 'dacao-cumprimento',
+        ],
     ];
 
     public function __construct(private UrlCryptoService $cryptoService)

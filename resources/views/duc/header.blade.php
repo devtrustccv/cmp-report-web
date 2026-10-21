@@ -2,7 +2,7 @@
 style="margin-top:50px;">
     <tr>
         <!-- COLUNA ESQUERDA -->
-        @if(!empty($tipo) && $tipo === 'IUPCOMPRA')
+        @if(!empty($tipo) && in_array($tipo, ['IUPCOMPRA', 'IUPDACAO']))
            <td style="width:15%; font-size:7px;">Modelo nº 3 (Artigo 74)</td>
         
         @elseif($tipo === 'IUPDOACAO')
@@ -48,6 +48,8 @@ style="margin-top:50px;">
             
             @if(!empty($tipo) && $tipo === 'IUPCOMPRA')
                 <div style="font-size: 10px;  text-decoration: underline;">Referente a Compra - Proc. Nº {{$dados->numero_processo ?? ''}}</div>
+            @elseif(!empty($tipo) && $tipo === 'IUPDACAO')
+                <div style="font-size: 10px;  text-decoration: underline;">Referente a Dação em Cumprimento - Proc. Nº {{$dados->numero_processo ?? ''}}</div>
             @elseif(!empty($tipo) && $tipo == 'IUPREMFORO')
                <div style="font-size: 10px;  text-decoration: underline;">Referente a Remição de FORO</div>
             @elseif(!empty($tipo) && $tipo == 'IUPDOACAO')
@@ -69,7 +71,7 @@ style="margin-top:50px;">
             @if(!empty($tipo) && $tipo !== 'IUPPERMUTA')
                 <div><strong>Nº Matriz: </strong><span style="text-decoration: underline; ">{{$dados->matriz ?? ''}}</span></div>
             @endif
-            @if(!empty($tipo) && $tipo === 'IUPCOMPRA')
+            @if(!empty($tipo) && in_array($tipo, ['IUPCOMPRA', 'IUPDACAO']))
                 <div><strong>Local: </strong><span style="text-decoration: underline; ">{{$dados->local ?? ''}}</span></div>
             @elseif(!empty($tipo) && $tipo == 'IUPPARTILHA')
                <div><strong>Nº Processo: </strong><span style="text-decoration: underline; ">{{$dados->numero_processo ?? ''}}</span></div>

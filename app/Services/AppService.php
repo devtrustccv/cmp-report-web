@@ -6,6 +6,7 @@ use App\Exceptions\DocumentoNaoEncontradoException;
 use App\Models\AssinaturaDto;
 use App\Models\CertidaoMatricialDto;
 use App\Models\CompraVenda;
+use App\Models\DacaoCumprimentoDto;
 use App\Models\DeclaracaoPrediosRegistadosDto;
 use App\Models\DoacaoDto;
 use App\Models\ExpedienteEncaminhadoDto;
@@ -93,6 +94,16 @@ class AppService extends BaseApiService
         return $this->getDto(
             "reports/compra-venda/{$id}",
             CompraVenda::class,
+            [],
+            $this->reportHeaders()
+        );
+    }
+
+    public function getDacaoCumprimento(int $id): DacaoCumprimentoDto
+    {
+        return $this->getDto(
+            "reports/dacao-cumprimento/{$id}",
+            DacaoCumprimentoDto::class,
             [],
             $this->reportHeaders()
         );

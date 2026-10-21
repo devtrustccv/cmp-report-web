@@ -47,6 +47,11 @@ class IupController extends Controller
 
     }
 
+    public function dacaoCumprimento(string $params)
+    {
+        return $this->gerar($params, TipoRelatorioEnum::IUPDACAO, 'getDacaoCumprimento');
+    }
+
     public function permuta(string $params)
     {
         return $this->gerar($params, TipoRelatorioEnum::IUPPERMUTA, 'getPermuta');
