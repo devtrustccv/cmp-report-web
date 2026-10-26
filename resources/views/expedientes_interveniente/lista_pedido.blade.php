@@ -6,9 +6,9 @@
     // Larguras partilhadas entre o cabeçalho (no <header> fixo) e as tabelas de cada data
     $colunas = [
         ['Data', '10%', ''],
-        ['Interveniente Actual', '26%', ''],
+        ['Interveniente Actual', '20%', ''],
         ['Assunto', '12%', ''],
-        ['Nº', '9%', ''],
+        ['Nº', '15%', ''],
         ['Identificação', '22%', ''],
         ['Bairro', '13%', ''],
         ['Nº Dias', '8%', 'text-center'],
