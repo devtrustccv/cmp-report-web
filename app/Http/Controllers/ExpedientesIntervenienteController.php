@@ -85,7 +85,7 @@ class ExpedientesIntervenienteController extends Controller
                 'dataInicio' => $dataInicio,
                 'dataFim' => $dataFim,
                 'tpPedidoId' => $values['tpPedidoId'] ?? null,
-                'nmIntervAnt' => $values['nmIntervAnt'] ?? null,
+                'nmIntervAnt' => trim($values['nmIntervAnt'] ?? ''),
                 'utilizadorId' => $values['utilizadorId'] ?? null,
             ], fn ($valor) => $valor !== null && $valor !== ''));
 
