@@ -45,8 +45,7 @@
         <thead>
             <tr>
                 <th style="width:10%;">Data</th>
-                <th style="width:13%;">Interveniente Actual</th>
-                <th style="width:13%;">Interveniente Anterior</th>
+                <th style="width:26%;">Interveniente Actual</th>
                 <th style="width:12%;">Assunto</th>
                 <th style="width:9%;">Nº</th>
                 <th style="width:22%;">Identificação</th>
@@ -65,7 +64,6 @@
                             <tr class="{{ $primeiraLinhaData ? 'grupo-data' : '' }}">
                                 <td class="data nowrap">{{ $primeiraLinhaData ? $data : '' }}</td>
                                 <td class="interveniente">{{ $primeiraLinhaInterv ? $interveniente : '' }}</td>
-                                <td>{{ $item->nmIntervAnt }}</td>
                                 <td class="assunto">{{ $i === 0 ? $assunto : '' }}</td>
                                 <td class="nowrap">{{ $item->nrPedido }}</td>
                                 <td>{{ $item->nmEntidade }}</td>
