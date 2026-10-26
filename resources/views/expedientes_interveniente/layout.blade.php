@@ -97,7 +97,6 @@
     </div>
     <div class="pais">REPÚBLICA DE CABO VERDE</div>
     <div class="camara">Câmara Municipal da Praia</div>
-    <div class="direcao">Direcção de Urbanismo</div>
     <div class="titulo">@yield('title', 'Lista de Expedientes Encaminhados por Interveniente')</div>
 </header>
 
