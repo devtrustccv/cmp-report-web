@@ -27,8 +27,13 @@
         }
 
         table.lista .data,
+        table.lista .interveniente,
         table.lista .assunto {
             font-weight: bold;
+        }
+
+        table.lista .nowrap {
+            white-space: nowrap;
         }
 
         table.lista .text-center {
@@ -40,32 +45,38 @@
         <thead>
             <tr>
                 <th style="width:11%;">Data</th>
-                <th style="width:19%;">Assunto</th>
-                <th style="width:12%;">Nº</th>
-                <th style="width:30%;">Identificação</th>
-                <th style="width:18%;">Bairro</th>
-                <th style="width:10%;" class="text-center">Nº Dias</th>
+                <th style="width:16%;">Interveniente</th>
+                <th style="width:14%;">Assunto</th>
+                <th style="width:10%;">Nº</th>
+                <th style="width:24%;">Identificação</th>
+                <th style="width:16%;">Bairro</th>
+                <th style="width:9%;" class="text-center">Nº Dias</th>
             </tr>
         </thead>
         <tbody>
+            {{-- Agrupado por Data > Interveniente > Assunto; cada um aparece só na 1ª linha do seu grupo --}}
             @forelse($grupos as $data => $itensData)
                 @php $primeiraLinhaData = true; @endphp
-                @foreach($itensData->groupBy('dsTpPedido') as $assunto => $itens)
-                    @foreach($itens as $i => $item)
-                        <tr class="{{ $primeiraLinhaData ? 'grupo-data' : '' }}">
-                            <td class="data">{{ $primeiraLinhaData ? $data : '' }}</td>
-                            <td class="assunto">{{ $i === 0 ? $assunto : '' }}</td>
-                            <td>{{ $item->nrPedido }}</td>
-                            <td>{{ $item->nmEntidade }}</td>
-                            <td>{{ $item->bairro }}</td>
-                            <td class="text-center">{{ $item->nrDias }}</td>
-                        </tr>
-                        @php $primeiraLinhaData = false; @endphp
+                @foreach($itensData->groupBy('nmInterveniente') as $interveniente => $itensInterv)
+                    @php $primeiraLinhaInterv = true; @endphp
+                    @foreach($itensInterv->groupBy('dsTpPedido') as $assunto => $itens)
+                        @foreach($itens as $i => $item)
+                            <tr class="{{ $primeiraLinhaData ? 'grupo-data' : '' }}">
+                                <td class="data nowrap">{{ $primeiraLinhaData ? $data : '' }}</td>
+                                <td class="interveniente">{{ $primeiraLinhaInterv ? $interveniente : '' }}</td>
+                                <td class="assunto">{{ $i === 0 ? $assunto : '' }}</td>
+                                <td class="nowrap">{{ $item->nrPedido }}</td>
+                                <td>{{ $item->nmEntidade }}</td>
+                                <td>{{ $item->bairro }}</td>
+                                <td class="text-center">{{ $item->nrDias }}</td>
+                            </tr>
+                            @php $primeiraLinhaData = false; $primeiraLinhaInterv = false; @endphp
+                        @endforeach
                     @endforeach
                 @endforeach
             @empty
                 <tr>
-                    <td colspan="6" style="text-align:center; padding:10px;">Sem expedientes no período seleccionado.</td>
+                    <td colspan="7" style="text-align:center; padding:10px;">Sem expedientes no período seleccionado.</td>
                 </tr>
             @endforelse
         </tbody>
