@@ -44,13 +44,14 @@
     <table class="lista">
         <thead>
             <tr>
-                <th style="width:11%;">Data</th>
-                <th style="width:16%;">Interveniente</th>
-                <th style="width:14%;">Assunto</th>
-                <th style="width:10%;">Nº</th>
-                <th style="width:24%;">Identificação</th>
-                <th style="width:16%;">Bairro</th>
-                <th style="width:9%;" class="text-center">Nº Dias</th>
+                <th style="width:10%;">Data</th>
+                <th style="width:13%;">Interveniente Actual</th>
+                <th style="width:13%;">Interveniente Anterior</th>
+                <th style="width:12%;">Assunto</th>
+                <th style="width:9%;">Nº</th>
+                <th style="width:22%;">Identificação</th>
+                <th style="width:13%;">Bairro</th>
+                <th style="width:8%;" class="text-center">Nº Dias</th>
             </tr>
         </thead>
         <tbody>
@@ -64,6 +65,7 @@
                             <tr class="{{ $primeiraLinhaData ? 'grupo-data' : '' }}">
                                 <td class="data nowrap">{{ $primeiraLinhaData ? $data : '' }}</td>
                                 <td class="interveniente">{{ $primeiraLinhaInterv ? $interveniente : '' }}</td>
+                                <td>{{ $item->nmIntervAnt }}</td>
                                 <td class="assunto">{{ $i === 0 ? $assunto : '' }}</td>
                                 <td class="nowrap">{{ $item->nrPedido }}</td>
                                 <td>{{ $item->nmEntidade }}</td>
@@ -76,7 +78,7 @@
                 @endforeach
             @empty
                 <tr>
-                    <td colspan="7" style="text-align:center; padding:10px;">Sem expedientes no período seleccionado.</td>
+                    <td colspan="8" style="text-align:center; padding:10px;">Sem expedientes no período seleccionado.</td>
                 </tr>
             @endforelse
         </tbody>
