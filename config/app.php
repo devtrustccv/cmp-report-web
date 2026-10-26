@@ -69,6 +69,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Limites do PHP (aplicados globalmente no AppServiceProvider)
+    |--------------------------------------------------------------------------
+    |
+    | A geração de PDFs (dompdf) com listas grandes consome muita memória e tempo.
+    |
+    */
+
+    'memory_limit' => env('APP_MEMORY_LIMIT', '512M'),
+
+    'max_execution_time' => (int) env('APP_MAX_EXECUTION_TIME', 300),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Locale Configuration
     |--------------------------------------------------------------------------
     |

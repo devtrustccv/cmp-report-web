@@ -76,10 +76,6 @@
             padding-top: 4px;
         }
 
-        footer .pagenum:before {
-            content: counter(page);
-        }
-
         .content {
             margin-top: 5px;
         }
@@ -98,13 +94,16 @@
     <div class="pais">REPÚBLICA DE CABO VERDE</div>
     <div class="camara">Câmara Municipal da Praia</div>
     <div class="titulo">@yield('title', 'Lista de Expedientes Encaminhados por Interveniente')</div>
+    {{-- Opcional: cabeçalho de colunas repetido em todas as páginas --}}
+    @yield('cabecalho_colunas')
 </header>
 
 <footer>
     <table width="100%" cellspacing="0" cellpadding="0">
         <tr>
             <td style="width:40%;">Util.: {{ $utilizador ?? '' }}</td>
-            <td style="width:20%; text-align:center;">Pág. <span class="pagenum"></span> de {{ $totalPaginas ?? '' }}</td>
+            {{-- "Pág. X de Y" é escrito pelo dompdf no controller (page_text) --}}
+            <td style="width:20%;"></td>
             <td style="width:40%; text-align:right;">Data: {{ $dataEmissao ?? '' }}</td>
         </tr>
     </table>

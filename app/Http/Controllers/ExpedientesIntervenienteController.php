@@ -118,12 +118,26 @@ class ExpedientesIntervenienteController extends Controller
 
     private function gerarComTotalPaginas(string $view, array $dados, string $filename, string $orientacao)
     {
-        // dompdf não tem contador de total de páginas nativo: faz-se um render prévio
-        // só para descobrir o total e injectá-lo no rodapé do render final.
-        $rascunho = Pdf::loadView($view, $dados)->setPaper('A4', $orientacao);
-        $rascunho->render();
-        $dados['totalPaginas'] = $rascunho->getDomPDF()->getCanvas()->get_page_count();
+        // Um único render; o "Pág. X de Y" é escrito pelo dompdf em cada página
+        // com {PAGE_NUM}/{PAGE_COUNT}, sem precisar de um render prévio para contar as páginas.
+        $pdf = Pdf::loadView($view, $dados)->setPaper('A4', $orientacao);
+        $pdf->render();
 
-        return BasicMethods::generateReport($view, $dados, $filename, $orientacao);
+        $dompdf = $pdf->getDomPDF();
+        $canvas = $dompdf->getCanvas();
+        $fonte = $dompdf->getFontMetrics()->getFont('DejaVu Sans');
+        $tamanho = 7.5; // 10px
+        $texto = 'Pág. {PAGE_NUM} de {PAGE_COUNT}';
+        $largura = $dompdf->getFontMetrics()->getTextWidth('Pág. 99 de 99', $fonte, $tamanho);
+
+        $canvas->page_text(
+            ($canvas->get_width() - $largura) / 2,
+            $canvas->get_height() - 36,
+            $texto,
+            $fonte,
+            $tamanho
+        );
+
+        return $pdf->stream($filename);
     }
 }
