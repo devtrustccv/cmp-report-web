@@ -10,6 +10,7 @@ use App\Models\DacaoCumprimentoDto;
 use App\Models\DeclaracaoPrediosRegistadosDto;
 use App\Models\DoacaoDto;
 use App\Models\ExpedienteEncaminhadoDto;
+use App\Models\ListaPedidoItemDto;
 use App\Models\PartilhaDto;
 use App\Models\PermutaDto;
 use App\Models\SucessorioDto;
@@ -257,6 +258,37 @@ class AppService extends BaseApiService
             [],
             $this->reportHeaders()
         );
+    }
+
+    /**
+     * A API devolve um objeto (ListaPedidoReportDTO) com o utilizador e a lista de pedidos.
+     *
+     * @return array{nmUtilizador: ?string, dtActual: ?string, pedidos: ListaPedidoItemDto[]}
+     */
+    public function getListaPedido(array $params = []): array
+    {
+        $response = $this->get('reports/lista-pedido', $params, $this->reportHeaders());
+
+        if ($response->failed()) {
+            $erroApi = $response->json('message') ?? $response->json('error') ?? $response->body();
+
+            throw new Exception($erroApi ?: 'Erro ao consumir API.');
+        }
+
+        if ($response->json('status') === false) {
+            throw new Exception($response->json('msg') ?: 'Erro ao consumir API.');
+        }
+
+        $dados = $response->json('data') ?? [];
+
+        return [
+            'nmUtilizador' => $dados['nmUtilizador'] ?? null,
+            'dtActual' => $dados['dtActual'] ?? null,
+            'pedidos' => array_map(
+                fn (array $item) => new ListaPedidoItemDto($item),
+                $dados['pedidos'] ?? []
+            ),
+        ];
     }
 
     /**
