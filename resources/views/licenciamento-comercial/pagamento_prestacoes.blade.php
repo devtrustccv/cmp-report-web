@@ -6,7 +6,7 @@
     $fonte        = 'arial';
     $tamanhoFonte = '18px';
     $alturaLinha  = 1.6;
-
+    $dataEmissao = \App\Models\CertidaoLicenciamentoDto::dataEmissaoExtenso();
     /** @var \App\Models\CertidaoLicenciamentoDto $dados */
 @endphp
 
