@@ -69,7 +69,7 @@
     <header>
         <img src="{{ public_path('images/logo_CMPRAIA.png') }}" alt="Logo">
         <div class="direcao">{{ $dados?->direcao ?? '' }}</div>
-        <div class="titulo">{{ $tipo->titulo() }}</div>
+        <div class="titulo" style="font-size: 20px;">{{ $tipo->titulo() }}</div>
     </header>
 
     <footer>

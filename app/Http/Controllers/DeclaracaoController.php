@@ -23,7 +23,7 @@ class DeclaracaoController extends Controller
     public function gerar(string $tipo, string $token)
     {
         try {
-
+            
             $tipoDeclaracao = TipoDeclaracaoEnum::fromSlug($tipo);
 
             if (!$tipoDeclaracao) {

@@ -9,6 +9,7 @@ use App\Http\Controllers\{
     DocumentController,
     CertidaoMatricialController,
     IupController,
+    LicenciamentoComercialController,
     ValidadorController
 };
 
@@ -29,6 +30,7 @@ Route::prefix('/')->group(function () {
     Route::get('document-link-public/{id}', [DocumentController::class, 'loadDocument']);
     Route::get('reports/certidao-matricial/{token}', [CertidaoMatricialController::class, 'gerarCertidaoMatricial']);
     Route::get('reports/declaracao/{tipo}/{token}', [DeclaracaoController::class, 'gerar']);
+    Route::get('reports/licenciamento-comercial/{certidaoId}', [LicenciamentoComercialController::class, 'gerar'])->whereNumber('certidaoId');
     Route::get('reports/imposto-circulacao/{token}', [ImpostoCirculacaoController::class, 'gerar']);
     Route::get('reports/expedientes-interveniente/{token}', [ExpedientesIntervenienteController::class, 'gerar']);
     Route::get('reports/lista-pedido/{token}', [ExpedientesIntervenienteController::class, 'listaPedido']);

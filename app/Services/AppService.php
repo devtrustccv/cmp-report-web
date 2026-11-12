@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Exceptions\DocumentoNaoEncontradoException;
 use App\Models\AssinaturaDto;
+use App\Models\CertidaoLicenciamentoDto;
 use App\Models\CertidaoMatricialDto;
 use App\Models\CompraVenda;
 use App\Models\DacaoCumprimentoDto;
@@ -257,6 +258,18 @@ class AppService extends BaseApiService
             DeclaracaoPrediosRegistadosDto::class,
             [],
             $this->reportHeaders()
+        );
+    }
+
+    /**
+     * GET {URL_API}/certidao-licenciamento?certidaoId={id}
+     */
+    public function getCertidaoLicenciamento(int $certidaoId): CertidaoLicenciamentoDto
+    {
+        return $this->getDto(
+            'certidao-licenciamento',
+            CertidaoLicenciamentoDto::class,
+            ['certidaoId' => $certidaoId]
         );
     }
 

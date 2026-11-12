@@ -37,7 +37,7 @@
         $itensTexto = $juntarComE($itens);
     @endphp
 
-    <p>
+    <p style="font-size: 20px">
         Pelo presente se declara que em cumprimento do despacho no mesmo exarado, que compulsando o cadastro dos
         contribuintes existentes neste serviço, foi encontrado {{ $qtdExtenso }}
         {{ $totalPredios > 1 ? 'prédios urbanos localizados' : 'prédio urbano localizado' }}
@@ -46,7 +46,7 @@
         <strong>{{ $dados?->titular ?? '' }}</strong>.
     </p>
 
-    <p style="margin-top:30px;">
+    <p style="font-size: 20px; margin-top:30px;">
         Câmara Municipal da Praia, {{ !empty($dados?->dataEmissao) ? \Carbon\Carbon::parse($dados->dataEmissao)->translatedFormat('d \d\e F \d\e Y') : '' }}.
     </p>
 @endsection
