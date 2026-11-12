@@ -16,10 +16,8 @@
 @section('title', 'Cessação de Atividade nº ' . $dados->nrCertidao)
 
 @section('content')
-    <div class="data-local">CMP, {{ $dataEmissao }}</div>
 
-    <div class="assunto">Assunto: Cessação de Atividade nº{{ $dados->nrCertidao }}</div>
-
+    <div class="titulo-documento">Cessação de Atividade nº{{ $dados->nrCertidao }}</div>
     <p>
         Para os devidos efeitos, declara que o Alvará Comercial registado sob o
         <strong>nº{{ $dados->nAlvara }}</strong>, em nome do Estabelecimento,
@@ -31,4 +29,6 @@
         Por ser verdade, passa a presente declaração que vai devidamente assinada e autenticada com
         carimbo a óleo em uso nesta Instituição.@preencher
     </p>
+
+    <p class="italico">Praia, {{ $dataEmissao }}.</p>
 @endsection
