@@ -55,7 +55,7 @@ class CertidaoLicenciamentoDto
         $this->nrDocumento   = $data['nrDocumento'] ?? null;
     }
 
-    /** Ex.: "03 (três)" */
+    /** Ex.: "três (03)" */
     public function validadeTexto(): string
     {
         $n = (int) $this->validadeMes;
@@ -64,12 +64,13 @@ class CertidaoLicenciamentoDto
             return '';
         }
 
-        return str_pad((string) $n, 2, '0', STR_PAD_LEFT) . ' (' . (self::EXTENSO[$n] ?? $n) . ')';
+        return (self::EXTENSO[$n] ?? $n) . ' (' . str_pad((string) $n, 2, '0', STR_PAD_LEFT) . ')';
     }
 
     public function finsTexto(): string
     {
-        return $this->fins ?: 'fins convenientes';
+        // sem valor por defeito: o texto vem sempre do ecrã
+        return trim((string) $this->fins);
     }
 
     /**

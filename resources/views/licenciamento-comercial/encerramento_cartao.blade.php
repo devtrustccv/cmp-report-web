@@ -30,7 +30,9 @@
 
     <div class="espaco"></div>
 
-    <x-linha-preenchida italico>Válido para {{ $dados->finsTexto() }}</x-linha-preenchida>
+    @if($dados->finsTexto())
+        <x-linha-preenchida italico>Válido para {{ $dados->finsTexto() }}</x-linha-preenchida>
+    @endif
 
     @if($dados->validadeTexto())
         <p class="italico">Valida por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>

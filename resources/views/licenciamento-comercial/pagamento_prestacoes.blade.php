@@ -33,4 +33,6 @@
         @iguais(5) Por ser verdade, passa a presente declaração que vai devidamente assinada e autenticada com
         carimbo a óleo em uso nesta Instituição.@preencher
     </p>
+
+    <p class="italico">CÂMARA MUNICIPAL DA PRAIA, {{ $dataEmissao }}.</p>
 @endsection

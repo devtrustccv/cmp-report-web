@@ -1,33 +1,23 @@
 @extends('licenciamento-comercial.layout')
 
+{{-- Certidão sem Alvará (ainda sem código na API; dados vêm todos do CertidaoLicenciamentoDto) --}}
 @php
     // ---- Parâmetros de formatação ----
     $fonte        = 'arial';
     $tamanhoFonte = '18px';
     $alturaLinha  = 1.5;
 
-    // ---- Dados (estáticos até ligar a API) ----
-    $d = $dados ?? (object) [
-        'numero'      => '006/2026',
-        'tratamento'  => 'Senhora',
-        'nome'        => 'Celestina Pereira',
-        'documento'   => 'CNI',
-        'numDocumento'=> '19810121F002H',
-        'residencia'  => 'Terra Branca - Praia',
-        'validadeMeses' => '3 (Três)',
-        'fins'        => null, // texto colocado no ecrã; vazio -> "fins convenientes"
-    ];
+    /** @var \App\Models\CertidaoLicenciamentoDto $dados */
 @endphp
 
-@section('title', 'Certidão Nº ' . $d->numero)
+@section('title', 'Certidão Nº ' . $dados->nrCertidao)
 
 @section('content')
-    <div class="titulo-documento">CERTIDÃO Nº {{ $d->numero }}</div>
+    <div class="titulo-documento">CERTIDÃO Nº {{ $dados->nrCertidao }}</div>
 
     <p class="italico">
-        @iguais(10)Certifico, de harmonia com o requerimento da {{ $d->tratamento }},
-        <strong>{{ $d->nome }},</strong> {{ $d->documento }} – {{ $d->numDocumento }}, residente em
-        {{ $d->residencia }}, e em cumprimento do despacho no mesmo exarado que, compulsando o cadastro
+        @iguais(10)Certifico, de harmonia com o requerimento de {!! $dados->titularesTexto() !!},
+        e em cumprimento do despacho no mesmo exarado que, compulsando o cadastro
         comercial existente neste serviço, não se encontra registado nenhum Alvará/licença comercial,
         licenciado em nome da mesma.@preencher
     </p>
@@ -39,7 +29,13 @@
 
     <div class="espaco"></div>
 
-    <x-linha-preenchida italico>Válido para {{ $d->fins ?: 'fins convenientes' }}.</x-linha-preenchida>
+    @if($dados->finsTexto())
+        <x-linha-preenchida italico>Válido para {{ $dados->finsTexto() }}.</x-linha-preenchida>
+    @endif
 
-    <p class="italico">Valida por um período de {{ $d->validadeMeses }} meses.@preencher</p>
+    @if($dados->validadeTexto())
+        <p class="italico">Valida por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>
+    @endif
+
+     <p class="italico">CÂMARA MUNICIPAL DA PRAIA, {{ $dataEmissao }}.</p>
 @endsection
