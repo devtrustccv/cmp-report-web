@@ -20,7 +20,6 @@ class LinhaPreenchida
 
     /** Fontes embutidas do dompdf (não precisam de ficheiro) */
     private const FONTES_EMBUTIDAS = [
-        'times'   => 'times',
         'courier' => 'courier',
     ];
 
@@ -35,6 +34,17 @@ class LinhaPreenchida
                 'bold'        => 'arialbd.ttf',
                 'italic'      => 'ariali.ttf',
                 'bold_italic' => 'arialbi.ttf',
+            ],
+        ],
+        'times' => [
+            'familia'   => 'times-ttf',
+            'css'       => "'times-ttf', 'Times New Roman', Times, serif",
+            'pasta'     => 'times',
+            'ficheiros' => [
+                'normal'      => 'times.ttf',
+                'bold'        => 'timesbd.ttf',
+                'italic'      => 'timesi.ttf',
+                'bold_italic' => 'timesbi.ttf',
             ],
         ],
         'lora' => [
@@ -52,6 +62,9 @@ class LinhaPreenchida
 
     /** Só se preenche com "=" quando cabem pelo menos estes (ou seja, mais de 2) */
     public const MINIMO_IGUAIS = 3;
+
+    /** Nº fixo de "=" no início de cada parágrafo (@iguais) */
+    public const IGUAIS_INICIO = 5;
 
     private static ?FontMetrics $metrics = null;
 
@@ -141,8 +154,10 @@ class LinhaPreenchida
             }
 
             $pItalico = (bool) preg_match('#class="[^"]*\bitalico\b#', $m[1]);
-            $sobra    = self::sobraUltimaLinha($partes[1], $pItalico, $fm, $fonts, $sizePt, $larguraPt);
-            $igual    = $fm->getTextWidth('=', $fonts[$pItalico ? 'italic' : 'normal'], $sizePt);
+            $pNegrito = (bool) preg_match('#class="[^"]*\bnegrito\b#', $m[1]);
+            $sobra    = self::sobraUltimaLinha($partes[1], $pItalico, $fm, $fonts, $sizePt, $larguraPt, $pNegrito);
+            // o @preencher é desenhado a negrito (.preencher no layout)
+            $igual    = $fm->getTextWidth('=', $fonts[$pItalico ? 'bold_italic' : 'bold'], $sizePt);
 
             if ($sobra + 0.01 >= self::MINIMO_IGUAIS * $igual) {
                 return $m[0];
@@ -154,9 +169,9 @@ class LinhaPreenchida
     }
 
     /** Espaço (pt) que sobra na última linha do texto HTML de um parágrafo. */
-    private static function sobraUltimaLinha(string $htmlTexto, bool $pItalico, FontMetrics $fm, array $fonts, float $sizePt, float $larguraPt): float
+    private static function sobraUltimaLinha(string $htmlTexto, bool $pItalico, FontMetrics $fm, array $fonts, float $sizePt, float $larguraPt, bool $pNegrito = false): float
     {
-        $negrito = 0;
+        $negrito = $pNegrito ? 1 : 0;
         $italico = $pItalico ? 1 : 0;
         $pilha   = [];
 

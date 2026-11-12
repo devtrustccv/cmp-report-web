@@ -89,7 +89,7 @@
         main {
             width: 600px;
             margin: 0 auto;
-            padding-top: 0;
+            padding-top: 25px;
         }
 
         p {
@@ -105,6 +105,7 @@
          */
         .preencher {
             white-space: nowrap;
+            font-weight: bold;
             margin-right: -20000px; /* tem de ser maior que a largura dos 300 "=": assim nunca salta para a linha de baixo */
         }
 
@@ -123,17 +124,23 @@
             text-align: center;
             font-weight: bold;
             text-decoration: underline;
-            margin: 0 0 25px 0;
+            margin: 0 0 40px 0;
         }
 
         .assunto {
             font-weight: bold;
             text-decoration: underline;
-            margin: 0 0 25px 0;
+            margin: 0 0 40px 0;
         }
 
         .italico { font-style: italic; }
         .negrito { font-weight: bold; }
+
+        /* data no fim do documento: "Praia, <span class=\"data-emissao\">12 de Novembro de 2026.</span>" */
+        .data-emissao {
+            font-weight: bold;
+            font-size: 16px;
+        }
         .centro  { text-align: center; }
 
         .espaco { height: 20px; }

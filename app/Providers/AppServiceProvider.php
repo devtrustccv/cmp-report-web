@@ -29,8 +29,9 @@ class AppServiceProvider extends ServiceProvider
         ini_set('memory_limit', config('app.memory_limit'));
         set_time_limit(config('app.max_execution_time'));
 
-        // @iguais(10) -> "==========" com tamanho fixo (para usar no INÍCIO de uma frase)
-        Blade::directive('iguais', fn ($n) => "<?php echo str_repeat('=', (int) (" . ($n ?: '10') . ")); ?>");
+        // @iguais -> "=====" fixo a negrito no INÍCIO de um parágrafo (nº em LinhaPreenchida::IGUAIS_INICIO)
+        // @iguais(10) -> força outro número
+        Blade::directive('iguais', fn ($n) => "<?php echo '<b class=\"iguais\">' . str_repeat('=', (int) (" . ($n ?: '\App\Http\Helpers\LinhaPreenchida::IGUAIS_INICIO') . ")) . '</b>'; ?>");
 
         // @preencher -> "=====" até ao fim da linha atual. Usar SÓ no fim de um parágrafo (ver .preencher no layout)
         Blade::directive('preencher', fn () => '<span class="preencher">' . str_repeat('=', 300) . '</span>');

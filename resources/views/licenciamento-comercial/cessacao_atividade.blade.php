@@ -3,7 +3,7 @@
 {{-- LICO_CA - Cessação de Atividade --}}
 @php
     // ---- Parâmetros de formatação ----
-    $fonte        = 'lora';
+    $fonte        = 'times'; // Times New Roman
     $tamanhoFonte = '1.2rem'; // 20px
     $alturaLinha  = 1.4;       // espaço entre as linhas de um parágrafo
     $corTexto     = '#333333';
@@ -19,7 +19,7 @@
 
     <div class="titulo-documento">Cessação de Atividade nº{{ $dados->nrCertidao }}</div>
     <p>
-        Para os devidos efeitos, declara que o Alvará Comercial registado sob o
+        @iguais Para os devidos efeitos, declara que o Alvará Comercial registado sob o
         <strong>nº{{ $dados->nAlvara }}</strong>, em nome do Estabelecimento,
         {!! $dados->titularesTexto() !!},
         passou a fazer parte do nosso sistema inativo a partir do dia {{ $dados->dataRegistoFormatada() }}.@preencher
@@ -30,5 +30,5 @@
         carimbo a óleo em uso nesta Instituição.@preencher
     </p>
 
-    <p class="italico">Praia, {{ $dataEmissao }}.</p>
+    <p class="italico">Praia, <span class="data-emissao">{{ $dataEmissao }}.</span></p>
 @endsection

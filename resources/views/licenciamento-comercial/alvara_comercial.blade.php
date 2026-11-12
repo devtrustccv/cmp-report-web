@@ -3,7 +3,7 @@
 {{-- LICO_DA - Declaração de Alvará --}}
 @php
     // ---- Parâmetros de formatação ----
-    $fonte        = 'lora';
+    $fonte        = 'times'; // Times New Roman
     $tamanhoFonte = '1.2rem'; // 20px
     $alturaLinha  = 1.4;       // espaço entre as linhas de um parágrafo
     $corTexto     = '#333333';
@@ -19,7 +19,7 @@
     <div class="titulo-documento">Declaração Nº{{ $dados->nrCertidao }}</div>
 
     <p>
-        Para os devidos efeitos, declara que {!! $dados->titularesTexto() !!},
+        @iguais Para os devidos efeitos, declara que {!! $dados->titularesTexto() !!},
         {{ $dados->conforme('é portadora', 'são portadores') }} do Alvará Comercial registado sob o
         <strong>nº{{ $dados->nAlvara }}</strong>@preencher
     </p>
@@ -32,12 +32,12 @@
     <div class="espaco"></div>
 
     @if($dados->finsTexto())
-        <p class="italico">Válida para {{ $dados->finsTexto() }}.</p>
+        <p class="italico negrito">Válida para {{ $dados->finsTexto() }}.@preencher</p>
     @endif
 
     @if($dados->validadeTexto())
-        <p>Válida por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>
+        <p class="negrito">Válida por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>
     @endif
 
-    <p class="italico">Praia, {{ $dataEmissao }}.</p>
+    <p class="italico">Praia, <span class="data-emissao">{{ $dataEmissao }}.</span></p>
 @endsection

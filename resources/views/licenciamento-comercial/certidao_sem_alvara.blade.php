@@ -3,7 +3,7 @@
 {{-- Certidão sem Alvará (ainda sem código na API; dados vêm todos do CertidaoLicenciamentoDto) --}}
 @php
     // ---- Parâmetros de formatação ----
-    $fonte        = 'lora';
+    $fonte        = 'times'; // Times New Roman
     $tamanhoFonte = '1.2rem'; // 20px
     $alturaLinha  = 1.4;       // espaço entre as linhas de um parágrafo
     $corTexto     = '#333333';
@@ -18,7 +18,7 @@
     <div class="titulo-documento">CERTIDÃO Nº {{ $dados->nrCertidao }}</div>
 
     <p class="italico">
-        Certifico, de harmonia com o requerimento de {!! $dados->titularesTexto() !!},
+        @iguais Certifico, de harmonia com o requerimento de {!! $dados->titularesTexto() !!},
         e em cumprimento do despacho no mesmo exarado que, compulsando o cadastro
         comercial existente neste serviço, não se encontra registado nenhum Alvará/licença comercial,
         licenciado em nome da mesma.@preencher
@@ -32,12 +32,12 @@
     <div class="espaco"></div>
 
     @if($dados->finsTexto())
-        <p class="italico">Válido para {{ $dados->finsTexto() }}.</p>
+        <p class="italico negrito">Válido para {{ $dados->finsTexto() }}.@preencher</p>
     @endif
 
     @if($dados->validadeTexto())
-        <p class="italico">Valida por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>
+        <p class="italico negrito">Valida por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>
     @endif
 
-     <p class="italico">Praia, {{ $dataEmissao }}.</p>
+     <p class="italico">Praia, <span class="data-emissao">{{ $dataEmissao }}.</span></p>
 @endsection

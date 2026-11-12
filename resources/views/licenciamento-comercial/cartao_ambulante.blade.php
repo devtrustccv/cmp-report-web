@@ -3,7 +3,7 @@
 {{-- LICO_DC - Declaração de Cartão (Ambulante) --}}
 @php
     // ---- Parâmetros de formatação ----
-    $fonte        = 'lora';
+    $fonte        = 'times'; // Times New Roman
     $tamanhoFonte = '1.2rem'; // 20px
     $alturaLinha  = 1.4;       // espaço entre as linhas de um parágrafo
     $corTexto     = '#333333';
@@ -20,7 +20,7 @@
     <div class="titulo-documento" style="text-decoration: none;">Declaração Nº{{ $dados->nrCertidao }}</div>
 
     <p>
-        @iguais(5) Para os devidos efeitos, declara que {!! $dados->titularesTexto() !!},
+        @iguais Para os devidos efeitos, declara que {!! $dados->titularesTexto() !!},
         {{ $dados->conforme('é portadora', 'são portadores') }} do Cartão Ambulante registado sob
         <strong>{{ $dados->nrCartao }}</strong>@preencher
     </p>
@@ -31,12 +31,12 @@
     </p>
 
     @if($dados->finsTexto())
-        <p class="italico">Válido para {{ $dados->finsTexto() }}.</p>
+        <p class="italico negrito">Válido para {{ $dados->finsTexto() }}.@preencher</p>
     @endif
 
     @if($dados->validadeTexto())
-        <p>Válido por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>
+        <p class="negrito">Válido por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>
     @endif
 
-    <p class="italico">Praia, {{ $dataEmissao }}.</p>
+    <p class="italico">Praia, <span class="data-emissao">{{ $dataEmissao }}.</span></p>
 @endsection
