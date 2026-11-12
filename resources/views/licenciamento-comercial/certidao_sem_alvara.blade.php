@@ -24,11 +24,11 @@
     <div class="titulo-documento">CERTIDÃO Nº {{ $d->numero }}</div>
 
     <p class="italico">
-        ==========Certifico, de harmonia com o requerimento da {{ $d->tratamento }},
+        @preencher Certifico, de harmonia com o requerimento da {{ $d->tratamento }},
         <strong>{{ $d->nome }},</strong> {{ $d->documento }} – {{ $d->numDocumento }}, residente em
         {{ $d->residencia }}, e em cumprimento do despacho no mesmo exarado que, compulsando o cadastro
         comercial existente neste serviço, não se encontra registado nenhum Alvará/licença comercial,
-        licenciado em nome da mesma.==============
+        licenciado em nome da mesma. @preencher
     </p>
 
     <p class="italico">
@@ -39,8 +39,8 @@
     <div class="espaco"></div>
 
     <p class="negrito centro">
-        ============= <span class="italico" style="font-weight: normal;">Válido para fins convenientes</span> =============
+        @preencher<span class="italico" style="font-weight: normal;">Válido para fins convenientes</span>@preencher
     </p>
 
-    <p class="italico">Valida por um período de {{ $d->validadeMeses }} meses.</p>
+    <p class="italico">Valida por um período de {{ $d->validadeMeses }} meses.@preencher</p>
 @endsection
