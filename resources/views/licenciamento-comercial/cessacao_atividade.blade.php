@@ -19,14 +19,14 @@
     <div class="assunto">Assunto: Cessação de Atividade nº{{ $dados->nrCertidao }}</div>
 
     <p>
-        Para os devidos efeitos, declara que o Alvará Comercial registado sob o
+        @preencher Para os devidos efeitos, declara que o Alvará Comercial registado sob o
         <strong>nº{{ $dados->nAlvara }}</strong>, em nome do Estabelecimento,
         {!! $dados->titularesTexto() !!},
         passou a fazer parte do nosso sistema inativo a partir do dia {{ $dados->dataRegistoFormatada() }}.@preencher
     </p>
 
     <p>
-        Por ser verdade, passa a presente declaração que vai devidamente assinada e autenticada com
+        @preencher Por ser verdade, passa a presente declaração que vai devidamente assinada e autenticada com
         carimbo a óleo em uso nesta Instituição.@preencher
     </p>
 @endsection
