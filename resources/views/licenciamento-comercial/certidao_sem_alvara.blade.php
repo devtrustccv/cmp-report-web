@@ -41,6 +41,5 @@
     <p class="negrito centro">
         @preencher<span class="italico" style="font-weight: normal;">Válido para fins convenientes</span>@preencher
     </p>
-
     @preencher<p class="italico">Valida por um período de {{ $d->validadeMeses }} meses.@preencher</p>
 @endsection
