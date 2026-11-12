@@ -166,10 +166,12 @@ class CertidaoLicenciamentoDto
         return $data ? $data->format('d/m/Y') : '';
     }
 
-    /** Data de emissão do documento por extenso: "26 de agosto de 2026" */
+    /** Data de emissão do documento por extenso, mês com maiúscula: "12 de Novembro de 2026" */
     public static function dataEmissaoExtenso(?Carbon $data = null): string
     {
-        return ($data ?? Carbon::now())->locale('pt')->translatedFormat('d \d\e F \d\e Y');
+        $data = ($data ?? Carbon::now())->locale('pt');
+
+        return $data->format('d') . ' de ' . mb_convert_case($data->translatedFormat('F'), MB_CASE_TITLE) . ' de ' . $data->format('Y');
     }
 
     private static function parseData(?string $valor): ?Carbon

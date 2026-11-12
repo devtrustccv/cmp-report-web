@@ -3,9 +3,11 @@
 {{-- LICO_CA - Cessação de Atividade --}}
 @php
     // ---- Parâmetros de formatação ----
-    $fonte        = 'arial';
-    $tamanhoFonte = '18px';
-    $alturaLinha  = 1.6;
+    $fonte        = 'lora';
+    $tamanhoFonte = '1.2rem'; // 20px
+    $alturaLinha  = 1.8;       // dá respiro entre as linhas
+    $corTexto     = '#333333';
+    view()->share(compact('fonte', 'tamanhoFonte')); // o <x-linha-preenchida> mede com a mesma fonte
 
     /** @var \App\Models\CertidaoLicenciamentoDto $dados */
     $dataEmissao = \App\Models\CertidaoLicenciamentoDto::dataEmissaoExtenso();
@@ -19,14 +21,14 @@
     <div class="assunto">Assunto: Cessação de Atividade nº{{ $dados->nrCertidao }}</div>
 
     <p>
-        @iguais(5) Para os devidos efeitos, declara que o Alvará Comercial registado sob o
+        Para os devidos efeitos, declara que o Alvará Comercial registado sob o
         <strong>nº{{ $dados->nAlvara }}</strong>, em nome do Estabelecimento,
         {!! $dados->titularesTexto() !!},
         passou a fazer parte do nosso sistema inativo a partir do dia {{ $dados->dataRegistoFormatada() }}.@preencher
     </p>
 
     <p>
-        @iguais(5) Por ser verdade, passa a presente declaração que vai devidamente assinada e autenticada com
+        Por ser verdade, passa a presente declaração que vai devidamente assinada e autenticada com
         carimbo a óleo em uso nesta Instituição.@preencher
     </p>
 @endsection

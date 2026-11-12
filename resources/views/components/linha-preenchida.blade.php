@@ -6,15 +6,16 @@
       <x-linha-preenchida>Válido para fins convenientes</x-linha-preenchida>
       <x-linha-preenchida italico>Válido para fins convenientes</x-linha-preenchida>
 
-    Props (devem coincidir com $fonte / $tamanhoFonte da view):
-      fonte   = 'arial' | 'times' | 'courier'   (default 'arial')
-      tamanho = '18px'                          (default '18px')
-      italico = true/false                      (default false)
+    Fonte e tamanho: por defeito usa $fonte / $tamanhoFonte partilhados pela view
+    (view()->share(compact('fonte', 'tamanhoFonte')) no bloco de parâmetros do topo). Pode-se forçar:
+      <x-linha-preenchida fonte="arial" tamanho="18px">...</x-linha-preenchida>
 --}}
-@props(['fonte' => 'arial', 'tamanho' => '18px', 'italico' => false])
+@props(['fonte' => null, 'tamanho' => null, 'italico' => false])
 
 @php
-    $linha = \App\Http\Helpers\LinhaPreenchida::calcular((string) $slot, $fonte, $tamanho, (bool) $italico);
+    $fonte   = $fonte ?? 'lora';
+    $tamanho = $tamanho ?? ($tamanhoFonte ?? '1.25rem');
+    $linha   = \App\Http\Helpers\LinhaPreenchida::calcular((string) $slot, $fonte, $tamanho, (bool) $italico);
 @endphp
 
 @if($linha['lado'] !== '')

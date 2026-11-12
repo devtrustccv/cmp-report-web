@@ -9,16 +9,45 @@ use Dompdf\FontMetrics;
  * Calcula quantos "=" cabem de cada lado de um texto para formar
  * "======= texto =======" com a largura exata da área de texto,
  * usando as mesmas métricas de fonte que o dompdf usa ao desenhar.
+ *
+ * Também é aqui que estão as fontes TTF dos reports (resources/fonts/...),
+ * usadas tanto no @font-face do layout como na medição.
  */
 class LinhaPreenchida
 {
-    /** Largura útil da página A4 em pt (595.28pt - margens laterais 2 x 60px = 2 x 45pt) */
-    public const LARGURA_PT = 505.28;
+    /** Largura da coluna de texto em pt (main { width: 600px } no layout = 450pt) */
+    public const LARGURA_PT = 450.0;
 
-    private const FONTES = [
+    /** Fontes embutidas do dompdf (não precisam de ficheiro) */
+    private const FONTES_EMBUTIDAS = [
         'times'   => 'times',
         'courier' => 'courier',
-        'arial'   => 'helvetica',
+    ];
+
+    /** Fontes TTF do projeto: chave usada em $fonte => família dompdf + ficheiros em resources/fonts/<pasta> */
+    public const FONTES_TTF = [
+        'arial' => [
+            'familia'   => 'arial-ttf',
+            'css'       => "'arial-ttf', Arial, Helvetica, sans-serif",
+            'pasta'     => 'arial',
+            'ficheiros' => [
+                'normal'      => 'arial.ttf',
+                'bold'        => 'arialbd.ttf',
+                'italic'      => 'ariali.ttf',
+                'bold_italic' => 'arialbi.ttf',
+            ],
+        ],
+        'lora' => [
+            'familia'   => 'lora-ttf',
+            'css'       => "'lora-ttf', Georgia, serif",
+            'pasta'     => 'lora',
+            'ficheiros' => [
+                'normal'      => 'Lora-Regular.ttf',
+                'bold'        => 'Lora-Bold.ttf',
+                'italic'      => 'Lora-Italic.ttf',
+                'bold_italic' => 'Lora-BoldItalic.ttf',
+            ],
+        ],
     ];
 
     private static ?FontMetrics $metrics = null;
@@ -32,14 +61,14 @@ class LinhaPreenchida
      */
     public static function calcular(
         string $textoHtml,
-        string $fonte = 'arial',
-        string $tamanho = '18px',
+        string $fonte = 'lora',
+        string $tamanho = '20px',
         bool $italico = false,
         float $larguraPt = self::LARGURA_PT
     ): array {
         $fm = self::metrics();
 
-        $familia = self::FONTES[$fonte] ?? $fonte;
+        $familia = self::FONTES_TTF[$fonte]['familia'] ?? self::FONTES_EMBUTIDAS[$fonte] ?? $fonte;
         $estilo  = $italico ? 'italic' : 'normal';
         $font    = $fm->getFont($familia, $estilo) ?? $fm->getFont('helvetica', 'normal');
         $fontB   = $fm->getFont($familia, $italico ? 'bold_italic' : 'bold') ?? $font;
@@ -80,9 +109,77 @@ class LinhaPreenchida
         ];
     }
 
+    /** font-family CSS para a chave $fonte da view ('lora', 'arial', 'times', ...) */
+    public static function fontFamilyCss(string $fonte): string
+    {
+        return self::FONTES_TTF[$fonte]['css'] ?? match ($fonte) {
+            'times'   => "'Times New Roman', Times, serif",
+            'courier' => "'Courier New', Courier, monospace",
+            default   => $fonte,
+        };
+    }
+
+    /** Regras @font-face de todas as fontes TTF (para o <style> do layout) */
+    public static function fontFaceCss(): string
+    {
+        $css = '';
+
+        foreach (self::FONTES_TTF as $f) {
+            foreach ($f['ficheiros'] as $estilo => $ficheiro) {
+                $css .= sprintf(
+                    "@font-face { font-family: '%s'; font-weight: %s; font-style: %s; src: url('%s') format('truetype'); }\n",
+                    $f['familia'],
+                    str_contains($estilo, 'bold') ? 'bold' : 'normal',
+                    str_contains($estilo, 'italic') ? 'italic' : 'normal',
+                    self::caminho($f['pasta'], $ficheiro)
+                );
+            }
+        }
+
+        return $css;
+    }
+
     private static function metrics(): FontMetrics
     {
-        return self::$metrics ??= Pdf::getDomPDF()->getFontMetrics();
+        if (self::$metrics === null) {
+            self::$metrics = Pdf::getDomPDF()->getFontMetrics();
+            self::registarFontes(self::$metrics);
+        }
+
+        return self::$metrics;
+    }
+
+    /** Regista as fontes TTF no dompdf (ficam em cache em storage/fonts) para medir com a fonte real. */
+    private static function registarFontes(FontMetrics $fm): void
+    {
+        // pasta de cache de fontes do dompdf (config dompdf.font_cache)
+        if (!is_dir(storage_path('fonts'))) {
+            @mkdir(storage_path('fonts'), 0775, true);
+        }
+
+        $familias = $fm->getFontFamilies();
+
+        foreach (self::FONTES_TTF as $f) {
+            foreach ($f['ficheiros'] as $estilo => $ficheiro) {
+                if (isset($familias[$f['familia']][$estilo])) {
+                    continue; // já registado
+                }
+
+                $fm->registerFont(
+                    [
+                        'family' => $f['familia'],
+                        'weight' => str_contains($estilo, 'bold') ? 'bold' : 'normal',
+                        'style'  => str_contains($estilo, 'italic') ? 'italic' : 'normal',
+                    ],
+                    self::caminho($f['pasta'], $ficheiro)
+                );
+            }
+        }
+    }
+
+    private static function caminho(string $pasta, string $ficheiro): string
+    {
+        return str_replace('\\', '/', resource_path("fonts/{$pasta}/{$ficheiro}"));
     }
 
     private static function emPt(string $tamanho): float
@@ -90,7 +187,9 @@ class LinhaPreenchida
         $v = (float) $tamanho;
 
         return match (true) {
-            str_ends_with($tamanho, 'pt') => $v,
+            str_ends_with($tamanho, 'pt')  => $v,
+            str_ends_with($tamanho, 'rem'),
+            str_ends_with($tamanho, 'em')  => $v * 16 * 0.75, // 1rem = 16px
             default => $v * 0.75, // px -> pt
         };
     }

@@ -3,9 +3,11 @@
 {{-- Certidão sem Alvará (ainda sem código na API; dados vêm todos do CertidaoLicenciamentoDto) --}}
 @php
     // ---- Parâmetros de formatação ----
-    $fonte        = 'arial';
-    $tamanhoFonte = '18px';
-    $alturaLinha  = 1.5;
+    $fonte        = 'lora';
+    $tamanhoFonte = '1.2rem'; // 20px
+    $alturaLinha  = 1.8;       // dá respiro entre as linhas
+    $corTexto     = '#333333';
+    view()->share(compact('fonte', 'tamanhoFonte')); // o <x-linha-preenchida> mede com a mesma fonte
     $dataEmissao = \App\Models\CertidaoLicenciamentoDto::dataEmissaoExtenso();
     /** @var \App\Models\CertidaoLicenciamentoDto $dados */
 @endphp
@@ -16,26 +18,26 @@
     <div class="titulo-documento">CERTIDÃO Nº {{ $dados->nrCertidao }}</div>
 
     <p class="italico">
-        @iguais(10)Certifico, de harmonia com o requerimento de {!! $dados->titularesTexto() !!},
+        Certifico, de harmonia com o requerimento de {!! $dados->titularesTexto() !!},
         e em cumprimento do despacho no mesmo exarado que, compulsando o cadastro
         comercial existente neste serviço, não se encontra registado nenhum Alvará/licença comercial,
         licenciado em nome da mesma.@preencher
     </p>
 
     <p class="italico">
-        @iguais(10) Por ser verdade, mandei passar a presente certidão, que dato e assino e faço autenticar com
+        Por ser verdade, mandei passar a presente certidão, que dato e assino e faço autenticar com
         carimbo a óleo em uso neste serviço.@preencher
     </p>
 
     <div class="espaco"></div>
 
     @if($dados->finsTexto())
-        <x-linha-preenchida italico>Válido para {{ $dados->finsTexto() }}.</x-linha-preenchida>
+        <p class="italico">Válido para {{ $dados->finsTexto() }}.</p>
     @endif
 
     @if($dados->validadeTexto())
         <p class="italico">Valida por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>
     @endif
 
-     <p class="italico">CMP, {{ $dataEmissao }}.</p>
+     <p class="italico">Praia, {{ $dataEmissao }}.</p>
 @endsection

@@ -3,9 +3,11 @@
 {{-- LICO_DA - Declaração de Alvará --}}
 @php
     // ---- Parâmetros de formatação ----
-    $fonte        = 'arial';
-    $tamanhoFonte = '18px';
-    $alturaLinha  = 1.6;
+    $fonte        = 'lora';
+    $tamanhoFonte = '1.2rem'; // 20px
+    $alturaLinha  = 1.8;       // dá respiro entre as linhas
+    $corTexto     = '#333333';
+    view()->share(compact('fonte', 'tamanhoFonte')); // o <x-linha-preenchida> mede com a mesma fonte
 
     /** @var \App\Models\CertidaoLicenciamentoDto $dados */
     $dataEmissao = \App\Models\CertidaoLicenciamentoDto::dataEmissaoExtenso();
@@ -14,8 +16,6 @@
 @section('title', 'Declaração Nº ' . $dados->nrCertidao)
 
 @section('content')
-    <div class="data-local">CMP, {{ $dataEmissao }}</div>
-
     <div class="titulo-documento">Declaração Nº{{ $dados->nrCertidao }}</div>
 
     <p>
@@ -32,10 +32,12 @@
     <div class="espaco"></div>
 
     @if($dados->finsTexto())
-        <x-linha-preenchida>Válida para {{ $dados->finsTexto() }}.</x-linha-preenchida>
+        <p class="italico">Válida para {{ $dados->finsTexto() }}.</p>
     @endif
 
     @if($dados->validadeTexto())
         <p>Válida por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>
     @endif
+
+    <p class="italico">Praia, {{ $dataEmissao }}.</p>
 @endsection

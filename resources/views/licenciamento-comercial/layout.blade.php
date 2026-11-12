@@ -2,22 +2,19 @@
     Layout base dos reports do Serviço de Licenciamento Comercial.
 
     Parâmetros (podem ser definidos no topo de cada view filha com @php ... @endphp):
-      $fonte          -> 'times' | 'courier' | 'arial' | ou um font-family CSS completo
-      $tamanhoFonte   -> tamanho do texto do corpo (ex.: '15px')
+      $fonte          -> 'lora' | 'arial' | 'times' | 'courier' | ou um font-family CSS completo
+                         (lora/arial são TTF em resources/fonts, ver App\Http\Helpers\LinhaPreenchida::FONTES_TTF)
+      $tamanhoFonte   -> tamanho do texto do corpo (ex.: '1.25rem' = 20px)
       $alturaLinha    -> line-height do corpo (ex.: 1.8)
+      $corTexto       -> cor do texto do corpo (ex.: '#333333')
       $marcaAgua      -> true/false: mostra o logo em fundo
 --}}
 @php
-    $fontesDisponiveis = [
-        'times'   => "'Times New Roman', Times, serif",
-        'courier' => "'Courier New', Courier, monospace",
-        'arial'   => "Arial, Helvetica, sans-serif",
-    ];
-
-    $fonte        = $fonte ?? 'arial';
-    $fontFamily   = $fontesDisponiveis[$fonte] ?? $fonte;
-    $tamanhoFonte = $tamanhoFonte ?? '18px';
+    $fonte        = $fonte ?? 'lora';
+    $fontFamily   = \App\Http\Helpers\LinhaPreenchida::fontFamilyCss($fonte);
+    $tamanhoFonte = $tamanhoFonte ?? '1.25rem';
     $alturaLinha  = $alturaLinha ?? 1.8;
+    $corTexto     = $corTexto ?? '#333333';
     $marcaAgua    = $marcaAgua ?? true;
 @endphp
 <!DOCTYPE html>
@@ -27,14 +24,17 @@
     <title>@yield('title')</title>
 
     <style>
+        {!! \App\Http\Helpers\LinhaPreenchida::fontFaceCss() !!}
+
         @page {
-            margin: 175px 60px 90px 60px;
+            margin: 175px 60px 60px 60px;
         }
 
         body {
             font-family: {!! $fontFamily !!};
             font-size: {{ $tamanhoFonte }};
-            line-height: {{ $alturaLinha }};
+            line-height: {{ $alturaLinha }}; /* dá respiro entre as linhas */
+            color: {{ $corTexto }};
         }
 
         /* ---------- Cabeçalho (sempre centralizado) ---------- */
@@ -45,7 +45,7 @@
             right: 0;
             height: 140px;
             text-align: center;
-            font-family: 'Times New Roman', Times, serif;
+            font-family: {!! $fontFamily !!}; /* mesma fonte do texto ($fonte) */
         }
 
         header img {
@@ -81,13 +81,20 @@
         }
 
         /* ---------- Corpo ---------- */
+        /*
+         * Coluna de texto com 600px, centrada na página.
+         * Se mudar a largura, mudar também LinhaPreenchida::LARGURA_PT (px x 0.75).
+         * padding-top = espaço entre o cabeçalho e o primeiro elemento (título / data / assunto).
+         */
         main {
-            margin-top: 10px;
+            width: 600px;
+            margin: 0 auto;
+            padding-top: 0;
         }
 
         p {
             text-align: justify;
-            margin: 0 0 18px 0;
+            margin: 0 0 12px 0;
             overflow: hidden; /* corta o excesso do @@preencher */
         }
 
@@ -98,31 +105,31 @@
          */
         .preencher {
             white-space: nowrap;
-            margin-right: -3000px;
+            margin-right: -20000px; /* tem de ser maior que a largura dos 300 "=": assim nunca salta para a linha de baixo */
         }
 
         /* componente linha-preenchida: "==== texto ====" centrado; nº de "=" calculado em PHP */
         p.linha-preenchida {
-            text-align: center;
+            text-align: left; /* a largura já é exata (LinhaPreenchida) */
             overflow: hidden;
         }
 
         .data-local {
             font-weight: bold;
-            margin: 10px 0 25px 0;
+            margin: 0 0 25px 0;
         }
 
         .titulo-documento {
             text-align: center;
             font-weight: bold;
             text-decoration: underline;
-            margin: 10px 0 35px 0;
+            margin: 0 0 25px 0;
         }
 
         .assunto {
             font-weight: bold;
             text-decoration: underline;
-            margin: 10px 0 35px 0;
+            margin: 0 0 25px 0;
         }
 
         .italico { font-style: italic; }
@@ -145,10 +152,10 @@
         /* ---------- Rodapé ---------- */
         footer {
             position: fixed;
-            bottom: -70px;
+            bottom: -55px;
             left: 0;
             right: 0;
-            height: 70px;
+            height: 55px;
             text-align: center;
             font-size: 10px;
             font-family: Arial, Helvetica, sans-serif;
