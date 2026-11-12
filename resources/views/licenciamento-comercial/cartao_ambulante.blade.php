@@ -32,6 +32,6 @@
     <p><span class="italico">Válido para {{ $dados->finsTexto() }}</span>@preencher</p>
 
     @if($dados->validadeTexto())
-        <p>Válido por um período de {{ $dados->validadeTexto() }} meses@preencher</p>
+        <p>Válido por um período de {{ $dados->validadeTexto() }} meses @preencher</p>
     @endif
 @endsection
