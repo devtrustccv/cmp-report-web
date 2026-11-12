@@ -1,12 +1,20 @@
 {{--
-    Linha "=========== texto ===========" que ocupa a largura toda, com o texto ao centro.
-    Uso: <x-linha-preenchida><span class="italico">Válido para fins convenientes</span></x-linha-preenchida>
-    Requer as classes .linha-preenchida / .preencher definidas no layout.
+    Linha "======= texto =======" centrada que ocupa exatamente a largura do texto, sem passar a margem.
+    O nº de "=" é calculado com as métricas de fonte do dompdf (App\Http\Helpers\LinhaPreenchida).
+
+    Uso:
+      <x-linha-preenchida>Válido para fins convenientes</x-linha-preenchida>
+      <x-linha-preenchida italico>Válido para fins convenientes</x-linha-preenchida>
+
+    Props (devem coincidir com $fonte / $tamanhoFonte da view):
+      fonte   = 'arial' | 'times' | 'courier'   (default 'arial')
+      tamanho = '18px'                          (default '18px')
+      italico = true/false                      (default false)
 --}}
-<table class="linha-preenchida">
-    <tr>
-        <td class="lp-lado">@preencher</td>
-        <td class="lp-texto">{{ $slot }}</td>
-        <td class="lp-lado">@preencher</td>
-    </tr>
-</table>
+@props(['fonte' => 'arial', 'tamanho' => '18px', 'italico' => false])
+
+@php
+    [$esquerda, $direita] = \App\Http\Helpers\LinhaPreenchida::lados((string) $slot, $fonte, $tamanho, (bool) $italico);
+@endphp
+
+<p class="linha-preenchida {{ $italico ? 'italico' : '' }}">{{ $esquerda }} {{ $slot }} {{ $direita }}</p>

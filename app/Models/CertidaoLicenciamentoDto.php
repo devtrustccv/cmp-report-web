@@ -115,11 +115,15 @@ class CertidaoLicenciamentoDto
     public function titularesTexto(): string
     {
         $partes = array_map(function (array $t) {
-            $texto = '<strong>' . e($t['nome']). ',</strong>';
+            // A vírgula a negrito só aparece quando há documento a seguir;
+            // a vírgula depois do titular fica a cargo da view (evita "Nome,,").
+            $texto = '<strong>' . e($t['nome']);
 
             if (!empty($t['nrDocumento'])) {
                 $doc = trim(($t['tipoDocumento'] ?? '') . ' – ' . $t['nrDocumento'], ' –');
-                $texto .= ' ' . e($doc);
+                $texto .= ',</strong> ' . e($doc);
+            } else {
+                $texto .= '</strong>';
             }
 
             return $texto;

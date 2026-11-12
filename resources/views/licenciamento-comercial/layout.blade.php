@@ -101,27 +101,10 @@
             margin-right: -3000px;
         }
 
-        /* componente linha-preenchida: "==== texto ====" centrado na largura toda */
-        .linha-preenchida {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0 0 18px 0;
-        }
-
-        .linha-preenchida td {
-            padding: 0;
-            vertical-align: baseline;
-        }
-
-        .linha-preenchida .lp-lado {
+        /* componente linha-preenchida: "==== texto ====" centrado; nº de "=" calculado em PHP */
+        p.linha-preenchida {
+            text-align: center;
             overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .linha-preenchida .lp-texto {
-            width: 1%;
-            white-space: nowrap;
-            padding: 0 6px;
         }
 
         .data-local {

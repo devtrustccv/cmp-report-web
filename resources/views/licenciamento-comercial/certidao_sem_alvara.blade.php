@@ -38,7 +38,7 @@
 
     <div class="espaco"></div>
 
-    <x-linha-preenchida><span class="italico">Válido para fins convenientes</span></x-linha-preenchida>
+    <x-linha-preenchida italico>Válido para fins convenientes</x-linha-preenchida>
 
-    <x-linha-preenchida><span class="italico">Valida por um período de {{ $d->validadeMeses }} meses.</span></x-linha-preenchida>
+    <x-linha-preenchida italico>Valida por um período de {{ $d->validadeMeses }} meses.</x-linha-preenchida>
 @endsection
