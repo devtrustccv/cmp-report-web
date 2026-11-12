@@ -5,7 +5,7 @@
     // ---- Parâmetros de formatação ----
     $fonte        = 'lora';
     $tamanhoFonte = '1.2rem'; // 20px
-    $alturaLinha  = 1.8;       // dá respiro entre as linhas
+    $alturaLinha  = 1.4;       // espaço entre as linhas de um parágrafo
     $corTexto     = '#333333';
     view()->share(compact('fonte', 'tamanhoFonte')); // o <x-linha-preenchida> mede com a mesma fonte
 
