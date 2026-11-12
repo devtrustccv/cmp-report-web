@@ -181,7 +181,8 @@
     </footer>
 
     <main>
-        @yield('content')
+        {{-- só deixa o "=" de fim de parágrafo quando cabem pelo menos 3 (LinhaPreenchida::MINIMO_IGUAIS) --}}
+        {!! \App\Http\Helpers\LinhaPreenchida::ajustarPreenchimentos($__env->yieldContent('content'), $fonte, $tamanhoFonte) !!}
     </main>
 
 </body>
