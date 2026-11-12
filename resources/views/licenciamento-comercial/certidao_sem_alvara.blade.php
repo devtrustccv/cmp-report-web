@@ -33,7 +33,7 @@
 
     <p class="italico">
         Por ser verdade, mandei passar a presente certidão, que dato e assino e faço autenticar com
-        carimbo a óleo em uso neste serviço.
+        carimbo a óleo em uso neste serviço.@preencher
     </p>
 
     <div class="espaco"></div>
@@ -42,5 +42,5 @@
         @preencher<span class="italico" style="font-weight: normal;">Válido para fins convenientes</span>@preencher
     </p>
 
-    <p class="italico">Valida por um período de {{ $d->validadeMeses }} meses.@preencher</p>
+    @preencher<p class="italico">Valida por um período de {{ $d->validadeMeses }} meses.@preencher</p>
 @endsection
