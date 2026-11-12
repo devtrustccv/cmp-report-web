@@ -34,6 +34,6 @@
     <p>Válida para {{ $dados->finsTexto() }}.@preencher</p>
 
     @if($dados->validadeTexto())
-        <p>Válida por um período de {{ $dados->validadeTexto() }} meses</p>
+        <p>Válida por um período de {{ $dados->validadeTexto() }} meses.</p>
     @endif
 @endsection

@@ -42,5 +42,5 @@
         ============= <span class="italico" style="font-weight: normal;">Válido para fins convenientes</span> =============
     </p>
 
-    <p class="italico">Valida por um período de {{ $d->validadeMeses }} meses</p>
+    <p class="italico">Valida por um período de {{ $d->validadeMeses }} meses.</p>
 @endsection
