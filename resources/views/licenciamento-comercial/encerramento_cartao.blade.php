@@ -35,10 +35,10 @@
     </p>
 
     @if($dados->validadeTexto())
-        <p class="italico">Valida por um período de {{ $dados->validadeTexto() }} meses</p>
+        <p class="italico">Valida por um período de {{ $dados->validadeTexto() }} meses.</p>
     @endif
 
     <div class="espaco"></div>
 
-    <p class="italico">CÂMARA MUNICIPAL DA PRAIA, {{ $dataEmissao }}</p>
+    <p class="italico">CÂMARA MUNICIPAL DA PRAIA, {{ $dataEmissao }}.</p>
 @endsection
