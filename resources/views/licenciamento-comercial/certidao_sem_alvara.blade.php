@@ -37,5 +37,5 @@
         <p class="italico">Valida por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>
     @endif
 
-     <p class="italico">CÂMARA MUNICIPAL DA PRAIA, {{ $dataEmissao }}.</p>
+     <p class="italico">CMP, {{ $dataEmissao }}.</p>
 @endsection

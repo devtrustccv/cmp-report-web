@@ -34,5 +34,5 @@
         carimbo a óleo em uso nesta Instituição.@preencher
     </p>
 
-    <p class="italico">CÂMARA MUNICIPAL DA PRAIA, {{ $dataEmissao }}.</p>
+    <p class="italico">CMP, {{ $dataEmissao }}.</p>
 @endsection

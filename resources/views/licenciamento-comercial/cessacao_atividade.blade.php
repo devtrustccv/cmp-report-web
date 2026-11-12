@@ -14,7 +14,7 @@
 @section('title', 'Cessação de Atividade nº ' . $dados->nrCertidao)
 
 @section('content')
-    <div class="data-local">Câmara Municipal da Praia, {{ $dataEmissao }}</div>
+    <div class="data-local">CMP, {{ $dataEmissao }}</div>
 
     <div class="assunto">Assunto: Cessação de Atividade nº{{ $dados->nrCertidao }}</div>
 
