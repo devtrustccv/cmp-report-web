@@ -24,9 +24,13 @@ class LinhaPreenchida
     private static ?FontMetrics $metrics = null;
 
     /**
-     * @return array{0: string, 1: string} [lado esquerdo, lado direito]
+     * Calcula a linha "=== texto ===" justificada à largura útil.
+     *
+     * @return array{lado: string, wordSpacing: float}
+     *   lado        -> "=" a colocar de cada lado (vazio se o texto não couber numa linha)
+     *   wordSpacing -> espaço extra (pt) por cada espaço, para a linha ir exatamente de margem a margem
      */
-    public static function lados(
+    public static function calcular(
         string $textoHtml,
         string $fonte = 'arial',
         string $tamanho = '18px',
@@ -42,26 +46,38 @@ class LinhaPreenchida
         $sizePt  = self::emPt($tamanho);
 
         // Mede o texto (partes em <strong>/<b> medidas com a fonte a negrito)
+        $textoHtml = trim(preg_replace('/\s+/u', ' ', $textoHtml));
         $larguraTexto = 0.0;
+        $espacos = 0;
         $partes = preg_split('#(<(?:strong|b)\b[^>]*>.*?</(?:strong|b)>)#si', $textoHtml, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
         foreach ($partes as $parte) {
             $negrito = (bool) preg_match('#^<(strong|b)\b#i', $parte);
             $txt = html_entity_decode(strip_tags($parte), ENT_QUOTES | ENT_HTML5, 'UTF-8');
-            $txt = preg_replace('/\s+/u', ' ', $txt);
             $larguraTexto += $fm->getTextWidth($txt, $negrito ? $fontB : $font, $sizePt);
+            $espacos += substr_count($txt, ' ');
         }
 
-        $larguraTexto = $larguraTexto + 2 * $fm->getTextWidth(' ', $font, $sizePt);
-        $larguraIgual = $fm->getTextWidth('=', $font, $sizePt);
+        $larguraEspaco = $fm->getTextWidth(' ', $font, $sizePt);
+        $larguraIgual  = $fm->getTextWidth('=', $font, $sizePt);
+        $larguraTexto += 2 * $larguraEspaco; // espaços entre os "=" e o texto
+        $espacos += 2;
 
         // floor() garante que "=== texto ===" nunca passa a largura útil
-        $n = (int) floor((($larguraPt - $larguraTexto) / 2) / $larguraIgual);
-        $n = max(0, $n);
+        $n = max(0, (int) floor((($larguraPt - $larguraTexto) / 2) / $larguraIgual));
 
-        $lado = str_repeat('=', $n);
+        if ($n === 0) {
+            return ['lado' => '', 'wordSpacing' => 0.0];
+        }
 
-        return [$lado, $lado];
+        // O que sobra (menos de 2 "=") é distribuído pelos espaços -> linha justificada.
+        // 0.5pt de folga para arredondamentos nunca fazerem a linha quebrar.
+        $sobra = $larguraPt - ($larguraTexto + 2 * $n * $larguraIgual) - 0.5;
+
+        return [
+            'lado'        => str_repeat('=', $n),
+            'wordSpacing' => max(0.0, round($sobra / $espacos, 3)),
+        ];
     }
 
     private static function metrics(): FontMetrics

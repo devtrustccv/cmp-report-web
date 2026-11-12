@@ -1,5 +1,5 @@
 {{--
-    Linha "======= texto =======" centrada que ocupa exatamente a largura do texto, sem passar a margem.
+    Linha "======= texto =======" justificada: vai exatamente da margem esquerda à direita, nunca passa a margem.
     O nº de "=" é calculado com as métricas de fonte do dompdf (App\Http\Helpers\LinhaPreenchida).
 
     Uso:
@@ -14,7 +14,13 @@
 @props(['fonte' => 'arial', 'tamanho' => '18px', 'italico' => false])
 
 @php
-    [$esquerda, $direita] = \App\Http\Helpers\LinhaPreenchida::lados((string) $slot, $fonte, $tamanho, (bool) $italico);
+    $linha = \App\Http\Helpers\LinhaPreenchida::calcular((string) $slot, $fonte, $tamanho, (bool) $italico);
 @endphp
 
-<p class="linha-preenchida {{ $italico ? 'italico' : '' }}">{{ $esquerda }} {{ $slot }} {{ $direita }}</p>
+@if($linha['lado'] !== '')
+    {{-- cabe numa linha: "=== texto ===" de margem a margem --}}
+    <p class="linha-preenchida {{ $italico ? 'italico' : '' }}" style="word-spacing: {{ $linha['wordSpacing'] }}pt;">{{ $linha['lado'] }} {{ trim($slot) }} {{ $linha['lado'] }}</p>
+@else
+    {{-- texto maior que a linha: parágrafo justificado normal --}}
+    <p class="{{ $italico ? 'italico' : '' }}">{{ $slot }}</p>
+@endif
