@@ -20,7 +20,7 @@
         ==========Certifico, de harmonia com o requerimento de {!! $dados->titularesTexto() !!},
         e em cumprimento do despacho no mesmo exarado que, compulsando o cadastro comercial existente
         neste serviço, não se encontra registado nenhum Alvará/licença comercial,
-        <span style="font-style: normal;">licenciado em seu nome.</span>@preencher
+        <span style="font-style: normal;">licenciado em nome da mesma.</span>@preencher
     </p>
 
     <p class="italico">
