@@ -29,7 +29,10 @@ class AppServiceProvider extends ServiceProvider
         ini_set('memory_limit', config('app.memory_limit'));
         set_time_limit(config('app.max_execution_time'));
 
-        // @preencher -> "=====" até ao fim da linha atual (ver classe .preencher nos layouts)
+        // @iguais(10) -> "==========" com tamanho fixo (para usar no INÍCIO de uma frase)
+        Blade::directive('iguais', fn ($n) => "<?php echo str_repeat('=', (int) (" . ($n ?: '10') . ")); ?>");
+
+        // @preencher -> "=====" até ao fim da linha atual. Usar SÓ no fim de um parágrafo (ver .preencher no layout)
         Blade::directive('preencher', fn () => '<span class="preencher">' . str_repeat('=', 300) . '</span>');
 
         if (! $this->app->environment('local')) {

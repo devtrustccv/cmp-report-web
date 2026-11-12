@@ -17,7 +17,7 @@
     <div class="titulo-documento">CERTIDÃO Nº {{ $dados->nrCertidao }}</div>
 
     <p class="italico">
-        @preencher Certifico, de harmonia com o requerimento de {!! $dados->titularesTexto() !!},
+        @iguais(10)Certifico, de harmonia com o requerimento de {!! $dados->titularesTexto() !!},
         e em cumprimento do despacho no mesmo exarado que, compulsando o cadastro comercial existente
         neste serviço, não se encontra registado nenhum Alvará/licença comercial,
         <span style="font-style: normal;">licenciado em nome da mesma.</span>@preencher
@@ -30,12 +30,10 @@
 
     <div class="espaco"></div>
 
-    <p class="negrito centro">
-       @preencher <span class="italico" style="font-weight: normal;">Válido para {{ $dados->finsTexto() }}</span> @preencher
-    </p>
+    <x-linha-preenchida><span class="italico">Válido para {{ $dados->finsTexto() }}</span></x-linha-preenchida>
 
     @if($dados->validadeTexto())
-        <p class="italico">@preencher Valida por um período de {{ $dados->validadeTexto() }} meses. @preencher</p>
+        <x-linha-preenchida><span class="italico">Valida por um período de {{ $dados->validadeTexto() }} meses.</span></x-linha-preenchida>
     @endif
 
     <div class="espaco"></div>

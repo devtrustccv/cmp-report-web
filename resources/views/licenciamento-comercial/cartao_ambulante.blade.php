@@ -19,7 +19,7 @@
     <div class="titulo-documento" style="text-decoration: none;">Declaração Nº{{ $dados->nrCertidao }}</div>
 
     <p>
-        ===== Para os devidos efeitos, declara que {!! $dados->titularesTexto() !!},
+        @iguais(5) Para os devidos efeitos, declara que {!! $dados->titularesTexto() !!},
         {{ $dados->conforme('é titular', 'são titulares') }} do Cartão Ambulante registado sob
         <strong>{{ $dados->nrCartao }}</strong>@preencher
     </p>
@@ -29,9 +29,9 @@
         carimbo a óleo em uso nesta Instituição.@preencher
     </p>
 
-    <p>@preencher<span class="italico">Válido para {{ $dados->finsTexto() }}</span>@preencher</p>
+    <x-linha-preenchida><span class="italico">Válido para {{ $dados->finsTexto() }}</span></x-linha-preenchida>
 
     @if($dados->validadeTexto())
-        <p>@preencher Válido por um período de {{ $dados->validadeTexto() }} meses. @preencher</p>
+        <x-linha-preenchida>Válido por um período de {{ $dados->validadeTexto() }} meses.</x-linha-preenchida>
     @endif
 @endsection

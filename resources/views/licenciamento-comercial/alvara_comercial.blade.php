@@ -31,9 +31,9 @@
 
     <div class="espaco"></div>
 
-    <p>@preencher Válida para {{ $dados->finsTexto() }}.@preencher</p>
+    <x-linha-preenchida>Válida para {{ $dados->finsTexto() }}.</x-linha-preenchida>
 
     @if($dados->validadeTexto())
-        <p>@preencher Válida por um período de {{ $dados->validadeTexto() }} meses. @preencher</p>
+        <x-linha-preenchida>Válida por um período de {{ $dados->validadeTexto() }} meses.</x-linha-preenchida>
     @endif
 @endsection

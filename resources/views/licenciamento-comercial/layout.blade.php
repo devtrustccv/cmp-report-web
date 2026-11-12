@@ -88,17 +88,40 @@
         p {
             text-align: justify;
             margin: 0 0 18px 0;
-            overflow: hidden; /* corta o excesso do @preencher */
+            overflow: hidden; /* corta o excesso do @@preencher */
         }
 
         /*
-         * @preencher: "=====" até ao fim da linha.
+         * @@preencher: "=====" até ao fim da linha.
          * A margem negativa faz o dompdf achar que cabe na linha atual;
          * o que passa da margem é cortado pelo overflow:hidden do <p>.
          */
         .preencher {
             white-space: nowrap;
             margin-right: -3000px;
+        }
+
+        /* componente linha-preenchida: "==== texto ====" centrado na largura toda */
+        .linha-preenchida {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 0 18px 0;
+        }
+
+        .linha-preenchida td {
+            padding: 0;
+            vertical-align: baseline;
+        }
+
+        .linha-preenchida .lp-lado {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .linha-preenchida .lp-texto {
+            width: 1%;
+            white-space: nowrap;
+            padding: 0 6px;
         }
 
         .data-local {
