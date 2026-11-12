@@ -40,5 +40,5 @@
 
     <x-linha-preenchida italico>Válido para fins convenientes</x-linha-preenchida>
 
-    <x-linha-preenchida italico>Valida por um período de {{ $d->validadeMeses }} meses.</x-linha-preenchida>
+    <p class="italico">Valida por um período de {{ $d->validadeMeses }} meses.@preencher</p>
 @endsection

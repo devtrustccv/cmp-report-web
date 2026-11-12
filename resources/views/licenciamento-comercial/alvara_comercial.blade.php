@@ -20,7 +20,7 @@
 
     <p>
         Para os devidos efeitos, declara que {!! $dados->titularesTexto() !!},
-        {{ $dados->conforme('é titular', 'são titulares') }} do Alvará Comercial registado sob o
+        {{ $dados->conforme('é portadora', 'são portadores') }} do Alvará Comercial registado sob o
         <strong>nº{{ $dados->nAlvara }}</strong>@preencher
     </p>
 
@@ -34,6 +34,6 @@
     <x-linha-preenchida>Válida para {{ $dados->finsTexto() }}.</x-linha-preenchida>
 
     @if($dados->validadeTexto())
-        <x-linha-preenchida>Válida por um período de {{ $dados->validadeTexto() }} meses.</x-linha-preenchida>
+        <p>Válida por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>
     @endif
 @endsection

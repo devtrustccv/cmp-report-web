@@ -20,7 +20,7 @@
 
     <p>
         @iguais(5) Para os devidos efeitos, declara que {!! $dados->titularesTexto() !!},
-        {{ $dados->conforme('é titular', 'são titulares') }} do Cartão Ambulante registado sob
+        {{ $dados->conforme('é portadora', 'são portadores') }} do Cartão Ambulante registado sob
         <strong>{{ $dados->nrCartao }}</strong>@preencher
     </p>
 
@@ -32,6 +32,6 @@
     <x-linha-preenchida italico>Válido para {{ $dados->finsTexto() }}</x-linha-preenchida>
 
     @if($dados->validadeTexto())
-        <x-linha-preenchida>Válido por um período de {{ $dados->validadeTexto() }} meses.</x-linha-preenchida>
+        <p>Válido por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>
     @endif
 @endsection

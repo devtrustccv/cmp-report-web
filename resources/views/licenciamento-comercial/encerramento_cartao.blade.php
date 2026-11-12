@@ -33,7 +33,7 @@
     <x-linha-preenchida italico>Válido para {{ $dados->finsTexto() }}</x-linha-preenchida>
 
     @if($dados->validadeTexto())
-        <x-linha-preenchida italico>Valida por um período de {{ $dados->validadeTexto() }} meses.</x-linha-preenchida>
+        <p class="italico">Valida por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>
     @endif
 
     <div class="espaco"></div>
