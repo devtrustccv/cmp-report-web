@@ -15,6 +15,7 @@
         'numDocumento'=> '19810121F002H',
         'residencia'  => 'Terra Branca - Praia',
         'validadeMeses' => '3 (Três)',
+        'fins'        => null, // texto colocado no ecrã; vazio -> "fins convenientes"
     ];
 @endphp
 
@@ -38,7 +39,7 @@
 
     <div class="espaco"></div>
 
-    <x-linha-preenchida italico>Válido para fins convenientes</x-linha-preenchida>
+    <x-linha-preenchida italico>Válido para {{ $d->fins ?: 'fins convenientes' }}.</x-linha-preenchida>
 
     <p class="italico">Valida por um período de {{ $d->validadeMeses }} meses.@preencher</p>
 @endsection

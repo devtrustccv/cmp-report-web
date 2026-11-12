@@ -21,6 +21,6 @@
     {{-- cabe numa linha: "=== texto ===" de margem a margem --}}
     <p class="linha-preenchida {{ $italico ? 'italico' : '' }}" style="word-spacing: {{ $linha['wordSpacing'] }}pt;">{{ $linha['lado'] }} {{ trim($slot) }} {{ $linha['lado'] }}</p>
 @else
-    {{-- texto maior que a linha: parágrafo justificado normal --}}
-    <p class="{{ $italico ? 'italico' : '' }}">{{ $slot }}</p>
+    {{-- texto maior que a linha: parágrafo justificado + "=" a preencher o resto da última linha --}}
+    <p class="{{ $italico ? 'italico' : '' }}">{{ trim($slot) }}@preencher</p>
 @endif

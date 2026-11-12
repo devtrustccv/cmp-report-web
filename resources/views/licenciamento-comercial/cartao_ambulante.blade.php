@@ -29,7 +29,7 @@
         carimbo a óleo em uso nesta Instituição.@preencher
     </p>
 
-    <x-linha-preenchida italico>Válido para {{ $dados->finsTexto() }}</x-linha-preenchida>
+    <x-linha-preenchida italico>Válido para {{ $dados->finsTexto() }}.</x-linha-preenchida>
 
     @if($dados->validadeTexto())
         <p>Válido por um período de {{ $dados->validadeTexto() }} meses.@preencher</p>
