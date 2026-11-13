@@ -21,7 +21,7 @@
     <p>
         @iguais Para os devidos efeitos, declara que {!! $dados->titularesTexto() !!},
         {{ $dados->conforme('é portadora', 'são portadores') }} do Alvará Comercial registado sob o
-        <strong>Nº {{ $dados->nAlvara }}</strong>@preencher
+        <strong>Nº{{ $dados->nAlvara }}</strong>@preencher
     </p>
 
     <p>

@@ -20,7 +20,7 @@
     <div class="titulo-documento">Cessação de Atividade nº{{ $dados->nrCertidao }}</div>
     <p>
         @iguais Para os devidos efeitos, declara que o Alvará Comercial registado sob o
-        <strong>Nº {{ $dados->nAlvara }}</strong>, em nome do Estabelecimento,
+        <strong>Nº{{ $dados->nAlvara }}</strong>, em nome do Estabelecimento,
         {!! $dados->titularesTexto() !!},
         passou a fazer parte do nosso sistema inativo a partir do dia {{ $dados->dataRegistoFormatada() }}.@preencher
     </p>
