@@ -21,7 +21,7 @@
 
     <p>
         @iguais Para os devidos efeitos, declara que {!! $dados->titularesTexto() !!},
-        {{ $dados->conforme('é portadora', 'são portadores') }} do Cartão Ambulante registado sob
+        {{ $dados->conforme('é portador (a)', 'são portadores') }} do Cartão Ambulante registado sob
         <strong>Nº{{ $dados->nrCartao }}</strong>@preencher
     </p>
 
