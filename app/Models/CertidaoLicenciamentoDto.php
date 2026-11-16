@@ -61,7 +61,7 @@ class CertidaoLicenciamentoDto
     /** Ex.: "três (03)" */
     public function validadeTexto(): string
     {
-        $n = (int) $this->validadeMes;
+        $n = (int) $this->nrPrestacao;
 
         if ($n <= 0) {
             return '';
