@@ -20,7 +20,7 @@
     <p>
         @iguais Para os devidos efeitos, declara que o Alvará registado sob o <strong>Nº  {{ $dados->nAlvara }}</strong>,
         em nome do estabelecimento, {!! $dados->titularesTexto() !!},
-        encontra-se a pagar as suas dívidas em prestações{{ $dados->nrPrestacao ? ' (prestação nº ' . $dados->nrPrestacao . ')' : '' }},
+        encontra-se a pagar as suas dívidas em {{ $dados->nrPrestacao ? ' (prestação nº ' . $dados->nrPrestacao . ')' : '' }},
         referente as taxas de licenciamento comercial.@preencher
     </p>
 
