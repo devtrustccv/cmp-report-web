@@ -11,6 +11,7 @@
 
     /** @var \App\Models\CertidaoLicenciamentoDto $dados */
     $dataEmissao = \App\Models\CertidaoLicenciamentoDto::dataEmissaoExtenso();
+    $localidade  = trim((string) $dados->localidade);
 @endphp
 
 @section('title', 'Cessação de Atividade nº ' . $dados->nrCertidao)
@@ -20,8 +21,8 @@
     <div class="titulo-documento">Cessação de Atividade nº{{ $dados->nrCertidao }}</div>
     <p>
         @iguais Para os devidos efeitos, declara que o Alvará Comercial registado sob o
-        <strong>Nº{{ $dados->nAlvara }}</strong>, em nome do Estabelecimento,
-        {!! $dados->titularesTexto() !!},
+        <strong>nº{{ $dados->nAlvara }}</strong>, em nome {{ $dados->conforme('do(a) Senhor(a)', 'dos Senhores') }},
+        {!! $dados->titularesTexto() !!}@if($localidade !== ''), situado em {{ $localidade }}@endif,
         passou a fazer parte do nosso sistema inativo a partir do dia {{ $dados->dataRegistoFormatada() }}.@preencher
     </p>
 

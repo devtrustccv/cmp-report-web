@@ -24,6 +24,8 @@ class CertidaoLicenciamentoDto
     public ?string $nome = null;
     public ?string $tipoDocumento = null;
     public ?string $nrDocumento = null;
+    public ?string $localidade = null;
+    public ?string $localiadde = null;
 
     private const EXTENSO = [
         1 => 'um', 2 => 'dois', 3 => 'três', 4 => 'quatro', 5 => 'cinco', 6 => 'seis',
@@ -53,6 +55,7 @@ class CertidaoLicenciamentoDto
         $this->nome          = $data['nome'] ?? null;
         $this->tipoDocumento = $data['tipoDocumento'] ?? null;
         $this->nrDocumento   = $data['nrDocumento'] ?? null;
+        $this->localidade    = $data['localidade'] ?? null;
     }
 
     /** Ex.: "três (03)" */

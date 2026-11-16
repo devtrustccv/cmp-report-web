@@ -12,7 +12,8 @@ enum TipoLicenciamentoComercialEnum: string
     case DECLARACAO_CARTAO    = 'LICO_DC';
     case DECLARACAO_ALVARA    = 'LICO_DA';
     case DIVIDA_PRESTACAO     = 'LICO_DP';
-    case CESSACAO_ATIVIDADE   = 'LICO_CA';
+    case CESSACAO_ATIVIDADE   = 'LICO_CA';      // Alvará Comercial
+    case CESSACAO_VENDA_AMBULANTE = 'LICO_CA_VEND'; // Cartão de Venda Ambulante
 
     public static function fromCodigo(?string $codigo): ?self
     {
@@ -27,6 +28,7 @@ enum TipoLicenciamentoComercialEnum: string
             self::DECLARACAO_ALVARA   => 'alvara_comercial',
             self::DIVIDA_PRESTACAO    => 'pagamento_prestacoes',
             self::CESSACAO_ATIVIDADE  => 'cessacao_atividade',
+            self::CESSACAO_VENDA_AMBULANTE => 'cessacao_venda_ambulante',
         };
     }
 
