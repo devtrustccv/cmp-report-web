@@ -59,9 +59,20 @@ class CertidaoLicenciamentoDto
     }
 
     /** Ex.: "três (03)" */
-    public function validadeTexto(): string
+    public function validadeTextoPrestacao(): string
     {
         $n = (int) $this->nrPrestacao;
+
+        if ($n <= 0) {
+            return '';
+        }
+
+        return (self::EXTENSO[$n] ?? $n) . ' (' . str_pad((string) $n, 2, '0', STR_PAD_LEFT) . ')';
+    }
+
+    public function validadeTexto(): string
+    {
+        $n = (int) $this->validadeMes;
 
         if ($n <= 0) {
             return '';

@@ -24,10 +24,10 @@
         referente as taxas de licenciamento comercial.@preencher
     </p>
 
-    @if($dados->validadeTexto())
+    @if($dados->validadeTextoPrestacao())
         <p>
             Neste sentido, a referida empresa fica autorizada a exercer a sua atividade económica, por um
-            período de {{ $dados->validadeTexto() }} meses, a contar da data da emissão da presente declaração.@preencher
+            período de {{ $dados->validadeTextoPrestacao() }} meses, a contar da data da emissão da presente declaração.@preencher
         </p>
     @endif
 
