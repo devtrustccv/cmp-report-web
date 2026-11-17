@@ -54,4 +54,23 @@ class AssinaturaProcessorService
 
         return $this->appService->uploadDocument($stampedContent, "documento_assinado_{$dados['numero_processo']}.pdf");
     }
+
+    /**
+     * Renovação de alvará: estampa só a assinatura no último retângulo "RENOVADO ATÉ" do documento.
+     *
+     * @param array{file_id: int, signature_id: int, numero_processo: string} $dados
+     */
+    public function processarRenovacaoAlvara(array $dados): array
+    {
+        if (empty($dados['signature_id'])) {
+            throw new \InvalidArgumentException('Renovação de alvará sem imagem de assinatura (imgAssinaturaId).');
+        }
+
+        $filePath = $this->storeRemoteDocument($this->appService, (int) $dados['file_id'], 'uploads/documents');
+        $signaturePath = $this->storeRemoteDocument($this->appService, (int) $dados['signature_id'], 'uploads/signature');
+
+        $stampedContent = $this->pdfStampService->signRenovacaoAlvara($filePath, $signaturePath);
+
+        return $this->appService->uploadDocument($stampedContent, "alvara_renovado_{$dados['numero_processo']}.pdf");
+    }
 }

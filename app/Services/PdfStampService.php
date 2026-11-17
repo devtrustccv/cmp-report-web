@@ -169,6 +169,141 @@ class PdfStampService
     }
     
     /**
+     * Renovação de alvará: estampa só a imagem da assinatura no último retângulo
+     * "RENOVADO ATÉ ... / PELA CÂMARA" da última página, entre "PELA CÂMARA" e a linha.
+     * Devolve o conteúdo binário do PDF assinado.
+     */
+    public function signRenovacaoAlvara(string $filePath, string $signaturePath): string
+    {
+        if ($this->isEncryptedPDF($filePath)) {
+            $cleanedPath = $this->utilsService->cleanPdf($filePath);
+            Storage::disk('public')->delete($filePath);
+            $filePath = $cleanedPath;
+        }
+
+        $fileInput = storage_path('app/public/' . $filePath);
+        $imgPath = storage_path('app/public/' . $signaturePath);
+
+        try {
+            $pdf = new Fpdi();
+            $pagesCount = $pdf->setSourceFile($fileInput);
+            $caixa = $this->findUltimaCaixaRenovacao($fileInput, $pagesCount);
+
+            for ($i = 1; $i <= $pagesCount; $i++) {
+                $templateId = $pdf->importPage($i);
+                $size = $pdf->getTemplateSize($templateId);
+                $pdf->AddPage($size['orientation'], [$size['width'], $size['height']]);
+                $pdf->useTemplate($templateId);
+
+                if ($i === $pagesCount) {
+                    $this->stampAssinaturaNaCaixa($pdf, $imgPath, $caixa, $size['height']);
+                }
+            }
+
+            $stampedContent = $pdf->Output('S');
+
+            Storage::disk('public')->delete([$filePath, $signaturePath]);
+
+            Log::channel('pdfstamper')->info('PDF de renovação de alvará assinado com sucesso.', ['caixa_pt' => $caixa]);
+
+            return $stampedContent;
+        } catch (\Exception $e) {
+            Log::channel('pdfstamper')->error('Erro ao assinar PDF de renovação de alvará: ' . $e->getMessage());
+
+            throw new \Exception('Erro ao processar o PDF de renovação de alvará: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Procura, na última página, as caixas de renovação (retângulos "x y w h re" com ~166x85pt)
+     * e devolve a última (linha mais abaixo, mais à direita) em pontos PDF, origem no canto
+     * inferior esquerdo: [x, y, w, h]. Se não encontrar, usa a posição do modelo (3.ª caixa).
+     */
+    private function findUltimaCaixaRenovacao(string $fileInput, int $pagesCount): array
+    {
+        // Posição da 3.ª caixa no modelo (Letter 612x792pt).
+        $fallback = [369.00, 695.76, 166.52, 85.52];
+
+        try {
+            $reader = new \setasign\Fpdi\PdfReader\PdfReader(
+                new \setasign\Fpdi\PdfParser\PdfParser(\setasign\Fpdi\PdfParser\StreamReader::createByFile($fileInput))
+            );
+            $content = $reader->getPage($pagesCount)->getContentStream();
+        } catch (\Throwable $e) {
+            Log::channel('pdfstamper')->warning('Renovação alvará: não foi possível ler a página, a usar posição padrão. ' . $e->getMessage());
+
+            return $fallback;
+        }
+
+        preg_match_all('/(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+re\b/', $content, $m, PREG_SET_ORDER);
+
+        $caixas = [];
+        foreach ($m as $r) {
+            [$x, $y, $w, $h] = [(float) $r[1], (float) $r[2], (float) $r[3], (float) $r[4]];
+            if ($w >= 100 && $w <= 260 && $h >= 50 && $h <= 130) {
+                $caixas[] = [$x, $y, $w, $h];
+            }
+        }
+
+        if (!$caixas) {
+            Log::channel('pdfstamper')->warning('Renovação alvará: nenhuma caixa encontrada, a usar posição padrão.');
+
+            return $fallback;
+        }
+
+        // Última = linha mais abaixo (menor y) e, nessa linha, a mais à direita.
+        usort($caixas, fn ($a, $b) => abs($a[1] - $b[1]) > 2 ? $a[1] <=> $b[1] : $b[0] <=> $a[0]);
+
+        return $caixas[0];
+    }
+
+    /**
+     * Desenha a assinatura dentro da caixa (em pt) entre "PELA CÂMARA" e a linha de assinatura.
+     * Medidas do modelo, a partir do topo da caixa: "PELA CÂMARA" ~36.7pt, linha ~60.7pt.
+     */
+    private function stampAssinaturaNaCaixa(Fpdi $pdf, string $imgPath, array $caixa, float $pageHeightMm): void
+    {
+        [$x, $y, $w, $h] = $caixa;
+        $k = 25.4 / 72; // pt -> mm
+
+        $boxLeft = $x * $k;
+        $boxWidth = $w * $k;
+        $boxTop = $pageHeightMm - ($y + $h) * $k;
+
+        // Tamanho da assinatura: aumentar $alturaMaxPt / $larguraMax para ficar maior.
+        $alturaMaxPt = 36.0;                 // ~12.7mm (antes 24pt)
+        $larguraMax = 0.85;                  // 85% da largura da caixa (antes 60%)
+        $descePt = 5.0;                      // a assinatura passa um pouco por cima da linha, como à mão
+
+        $linhaY = $boxTop + (60.0 + $descePt) * $k; // base da linha "____" + descida
+        $maxH = $alturaMaxPt * $k;
+        $maxW = $boxWidth * $larguraMax;
+
+        $info = @getimagesize($imgPath);
+        if (!$info) {
+            throw new \Exception('Imagem de assinatura inválida.');
+        }
+        $tipo = match ($info[2]) {
+            IMAGETYPE_JPEG => 'JPG',
+            IMAGETYPE_GIF => 'GIF',
+            default => 'PNG',
+        };
+
+        $ratio = $info[0] / max(1, $info[1]);
+        $imgW = $maxW;
+        $imgH = $imgW / $ratio;
+        if ($imgH > $maxH) {
+            $imgH = $maxH;
+            $imgW = $imgH * $ratio;
+        }
+
+        $imgX = $boxLeft + ($boxWidth - $imgW) / 2;
+        $imgY = $linhaY - $imgH;
+
+        $pdf->Image($imgPath, $imgX, $imgY, $imgW, $imgH, $tipo);
+    }
+
+    /**
      * Escreve $text quebrado em linhas dentro de $maxWidth (mm), reduzindo o tamanho
      * da fonte (de $maxSize até $minSize) até caber em até $preferredLines linhas.
      * Nunca corta o texto: se mesmo no tamanho mínimo não couber em $preferredLines,
