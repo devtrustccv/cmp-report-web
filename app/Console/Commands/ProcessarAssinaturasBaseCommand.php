@@ -24,7 +24,13 @@ abstract class ProcessarAssinaturasBaseCommand extends Command
         parent::__construct();
     }
 
-    /** Indica se o registo deve ser processado por este job. */
+    /** Filtros enviados à API na listagem dos PENDENTE (ex.: tipoDoc / tipoDocExcluir). */
+    abstract protected function filtrosApi(): array;
+
+    /**
+     * Indica se o registo deve ser processado por este job.
+     * Repete o filtro da API por segurança (caso a API ignore o parâmetro).
+     */
     abstract protected function filtrar(array $registo): bool;
 
     /** Assina o documento do registo e devolve a resposta do upload. */
@@ -38,7 +44,7 @@ abstract class ProcessarAssinaturasBaseCommand extends Command
     public function handle(): int
     {
         $pendentes = array_values(array_filter(
-            $this->logService->listarPorStatus('PENDENTE'),
+            $this->logService->listarPorStatus('PENDENTE', $this->filtrosApi()),
             fn (array $registo) => $this->filtrar($registo)
         ));
 

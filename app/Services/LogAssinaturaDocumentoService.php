@@ -10,11 +10,12 @@ class LogAssinaturaDocumentoService extends BaseApiService
     private const ENDPOINT = 'log-assinatura-documento';
 
     /**
+     * @param array<string, mixed> $filtros filtros extra para a API (ex.: ['tipoDoc' => 'X'] ou ['tipoDocExcluir' => 'X'])
      * @return array<int, array<string, mixed>>
      */
-    public function listarPorStatus(string $status = 'PENDENTE'): array
+    public function listarPorStatus(string $status = 'PENDENTE', array $filtros = []): array
     {
-        $response = $this->get(self::ENDPOINT, ['status' => $status]);
+        $response = $this->get(self::ENDPOINT, ['status' => $status] + $filtros);
 
         if ($response->failed()) {
             Log::error('Erro ao consultar o log de assinatura de documentos', [

@@ -9,6 +9,11 @@ class ProcessarRenovacaoAlvaraCommand extends ProcessarAssinaturasBaseCommand
     protected $description = 'Assina os registos PENDENTE com tipoDoc = RENOVACAO_ALVARA (assinatura no último retângulo "RENOVADO ATÉ") e atualiza o status para SUCESSO/ERRO.';
 
     // Só RENOVACAO_ALVARA.
+    protected function filtrosApi(): array
+    {
+        return ['tipoDoc' => self::TIPO_RENOVACAO_ALVARA];
+    }
+
     protected function filtrar(array $registo): bool
     {
         return self::isRenovacaoAlvara($registo);
