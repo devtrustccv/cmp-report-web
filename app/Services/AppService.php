@@ -231,7 +231,17 @@ class AppService extends BaseApiService
         $response = $this->postFile('/documento', 'file', $contents, $filename, $mimeType);
 
         if ($response->failed()) {
-            throw new Exception('Erro ao enviar documento assinado.');
+            \Illuminate\Support\Facades\Log::error('Erro ao enviar documento assinado', [
+                'filename' => $filename,
+                'tamanho_bytes' => strlen($contents),
+                'status_http' => $response->status(),
+                'body' => $response->body(),
+            ]);
+
+            throw new Exception(
+                "Erro ao enviar documento assinado (HTTP {$response->status()}, "
+                . round(strlen($contents) / 1024) . " KB): " . mb_substr($response->body(), 0, 500)
+            );
         }
 
         return $response->json();
