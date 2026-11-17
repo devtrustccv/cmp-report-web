@@ -72,7 +72,7 @@
             position: fixed;
             /* Área útil A4: 674px x 858px (página 794x1123 menos margens do @page).
                Logo 600x625 -> left = (674-600)/2, top = (858-625)/2 */
-            top: 40px;
+            top: 0px;
             left: 37px;
             width: 600px;
             height: 625px;
