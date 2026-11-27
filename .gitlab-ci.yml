@@ -20,7 +20,7 @@ build_docker_image_prod:
   script:
     - docker login -u "$REGISTRY_USERNAME" -p "$REGISTRY_PASSWORD"
     - docker build --platform linux/amd64 -t devtrustcv/cmp-report-prod:$CI_PIPELINE_ID .
-    - docker tag devtrustcv/cmp-report-prod:$CI_PIPELINE_ID devtrustcv/cmpweb-igrp-prod:latest
+    - docker tag devtrustcv/cmp-report-prod:$CI_PIPELINE_ID devtrustcv/cmp-report-prod:latest
     - docker push devtrustcv/cmp-report-prod:$CI_PIPELINE_ID
     - docker push devtrustcv/cmp-report-prod:latest
 
