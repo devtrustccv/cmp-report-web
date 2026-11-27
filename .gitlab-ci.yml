@@ -1,0 +1,38 @@
+services:
+  - name: docker:28.1.1-dind
+    command: [ "--tls=false", "--mtu=1240" ]
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_HOST: tcp://docker:2375
+
+stages:
+  - build
+  - deploy
+  #  - migrate_cnq
+  #  - migrate_equivalencia
+  ###### PROD PIPELINE #####
+build_docker_image_prod:
+  image: docker:28.1.1
+  stage: build
+  only:
+    - main
+  script:
+    - docker login -u "$REGISTRY_USERNAME" -p "$REGISTRY_PASSWORD"
+    - docker build --platform linux/amd64 -t devtrustcv/cmp-report-prod:$CI_PIPELINE_ID .
+    - docker tag devtrustcv/cmp-report-prod:$CI_PIPELINE_ID devtrustcv/cmpweb-igrp-prod:latest
+    - docker push devtrustcv/cmp-report-prod:$CI_PIPELINE_ID
+    - docker push devtrustcv/cmp-report-prod:latest
+
+deploy_prod:
+  image: gcc:latest
+  stage: deploy
+  only:
+    - main
+  script:
+    - |
+      curl -u "$DEPLOY_USER_PROD:$DEPLOY_PASSWORD_PROD" \
+        -X POST \
+        -H 'Accept: application/json' \
+        -H 'Content-Type: application/json' \
+        'https://cmp-admin.gov.cv/v3/project/c-m-xtv59r88:p-bzlxc/workloads/deployment:igrp-web:cmp-report-prod?action=redeploy'
